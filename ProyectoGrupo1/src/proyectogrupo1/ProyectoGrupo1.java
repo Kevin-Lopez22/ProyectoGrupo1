@@ -4,6 +4,12 @@
  */
 package proyectogrupo1;
 
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author denni
@@ -16,6 +22,21 @@ public class ProyectoGrupo1 {
     public static void main(String[] args) {
         // dennis chamba
         // 10 de agosto
+        try{
+            Statement sql = ConexionSQL.getConexion().createStatement();
+            
+            String consulta = "Select * from baseBiblioteca.dbo.BIBLIOTECARIOS";
+            
+            ResultSet resultado = sql.executeQuery(consulta);
+            
+            while(resultado.next()){
+                System.out.println(resultado.getString(1));
+            }
+            
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
     }
     
 }
