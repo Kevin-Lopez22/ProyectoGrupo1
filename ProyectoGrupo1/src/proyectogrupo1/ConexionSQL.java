@@ -30,6 +30,8 @@ public class ConexionSQL {
             JOptionPane.showMessageDialog(null, "Conexion fallida: "+ex.toString());
             return null;
         }
+        
+        
     }
     
 }

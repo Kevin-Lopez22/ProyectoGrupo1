@@ -37,6 +37,8 @@ public class ProyectoGrupo1 {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, ex.toString());
         }
+        
+        System.out.println("Hola mundo");
     }
     
 }
