@@ -20,7 +20,7 @@ public class ProyectoGrupo1 {
      */
     public static void main(String[] args) {
         // dennis chamba
-        // 10 de agosto
+        // 10 de agosto....
         try{
             Statement sql = ConexionSQL.getConexion().createStatement();
             
