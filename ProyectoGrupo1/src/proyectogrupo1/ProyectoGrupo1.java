@@ -22,7 +22,7 @@ public class ProyectoGrupo1 {
     public static void main(String[] args) {
         // dennis chamba
         // 10 de agosto
-        try{
+        /*try{
             Statement sql = ConexionSQL.getConexion().createStatement();
             
             String consulta = "Select * from baseBiblioteca.dbo.BIBLIOTECARIOS";
@@ -37,8 +37,8 @@ public class ProyectoGrupo1 {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, ex.toString());
         }
-        
-        System.out.println("Hola mundo");
+        */
+       
     }
     
 }
