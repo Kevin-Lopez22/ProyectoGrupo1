@@ -1,27 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectogrupo1;
 
-/**
- *
- * @author Thomas Tapia
- */
 public class Persona {
     
-    private String cedula;
+    private long cedula;
     private String nombre;
     private String apellido;
-    private String telefono;
+    private long telefono;
     private String direccion;
     private String correo;
 
-    public String getCedula() {
+    public long getCedula() {
         return cedula;
     }
 
-    public void setCedula(String cedula) {
+    public void setCedula(long cedula) {
         this.cedula = cedula;
     }
 
@@ -41,11 +33,11 @@ public class Persona {
         this.apellido = apellido;
     }
 
-    public String getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 
@@ -65,7 +57,7 @@ public class Persona {
         this.correo = correo;
     }
 
-    Persona(String cedula, String nombre, String apellido, String telefono, String direccion, String correo) {
+    Persona(long cedula, String nombre, String apellido, long telefono, String direccion, String correo) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
