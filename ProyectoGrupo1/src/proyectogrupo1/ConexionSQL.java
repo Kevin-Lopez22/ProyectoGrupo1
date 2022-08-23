@@ -17,7 +17,7 @@ public class ConexionSQL {
     
     public static Connection getConexion(){
         String conexionUrl = "jdbc:sqlserver://localhost:1433; "//puerto por defecto
-                + "database = baseBilbioteca;"
+                + "database = baseBiblioteca;"
                 + "user = sa;"
                 + "password = 12345;"//pilas la clave 
                 + "loginTimeout = 40;"; //tiempo para la conexion 
