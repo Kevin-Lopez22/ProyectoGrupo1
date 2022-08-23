@@ -2,7 +2,6 @@ package proyectogrupo1.Negocio;
 
 import java.sql.ResultSet;
 
-import proyectogrupo1.ConexionSQL;
 
 import java.sql.Connection;
 

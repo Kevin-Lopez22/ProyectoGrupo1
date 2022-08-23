@@ -4,6 +4,7 @@
  */
 package proyectogrupo1;
 
+import proyectogrupo1.Negocio.ConexionSQL;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

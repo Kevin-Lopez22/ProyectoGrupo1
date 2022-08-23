@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package proyectogrupo1;
+package proyectogrupo1.Negocio;
 
 
 import java.sql.*;
@@ -31,5 +31,28 @@ public class ConexionSQL {
             return null;
         }
     }
+    
+    public boolean verificarConexion(){
+        try{
+            Statement sql = ConexionSQL.getConexion().createStatement();
+            return true;
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            return false;
+        }
+    }
+    
+    public static ResultSet consulta (String consulta) throws SQLException{
+       Connection con = getConexion();
+       Statement info;
+       try{
+           info=con.createStatement();
+           ResultSet respuesta = info.executeQuery(consulta);
+           return respuesta;
+       }catch(SQLException ex){
+           JOptionPane.showMessageDialog(null, ex.toString());
+       }
+       return null;
+    } 
     
 }
