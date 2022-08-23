@@ -19,7 +19,7 @@ public class GestorLibros {
     }
 
     public void modificarDisponibilidad(Ejemplar ejemplar){
-
+// nuevo cambio
     }
 
 }
