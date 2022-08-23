@@ -9,5 +9,6 @@ package proyectogrupo1.Negocio;
  * @author Det-Pc
  */
 public class ClasePrueba {
-    
+ 
+    //Prueba Conexión
 }
