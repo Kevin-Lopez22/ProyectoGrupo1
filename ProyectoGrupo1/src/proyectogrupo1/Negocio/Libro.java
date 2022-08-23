@@ -24,4 +24,8 @@ public class Libro {
         ISBN = iSBN;
         Stock = stock2;
     }
+
+    public Libro() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
