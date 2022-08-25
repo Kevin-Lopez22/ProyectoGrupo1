@@ -2,10 +2,11 @@ package proyectogrupo1;
 
 public class Cliente extends Persona{
     
-   private int idCliente;
+   private final int idCliente;
 
-    Cliente(long cedula, String nombre, String apellido, long telefono, String direccion, String correo) {
+    Cliente(int idCliente, long cedula, String nombre, String apellido, long telefono, String direccion, String correo) {
         super(cedula, nombre, apellido, telefono, direccion, correo);
+        this.idCliente = idCliente;
         //this.idCliente = (int) Math.random(); Crear metodo para obtener id de la base de datos
     }
 
@@ -13,9 +14,6 @@ public class Cliente extends Persona{
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
 
     @Override
     public String toString() {

@@ -5,6 +5,10 @@
  */
 package proyectogrupo1;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Usuario
@@ -14,9 +18,10 @@ public class GestorClient extends javax.swing.JFrame {
     /**
      * Creates new form GestorClient
      */
+    SqlCrud<Cliente,Long> sqlCrudCliente;
     public GestorClient() {
         initComponents();
-        
+        sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
     }
 
     /**
@@ -79,6 +84,35 @@ public class GestorClient extends javax.swing.JFrame {
         });
     }
 
+    void registrarCliente(Cliente cliente){
+        try {
+            sqlCrudCliente.create(cliente);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    void eliminarCliente(Cliente cliente){
+        try {
+            sqlCrudCliente.delete(cliente);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    void modificarCliente(Cliente cliente){
+        try {
+            sqlCrudCliente.update(cliente);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    void suspenderCliente(Cliente cliente){
+        try {
+            sqlCrudCliente.update(cliente);
+                    } catch (SQLException ex) {
+            Logger.getLogger(GestorClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
