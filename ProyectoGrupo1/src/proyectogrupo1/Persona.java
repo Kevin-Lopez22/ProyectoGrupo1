@@ -2,18 +2,18 @@ package proyectogrupo1;
 
 public class Persona {
     
-    private long cedula;
+    private String cedula;
     private String nombre;
     private String apellido;
     private long telefono;
     private String direccion;
     private String correo;
 
-    public long getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(long cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
@@ -57,7 +57,7 @@ public class Persona {
         this.correo = correo;
     }
 
-    Persona(long cedula, String nombre, String apellido, long telefono, String direccion, String correo) {
+    Persona(String cedula, String nombre, String apellido, long telefono, String direccion, String correo) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
