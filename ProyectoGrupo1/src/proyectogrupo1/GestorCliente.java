@@ -106,7 +106,7 @@ public class GestorCliente extends javax.swing.JFrame {
     }
     void suspenderCliente(Cliente cliente){
         try {
-            sqlCrudCliente.update(cliente)
+            sqlCrudCliente.update(cliente);
                     } catch (SQLException ex) {
             Logger.getLogger(GestorCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
