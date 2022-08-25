@@ -50,7 +50,7 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
 
     private Cliente readRow(ResultSet rs) throws SQLException{
         int idCliente = Integer.parseInt(rs.getString(1));
-        long cedula = Long.parseLong(rs.getString(2));
+        String cedula = rs.getString(2);
         String nombre = rs.getString(3);
         String apellido = rs.getString(4);
         long telefono = Long.parseLong(rs.getString(5));
