@@ -5,7 +5,7 @@ public class Persona {
     private String cedula;
     private String nombre;
     private String apellido;
-    private long telefono;
+    private String telefono;
     private String direccion;
     private String correo;
 
@@ -33,11 +33,11 @@ public class Persona {
         this.apellido = apellido;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -57,7 +57,7 @@ public class Persona {
         this.correo = correo;
     }
 
-    Persona(String cedula, String nombre, String apellido, long telefono, String direccion, String correo) {
+    Persona(String cedula, String nombre, String apellido, String telefono, String direccion, String correo) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;

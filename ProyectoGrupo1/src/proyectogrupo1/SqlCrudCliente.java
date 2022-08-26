@@ -53,7 +53,7 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
         String cedula = rs.getString(2);
         String nombre = rs.getString(3);
         String apellido = rs.getString(4);
-        long telefono = Long.parseLong(rs.getString(5));
+        String telefono = rs.getString(5);
         String direccion = rs.getString(6);
         String correo = rs.getString(7);
         
