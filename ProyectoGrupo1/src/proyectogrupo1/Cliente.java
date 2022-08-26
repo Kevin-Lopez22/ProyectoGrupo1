@@ -14,11 +14,13 @@ public class Cliente extends Persona{
         return idCliente;
     }
 
-
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + "nombre" + super.getNombre() + '}';
+        return "Cliente{" + "idCliente=" + idCliente +","+super.toString()+'}';
     }
+
+
+    
 
     
     

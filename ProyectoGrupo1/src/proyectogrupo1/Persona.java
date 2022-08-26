@@ -65,6 +65,13 @@ public class Persona {
         this.direccion = direccion;
         this.correo = correo;
     }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", direccion=" + direccion + ", correo=" + correo + '}';
+    }
+    
+    
    
     
 }

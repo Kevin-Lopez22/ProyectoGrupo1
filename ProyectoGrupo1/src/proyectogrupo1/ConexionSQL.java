@@ -8,19 +8,18 @@ public class ConexionSQL {
     //trabajando con jre17
     
     public static Connection getConexion(){
-        String conexionUrl = "jdbc:sqlserver://localhost:1433; "//puerto por defecto
-                + "database = baseBilbioteca;"
+        String conexionUrl = "jdbc:sqlserver://192.168.56.103:1433; "//puerto por defecto
+                + "database = baseBiblioteca;"
                 + "user = sa;"
-                + "password = 12345;"//pilas la clave // "I only cannot see this going well"
+                + "password = dXXTOR66;"//pilas la clave // "I only cannot see this going well"
                 + "loginTimeout = 40;"; //tiempo para la conexion 
         try{
             Connection con = DriverManager.getConnection(conexionUrl);
-            JOptionPane.showMessageDialog(null, "Conexion Exitosa");
             return con;
             
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Conexion fallida: "+ex.toString());
-            return null;
+                return null;
         }
         
         

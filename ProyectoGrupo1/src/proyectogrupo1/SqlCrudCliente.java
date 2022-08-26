@@ -18,13 +18,13 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
                 "INSERT INTO CLIENTES(IDCLIENTE,CICLIENTE,NOMBRECLIENTE,APELLIDOCLIENTE,DIRECCION,TELEFONO,CORREO) VALUES("
                         + "?,?,?,?,?,?,?);"
         );
-        prepStat.setString(0, String.valueOf(e.getIdCliente()));
-        prepStat.setString(1, String.valueOf(e.getCedula()));
-        prepStat.setString(2, e.getNombre());
-        prepStat.setString(3, e.getApellido());
-        prepStat.setString(4, e.getDireccion());
-        prepStat.setString(5, String.valueOf(e.getTelefono()));
-        prepStat.setString(6, e.getCorreo());
+        prepStat.setString(1, String.valueOf(e.getIdCliente()));
+        prepStat.setString(2, String.valueOf(e.getCedula()));
+        prepStat.setString(3, e.getNombre());
+        prepStat.setString(4, e.getApellido());
+        prepStat.setString(5, e.getDireccion());
+        prepStat.setString(6, String.valueOf(e.getTelefono()));
+        prepStat.setString(7, e.getCorreo());
         prepStat.execute();
     }
 
@@ -33,11 +33,12 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
         // TODO: Implementar
         PreparedStatement prepStat = connection.prepareStatement(
                 "SELECT IDCLIENTE,CICLIENTE,NOMBRECLIENTE,APELLIDOCLIENTE,DIRECCION,TELEFONO,CORREO "+ 
+                      //1        ,2        ,3            ,4              ,5        ,6       ,7
                 "FROM CLIENTES "+
                 "WHERE ? <= CICLIENTE AND CICLIENTE <= ?;"
         );
-        prepStat.setString(0, String.valueOf(lowerLimit));
-        prepStat.setString(1, String.valueOf(upperLimit));
+        prepStat.setString(1, lowerLimit.toString());
+        prepStat.setString(2, upperLimit.toString());
         prepStat.execute();
         ResultSet rs = prepStat.getResultSet();
         
@@ -49,13 +50,13 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
     }
 
     private Cliente readRow(ResultSet rs) throws SQLException{
-        int idCliente = Integer.parseInt(rs.getString(1));
-        long cedula = Long.parseLong(rs.getString(2));
-        String nombre = rs.getString(3);
-        String apellido = rs.getString(4);
-        long telefono = Long.parseLong(rs.getString(5));
-        String direccion = rs.getString(6);
-        String correo = rs.getString(7);
+        int idCliente = Integer.parseInt(rs.getString(1).trim());
+        long cedula = Long.parseLong(rs.getString(2).trim());
+        String nombre = rs.getString(3).trim();
+        String apellido = rs.getString(4).trim();
+        String direccion = rs.getString(5).trim();
+        long telefono = Long.parseLong(rs.getString(6).trim());
+        String correo = rs.getString(7).trim();
         
         return new Cliente(idCliente,cedula,nombre,apellido,telefono,direccion,correo);
     }
@@ -66,12 +67,12 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
         PreparedStatement prepStat = connection.prepareStatement(
                 "UPDATE CLIENTES "
               + "SET "
-              + "NOMBRECLIENTE = ?,"    // 1
-              + "APELLIDOCLIENTE = ?,"  // 2
-              + "DIRECCION = ?,"        // 3
-              + "TELEFONO = ?,"         // 4
-              + "CORREO = ? "           // 5
-              + "WHERE CICLIENTE == ?;" // 6
+              + "NOMBRECLIENTE=?,"    // 1
+              + "APELLIDOCLIENTE=?,"  // 2
+              + "DIRECCION=?,"        // 3
+              + "TELEFONO=?,"         // 4
+              + "CORREO=? "           // 5
+              + "WHERE IDCLIENTE=?;" // 6
         );
         prepStat.setString(1, e.getNombre());
         prepStat.setString(2, e.getApellido());
@@ -86,8 +87,8 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
     @Override
     public void delete(Cliente e) throws SQLException{
         PreparedStatement prepStat = connection.prepareStatement(
-                "DELETE FROM CLIENTE "
-              + "WHERE CICLIENTE == ?;"
+                "DELETE FROM CLIENTES "
+              + "WHERE IDCLIENTE=?;"
         );
         
         prepStat.setString(1, String.valueOf(e.getIdCliente()));
