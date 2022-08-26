@@ -23,8 +23,7 @@ public class ProyectoGrupo1 {
      */
     public static void main(String[] args) {
         try {
-            // dennis chamba
-            // 10 de agosto
+            // LuisM45
             SqlCrudCliente sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
             
             Cliente a,b;
