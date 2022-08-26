@@ -13,13 +13,13 @@ import java.util.logging.Logger;
  *
  * @author Usuario
  */
-public class GestorClient extends javax.swing.JFrame {
+public class GUIGestorCliente extends javax.swing.JFrame {
 
     /**
-     * Creates new form GestorClient
+     * Creates new form GUIGestorCliente
      */
     SqlCrud<Cliente,Long> sqlCrudCliente;
-    public GestorClient() {
+    public GUIGestorCliente() {
         initComponents();
         sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
     }
@@ -148,20 +148,21 @@ public class GestorClient extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestorClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIGestorCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestorClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIGestorCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestorClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIGestorCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestorClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIGestorCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestorClient().setVisible(true);
+                new GUIGestorCliente().setVisible(true);
             }
         });
     }
@@ -170,28 +171,28 @@ public class GestorClient extends javax.swing.JFrame {
         try {
             sqlCrudCliente.create(cliente);
         } catch (SQLException ex) {
-            Logger.getLogger(GestorClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIGestorCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     void eliminarCliente(Cliente cliente){
         try {
             sqlCrudCliente.delete(cliente);
         } catch (SQLException ex) {
-            Logger.getLogger(GestorClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIGestorCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     void modificarCliente(Cliente cliente){
         try {
             sqlCrudCliente.update(cliente);
         } catch (SQLException ex) {
-            Logger.getLogger(GestorClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIGestorCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     void suspenderCliente(Cliente cliente){
         try {
             sqlCrudCliente.update(cliente);
                     } catch (SQLException ex) {
-            Logger.getLogger(GestorClient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIGestorCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
