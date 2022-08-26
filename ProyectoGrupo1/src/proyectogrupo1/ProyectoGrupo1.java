@@ -22,6 +22,7 @@ public class ProyectoGrupo1 {
     public static void main(String[] args) {
         // dennis chamba
         // 10 de agosto
+        System.out.println("Hola");
         /*try{
             Statement sql = ConexionSQL.getConexion().createStatement();
             
