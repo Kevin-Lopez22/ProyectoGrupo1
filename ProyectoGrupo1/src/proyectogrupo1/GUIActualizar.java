@@ -144,6 +144,8 @@ public class GUIActualizar extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cedula = "";
+        
+        cedula = txtCedula.getText();
         /*Aplicar logica para ingresar a la base de datos e imprimir en el textArea*/
     }//GEN-LAST:event_btnBuscarActionPerformed
 
