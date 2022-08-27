@@ -18,7 +18,7 @@ public class GUIGestorCliente extends javax.swing.JFrame {
     /**
      * Creates new form GUIGestorCliente
      */
-    SqlCrud<Cliente,Long> sqlCrudCliente;
+    SqlCrud<Cliente,Integer> sqlCrudCliente;
     public GUIGestorCliente() {
         initComponents();
         sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
