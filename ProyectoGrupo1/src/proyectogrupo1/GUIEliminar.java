@@ -4,15 +4,22 @@
  */
 package proyectogrupo1;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Thomas Tapia
  */
 public class GUIEliminar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUIEliminar
-     */
+
+    /* Variables para la actualizacion del cliente */
+    Cliente clientePorEliminar;     // Variable auxiliar para modificar y enviar al CRUD
+    SqlCrudCliente sqlCrudCliente;  // Handler para el crud
+    
+    
     public GUIEliminar() {
         initComponents();
     }
@@ -105,8 +112,12 @@ public class GUIEliminar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        //Esto tambien que se actualice en la base de datos y se cambie el textArea pilas mateo
-
+        // TODO: clientePorEliminar debe leerse cuando se le de a buscar
+        try {
+            sqlCrudCliente.delete(clientePorEliminar);
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIEliminar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
