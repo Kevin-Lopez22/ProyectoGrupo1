@@ -19,11 +19,11 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
                         + "?,?,?,?,?,?,?);"
         );
         prepStat.setString(1, String.valueOf(e.getIdCliente()));
-        prepStat.setString(2, String.valueOf(e.getCedula()));
+        prepStat.setString(2, e.getCedula());
         prepStat.setString(3, e.getNombre());
         prepStat.setString(4, e.getApellido());
         prepStat.setString(5, e.getDireccion());
-        prepStat.setString(6, String.valueOf(e.getTelefono()));
+        prepStat.setString(6, e.getTelefono());
         prepStat.setString(7, e.getCorreo());
         prepStat.execute();
     }
@@ -51,11 +51,11 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
 
     private Cliente readRow(ResultSet rs) throws SQLException{
         int idCliente = Integer.parseInt(rs.getString(1).trim());
-        long cedula = Long.parseLong(rs.getString(2).trim());
+        String cedula = rs.getString(2).trim();
         String nombre = rs.getString(3).trim();
         String apellido = rs.getString(4).trim();
         String direccion = rs.getString(5).trim();
-        long telefono = Long.parseLong(rs.getString(6).trim());
+        String telefono = rs.getString(6).trim();
         String correo = rs.getString(7).trim();
         
         return new Cliente(idCliente,cedula,nombre,apellido,telefono,direccion,correo);
@@ -77,7 +77,7 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
         prepStat.setString(1, e.getNombre());
         prepStat.setString(2, e.getApellido());
         prepStat.setString(3, e.getDireccion());
-        prepStat.setString(4, String.valueOf(e.getTelefono()));
+        prepStat.setString(4, e.getTelefono());
         prepStat.setString(5, e.getCorreo());
         prepStat.setString(6, String.valueOf(e.getIdCliente()));
         
