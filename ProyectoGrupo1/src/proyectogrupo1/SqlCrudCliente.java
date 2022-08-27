@@ -2,7 +2,7 @@ package proyectogrupo1;
 import java.sql.*;
 import java.util.*;
 
-final class SqlCrudCliente implements SqlCrud<Cliente,Integer>{
+final class SqlCrudCliente implements SqlCrud<Cliente,String>{
 
     Connection connection;
 
@@ -29,7 +29,7 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Integer>{
     }
 
     @Override
-    public List<Cliente> read(Integer lowerLimit, Integer upperLimit) throws SQLException{
+    public List<Cliente> read(String lowerLimit, String upperLimit) throws SQLException{
         // TODO: Implementar
         PreparedStatement prepStat = connection.prepareStatement(
                 "SELECT IDCLIENTE,CICLIENTE,NOMBRECLIENTE,APELLIDOCLIENTE,DIRECCION,TELEFONO,CORREO "+ 
@@ -37,8 +37,8 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Integer>{
                 "FROM CLIENTES "+
                 "WHERE ? <= CICLIENTE AND CICLIENTE <= ?;"
         );
-        prepStat.setString(1, lowerLimit.toString());
-        prepStat.setString(2, upperLimit.toString());
+        prepStat.setString(1, lowerLimit);
+        prepStat.setString(2, upperLimit);
         prepStat.execute();
         ResultSet rs = prepStat.getResultSet();
         
@@ -72,14 +72,14 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Integer>{
               + "DIRECCION=?,"        // 3
               + "TELEFONO=?,"         // 4
               + "CORREO=? "           // 5
-              + "WHERE IDCLIENTE=?;" // 6
+              + "WHERE CICLIENTE=?;" // 6
         );
         prepStat.setString(1, e.getNombre());
         prepStat.setString(2, e.getApellido());
         prepStat.setString(3, e.getDireccion());
         prepStat.setString(4, e.getTelefono());
         prepStat.setString(5, e.getCorreo());
-        prepStat.setString(6, String.valueOf(e.getIdCliente()));
+        prepStat.setString(6, String.valueOf(e.getCedula()));
         
         prepStat.execute();
     }
@@ -88,10 +88,10 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Integer>{
     public void delete(Cliente e) throws SQLException{
         PreparedStatement prepStat = connection.prepareStatement(
                 "DELETE FROM CLIENTES "
-              + "WHERE IDCLIENTE=?;"
+              + "WHERE CICLIENTE=?;"
         );
         
-        prepStat.setString(1, String.valueOf(e.getIdCliente()));
+        prepStat.setString(1, String.valueOf(e.getCedula()));
         
         prepStat.execute();
     }
