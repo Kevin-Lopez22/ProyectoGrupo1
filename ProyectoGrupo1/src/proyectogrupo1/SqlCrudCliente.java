@@ -2,7 +2,7 @@ package proyectogrupo1;
 import java.sql.*;
 import java.util.*;
 
-final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
+final class SqlCrudCliente implements SqlCrud<Cliente,Integer>{
 
     Connection connection;
 
@@ -29,7 +29,7 @@ final class SqlCrudCliente implements SqlCrud<Cliente,Long>{
     }
 
     @Override
-    public List<Cliente> read(Long lowerLimit, Long upperLimit) throws SQLException{
+    public List<Cliente> read(Integer lowerLimit, Integer upperLimit) throws SQLException{
         // TODO: Implementar
         PreparedStatement prepStat = connection.prepareStatement(
                 "SELECT IDCLIENTE,CICLIENTE,NOMBRECLIENTE,APELLIDOCLIENTE,DIRECCION,TELEFONO,CORREO "+ 
