@@ -21,25 +21,38 @@ public class ProyectoGrupo1 {
     public static void main(String[] args) {
         try {
             // LuisM45
-            SqlCrud<Cliente,Integer> sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
+            SqlCrudCliente sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
             
+            // Preparacion de los Objetos cliente
             Cliente a,b;
             a = new Cliente(1, "2", "3-nombre", "4-apellido", "5", "6-direcc", "7-correo");
             b = new Cliente(2, "3", "3-nombre", "4-apellido", "5", "6-direcc", "7-correo");
-            System.out.println(sqlCrudCliente.read((int)0, (int)9999));
+            System.out.println(sqlCrudCliente.read("0", "999999999"));                      // Lectura en la DB (Ejemplo de READ)
             
-            sqlCrudCliente.create(a); //create
+            // Ejemplo Create/Insercion
+            sqlCrudCliente.create(a); 
             sqlCrudCliente.create(b);
-            System.out.println(sqlCrudCliente.read((int)0, (int)9999));
+            System.out.println(sqlCrudCliente.read("0", "999999999")); // Lectura en la DB
             
+            // Ejemplo Delete/Eliminar
             sqlCrudCliente.delete(a);
-            System.out.println(sqlCrudCliente.read((int)0, (int)9999));
+            System.out.println(sqlCrudCliente.read("0", "999999999")); // Lectura en la DB
             
+            // Ejemplo Update
             b.setNombre("nuevo");
             sqlCrudCliente.update(b);
-            System.out.println(sqlCrudCliente.read((int)0, (int)9999));
+            System.out.println(sqlCrudCliente.read("0", "999999999")); // Lectura en la DB
             
+            // Limpieza de la DB
             sqlCrudCliente.delete(b);
+            
+            //Ejemplos útiles
+            sqlCrudCliente.read("0", "999999999"); // Lee los clientes con CI 0 < ci < 999999999
+            sqlCrudCliente.read("4", "4"); // Lee los clientes con CI ci = 4
+            
+            //Creación del GUIGestorCliente
+            GUIGestorCliente gUIGestorCliente = new GUIGestorCliente(ConexionSQL.getConexion());
+            gUIGestorCliente.setVisible(true);
             
         } catch (SQLException ex) {
             Logger.getLogger(ProyectoGrupo1.class.getName()).log(Level.SEVERE, null, ex);
