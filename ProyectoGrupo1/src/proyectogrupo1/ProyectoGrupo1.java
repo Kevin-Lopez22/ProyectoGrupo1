@@ -4,12 +4,9 @@
  */
 package proyectogrupo1;
 
-import java.sql.Statement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 
 /**
@@ -27,8 +24,8 @@ public class ProyectoGrupo1 {
             SqlCrudCliente sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
             
             Cliente a,b;
-            a = new Cliente(1, 2, "3-nombre", "4-apellido", 5, "6-direcc", "7-correo");
-            b = new Cliente(2, 3, "3-nombre", "4-apellido", 5, "6-direcc", "7-correo");
+            a = new Cliente(1, "2", "3-nombre", "4-apellido", "5", "6-direcc", "7-correo");
+            b = new Cliente(2, "3", "3-nombre", "4-apellido", "5", "6-direcc", "7-correo");
             System.out.println(sqlCrudCliente.read((long)0, (long)9999));
             
             sqlCrudCliente.create(a); //create
