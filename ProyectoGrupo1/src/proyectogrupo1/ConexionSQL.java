@@ -8,7 +8,7 @@ public class ConexionSQL {
     //trabajando con jre17
     
     public static Connection getConexion(){
-        String conexionUrl = "jdbc:sqlserver://192.168.56.103:1433; "//puerto por defecto
+        String conexionUrl = "jdbc:sqlserver://192.168.191.2:1433; "//puerto por defecto
                 + "database = baseBiblioteca;"
                 + "user = sa;"
                 + "password = dXXTOR66;"//pilas la clave // "I only cannot see this going well"
