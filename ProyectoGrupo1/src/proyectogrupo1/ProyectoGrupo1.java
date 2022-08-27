@@ -21,23 +21,23 @@ public class ProyectoGrupo1 {
     public static void main(String[] args) {
         try {
             // LuisM45
-            SqlCrudCliente sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
+            SqlCrud<Cliente,Integer> sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
             
             Cliente a,b;
             a = new Cliente(1, "2", "3-nombre", "4-apellido", "5", "6-direcc", "7-correo");
             b = new Cliente(2, "3", "3-nombre", "4-apellido", "5", "6-direcc", "7-correo");
-            System.out.println(sqlCrudCliente.read((long)0, (long)9999));
+            System.out.println(sqlCrudCliente.read((int)0, (int)9999));
             
             sqlCrudCliente.create(a); //create
             sqlCrudCliente.create(b);
-            System.out.println(sqlCrudCliente.read((long)0, (long)9999));
+            System.out.println(sqlCrudCliente.read((int)0, (int)9999));
             
             sqlCrudCliente.delete(a);
-            System.out.println(sqlCrudCliente.read((long)0, (long)9999));
+            System.out.println(sqlCrudCliente.read((int)0, (int)9999));
             
             b.setNombre("nuevo");
             sqlCrudCliente.update(b);
-            System.out.println(sqlCrudCliente.read((long)0, (long)9999));
+            System.out.println(sqlCrudCliente.read((int)0, (int)9999));
             
             sqlCrudCliente.delete(b);
             
