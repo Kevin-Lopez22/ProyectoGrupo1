@@ -5,6 +5,9 @@
  */
 package proyectogrupo1;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +21,7 @@ public class GUIRegistrar extends javax.swing.JFrame {
      */
     //Instancia de cliente
     Cliente cliente ;
+    SqlCrudCliente sqlCrudCliente; // Handler para el crud
     public GUIRegistrar() {
         initComponents();
     }
@@ -194,6 +198,15 @@ public class GUIRegistrar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Puto el que lea"); // Ahi le cambian
         }
         cliente = new Cliente(1, cedula, nombre, apellido, telefono, direccion, correo);
+        
+        // La documentación da mas detalles de como opera el SqlCrudCliente
+        // Parte de la insercion
+        try {
+            sqlCrudCliente.create(cliente);
+        } catch (SQLException ex) {
+            // TODO: Control de excepciones
+            Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
