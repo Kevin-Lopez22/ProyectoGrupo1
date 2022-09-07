@@ -64,8 +64,6 @@ public class GUIEliminar extends javax.swing.JFrame {
 
         jLabel1.setText("Cédula");
 
-        txtCedula.setText("jTextField1");
-
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
