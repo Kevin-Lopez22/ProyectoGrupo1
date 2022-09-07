@@ -149,7 +149,9 @@ public class GUIGestorCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        
+        GUIActualizar actualizar = new GUIActualizar(sqlCrudCliente);
+        actualizar.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
