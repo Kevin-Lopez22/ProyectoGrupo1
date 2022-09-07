@@ -53,7 +53,6 @@ public class GUIEliminar extends javax.swing.JFrame {
         txaInformacion.setEditable(false);
         txaInformacion.setColumns(20);
         txaInformacion.setRows(5);
-        txaInformacion.setText("*Mostrar Informacion de ese mmv* Que si betsa ya shhh");
         jScrollPane1.setViewportView(txaInformacion);
 
         btnEliminar.setText("Eliminar");
