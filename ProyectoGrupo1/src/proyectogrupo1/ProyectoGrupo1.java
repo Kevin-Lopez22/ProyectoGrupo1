@@ -38,7 +38,7 @@ public class ProyectoGrupo1 {
             sqlCrudCliente.delete(a);
             System.out.println(sqlCrudCliente.read("0", "999999999")); // Lectura en la DB
             
-            // Ejemplo Update
+            // Ejemplo Update excepto la cedul
             b.setNombre("nuevo");
             sqlCrudCliente.update(b);
             System.out.println(sqlCrudCliente.read("0", "999999999")); // Lectura en la DB
@@ -47,6 +47,7 @@ public class ProyectoGrupo1 {
             sqlCrudCliente.delete(b);
             
             //Ejemplos útiles
+            //con rango
             sqlCrudCliente.read("0", "999999999"); // Lee los clientes con CI 0 < ci < 999999999
             sqlCrudCliente.read("4", "4"); // Lee los clientes con CI ci = 4
             
