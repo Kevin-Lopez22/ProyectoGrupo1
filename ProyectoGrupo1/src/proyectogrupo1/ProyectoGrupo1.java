@@ -29,11 +29,11 @@ public class ProyectoGrupo1 {
             Statement sql = ConexionSQL.getConexion().createStatement();
             
             //String consulta = "Select count(*) from baseBiblioteca.dbo.CLIENTES where cicliente = '1725661183' ";
-            String consulta = "Select * from baseBiblioteca.dbo.CLIENTES where cicliente = '1725661183'";
+            String consulta = "Select * from baseBiblioteca.dbo.LIBRO where titulo = 'luna de pluton'";
 
             ResultSet resultado = sql.executeQuery(consulta);
             resultado.next();
-            System.out.println(resultado.getString("nombreCliente"));
+            System.out.println(resultado.getString("autor"));
             /*
             while(resultado.next()){
                 System.out.println(resultado.getString(1));
