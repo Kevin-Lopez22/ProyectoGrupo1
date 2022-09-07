@@ -44,6 +44,11 @@ public class GUIEliminar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         txaInformacion.setEditable(false);
         txaInformacion.setColumns(20);
@@ -125,6 +130,12 @@ public class GUIEliminar extends javax.swing.JFrame {
         cedula = txtCedula.getText();
         /*Aplicar logica para ingresar a la base de datos e imprimir en el textArea*/
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        GUIGestorCliente regresar = new GUIGestorCliente(sqlCrudCliente);
+        regresar.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
