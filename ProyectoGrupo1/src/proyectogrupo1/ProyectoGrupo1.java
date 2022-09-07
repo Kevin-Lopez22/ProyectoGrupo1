@@ -51,7 +51,7 @@ public class ProyectoGrupo1 {
             sqlCrudCliente.read("4", "4"); // Lee los clientes con CI ci = 4
             
             //Creación del GUIGestorCliente
-            GUIGestorCliente gUIGestorCliente = new GUIGestorCliente(ConexionSQL.getConexion());
+            GUIGestorCliente gUIGestorCliente = new GUIGestorCliente(new SqlCrudCliente(ConexionSQL.getConexion()));
             gUIGestorCliente.setVisible(true);
             
         } catch (SQLException ex) {
