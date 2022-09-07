@@ -147,7 +147,9 @@ public class GUIActualizar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        GUIGestorCliente gestor = new GUIGestorCliente(sqlCrudCliente);
+        gestor.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
