@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Thomas Tapia
+ * @usuario
  */
 public class GUIActualizar extends javax.swing.JFrame {
 
@@ -21,6 +21,10 @@ public class GUIActualizar extends javax.swing.JFrame {
     public GUIActualizar(SqlCrudCliente sqlCrudCliente) {
         initComponents();
         this.sqlCrudCliente = sqlCrudCliente;
+    }
+
+    GUIActualizar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
