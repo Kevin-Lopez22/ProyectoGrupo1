@@ -7,7 +7,6 @@ package proyectogrupo1;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author denni
@@ -23,7 +22,7 @@ public class ConexionSQL {
                 + "loginTimeout = 40;"; //tiempo para la conexion 
         try{
             Connection con = DriverManager.getConnection(conexionUrl);
-            JOptionPane.showMessageDialog(null, "Conexion Exitosa");
+            //JOptionPane.showMessageDialog(null, "Conexion Exitosa");
             return con;
             
         }catch(SQLException ex){

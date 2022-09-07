@@ -8,8 +8,11 @@ package proyectogrupo1;
  *
  * @author denni
  */
+import com.sun.jdi.connect.spi.Connection;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -21,18 +24,20 @@ public class ProyectoGrupo1 {
     public static void main(String[] args) {
         // dennis chamba
         // 10 de agosto....
+        
         try{
             Statement sql = ConexionSQL.getConexion().createStatement();
             
-            String consulta = "Select * from baseBiblioteca.dbo.BIBLIOTECARIOS";
-            
+            //String consulta = "Select count(*) from baseBiblioteca.dbo.CLIENTES where cicliente = '1725661183' ";
+            String consulta = "Select * from baseBiblioteca.dbo.CLIENTES where cicliente = '1725661183'";
+
             ResultSet resultado = sql.executeQuery(consulta);
-            
+            resultado.next();
+            System.out.println(resultado.getString("nombreCliente"));
+            /*
             while(resultado.next()){
                 System.out.println(resultado.getString(1));
-            }
-            
-            
+            }*/
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, ex.toString());
         }        
