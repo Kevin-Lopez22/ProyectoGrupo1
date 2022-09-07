@@ -19,9 +19,9 @@ public class GUIGestorCliente extends javax.swing.JFrame {
      * Creates new form GUIGestorCliente
      */
     SqlCrudCliente sqlCrudCliente;
-    public GUIGestorCliente(java.sql.Connection connection) {
+    public GUIGestorCliente(SqlCrudCliente sqlCrudCliente) {
         initComponents();
-        sqlCrudCliente = new SqlCrudCliente(connection);
+        this.sqlCrudCliente = sqlCrudCliente;
     }
 
     /**
