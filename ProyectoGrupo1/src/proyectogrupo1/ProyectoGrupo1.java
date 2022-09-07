@@ -21,7 +21,6 @@ public class ProyectoGrupo1 {
     public static void main(String[] args) {
         try {
             // LuisM45
-            //CHAOS
             SqlCrudCliente sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
             
             // Preparacion de los Objetos cliente
