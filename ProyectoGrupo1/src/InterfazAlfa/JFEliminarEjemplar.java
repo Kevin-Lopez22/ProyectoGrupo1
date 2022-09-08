@@ -269,7 +269,7 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarLibroActionPerformed
 
     private void jBEliminarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarEjemplarActionPerformed
-        String IDEjemplar = (String)jtblEjemplaresPorLibro.getValueAt(jtblEjemplaresPorLibro.getSelectedRow(), 1);
+        int IDEjemplar = (int)jtblEjemplaresPorLibro.getValueAt(jtblEjemplaresPorLibro.getSelectedRow(), 1);
         int opcion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el Ejemplar seleccionado?", 
                     "** ADVERTENCIA **",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         System.out.println(IDEjemplar);
@@ -310,7 +310,7 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
     }//GEN-LAST:event_jtblEjemplaresPorLibroMouseReleased
 
     private void jpopItmEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpopItmEliminarActionPerformed
-        String IDEjemplar = (String)jtblEjemplaresPorLibro.getValueAt(jtblEjemplaresPorLibro.getSelectedRow(), 1);
+        int IDEjemplar = (int)jtblEjemplaresPorLibro.getValueAt(jtblEjemplaresPorLibro.getSelectedRow(), 1);
         int opcion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el Ejemplar seleccionado?", 
                     "** ADVERTENCIA **",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         System.out.println(IDEjemplar);

@@ -118,14 +118,14 @@ public class GestorLibros {
         return respuesta;
     }
       
-    public boolean eliminarEjemplar(String descripcion){
+    public boolean eliminarEjemplar(int idEjemplar){
         CallableStatement con = null; 
         boolean respuesta = true;
         
         try{
             con = ConexionSQL.getConexion().prepareCall("{call eliminarEjemplar(?)}");
             
-            con.setString(1, descripcion);
+            con.setInt(1, idEjemplar);
             respuesta = con.execute();
         }catch(Exception e){
             e.printStackTrace();
