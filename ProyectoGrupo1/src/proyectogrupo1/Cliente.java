@@ -28,16 +28,7 @@ public class Cliente extends Persona{
     public boolean isSuspendido() {
         return isSuspendido;
     }
-    
-    public static void cedula (String cedula){
-        int n=0;
-        if (n>=1 && n<=9) {
-            System.out.println("La cédula" + cedula);
-        }else{
-            System.out.println("No corresponde el número de digitos");
-        }
-    }
-    
+                   
     @Override
     public String toString() {
         return "Cliente{" + "idCliente=" + idCliente +","+super.toString()+'}';
