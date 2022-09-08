@@ -5,27 +5,91 @@ import java.sql.ResultSet;
 
 import java.sql.Connection;
 
-public class Libro {
-    private int idLibro,stock, paginas ; 
+public class Libro { 
    
-    private String titulo,autor,ISBN,Stock;
-    
+    private String titulo, autor, ISBN;
+    private int idLibro, paginas, stock;
 
     ConexionSQL conecxion = new ConexionSQL();
     
     static ResultSet res;
 
-    public Libro(int idLibro, int stock, int paginas, String titulo, String autor, String iSBN, String stock2) {
+    public Libro(int idLibro, String titulo, String autor, String isbn, int paginas, int stock) {
         this.idLibro = idLibro;
-        this.stock = stock;
-        this.paginas = paginas;
         this.titulo = titulo;
         this.autor = autor;
-        ISBN = iSBN;
-        Stock = stock2;
+        this.ISBN = isbn;
+        this.stock = stock;
+        this.paginas = paginas;   
     }
 
     public Libro() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public int getIdLibro() {
+        return idLibro;
+    }
+
+    public void setIdLibro(int idLibro) {
+        this.idLibro = idLibro;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(int paginas) {
+        this.paginas = paginas;
+    }
+
+    public ConexionSQL getConecxion() {
+        return conecxion;
+    }
+
+    public void setConecxion(ConexionSQL conecxion) {
+        this.conecxion = conecxion;
+    }
+
+    public static ResultSet getRes() {
+        return res;
+    }
+
+    public static void setRes(ResultSet res) {
+        Libro.res = res;
+    }
+    
+    
 }
