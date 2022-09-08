@@ -331,6 +331,11 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         for (int i = 0; i < stock; i++) {
              gestorLibro.agregarEjemplar(IDLibro, "Disponible");
         }
+        try {
+            gestorLibro.buscarLibro(jtblLibros, "SELECT * FROM LIBRO");
+        } catch (SQLException ex) {
+            Logger.getLogger(JFEliminarLibros.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_optAniadirEjemplarActionPerformed
 
     private void jBAniadirLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAniadirLibroActionPerformed
@@ -338,6 +343,12 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         String IDLibro = (String)jtblLibros.getValueAt(jtblLibros.getSelectedRow(), 0);
         for (int i = 0; i < stock; i++) {
              gestorLibro.agregarEjemplar(IDLibro, "Disponible");
+        }
+        
+        try {
+            gestorLibro.buscarLibro(jtblLibros, "SELECT * FROM LIBRO");
+        } catch (SQLException ex) {
+            Logger.getLogger(JFEliminarLibros.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBAniadirLibroActionPerformed
 

@@ -281,7 +281,9 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "¡Libro eliminado exitosamente!");
                 this.setVisible(true);
                 try {
-                    gestorLibro.buscarLibro(this.jtblEjemplaresPorLibro, "SELECT * FROM LIBRO");
+                    gestorLibro.buscarEjemplar(this.jtblEjemplaresPorLibro, "select a.TITULO, b.IDEJEMPLAR, b.ESTADO from\n"
+                + "LIBRO a, EJEMPLARES b \n"
+                + "where a.IDLIBRO = b.IDLIBRO");
                 } catch (SQLException ex) {
                     Logger.getLogger(JFEliminarLibros.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -320,7 +322,9 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "¡Libro eliminado exitosamente!");
                 this.setVisible(true);
                 try {
-                    gestorLibro.buscarLibro(this.jtblEjemplaresPorLibro, "SELECT * FROM LIBRO");
+                    gestorLibro.buscarEjemplar(this.jtblEjemplaresPorLibro, "select a.TITULO, b.IDEJEMPLAR, b.ESTADO from\n"
+                + "LIBRO a, EJEMPLARES b \n"
+                + "where a.IDLIBRO = b.IDLIBRO");
                 } catch (SQLException ex) {
                     Logger.getLogger(JFEliminarLibros.class.getName()).log(Level.SEVERE, null, ex);
                 }
