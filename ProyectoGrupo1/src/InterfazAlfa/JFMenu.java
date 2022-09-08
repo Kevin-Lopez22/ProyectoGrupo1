@@ -10,12 +10,8 @@ package InterfazAlfa;
  */
 public class JFMenu extends javax.swing.JFrame {
 
-   
-    
     JFRegistroLib registro;
     JFEliminarLibros eliminar;
-    
-    
     public JFMenu() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -32,26 +28,15 @@ public class JFMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu1 = new javax.swing.JMenu();
-        btnRegistrarLibro = new javax.swing.JButton();
         btnEliminarLibro = new javax.swing.JButton();
         btnBuscarLibro = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        btnRegistrarLibro = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuSalir = new javax.swing.JMenuItem();
 
-        jMenu1.setText("jMenu1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        btnRegistrarLibro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnRegistrarLibro.setText("Registrar libro");
-        btnRegistrarLibro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarLibroActionPerformed(evt);
-            }
-        });
 
         btnEliminarLibro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEliminarLibro.setText("Eliminar Libro");
@@ -66,6 +51,14 @@ public class JFMenu extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton4.setText("Agregar Ejemplar");
+
+        btnRegistrarLibro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnRegistrarLibro.setText("Registrar libro");
+        btnRegistrarLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarLibroActionPerformed(evt);
+            }
+        });
 
         jMenu2.setText("File");
 
@@ -95,7 +88,7 @@ public class JFMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnBuscarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +97,7 @@ public class JFMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarLibro)
                     .addComponent(btnBuscarLibro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminarLibro)
                     .addComponent(jButton4))
@@ -118,15 +111,15 @@ public class JFMenu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuSalirActionPerformed
 
-    private void btnRegistrarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarLibroActionPerformed
-        this.setVisible(false);
-        registro.setVisible(true);
-    }//GEN-LAST:event_btnRegistrarLibroActionPerformed
-
     private void btnEliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLibroActionPerformed
         this.setVisible(false);
         eliminar.setVisible(true);
     }//GEN-LAST:event_btnEliminarLibroActionPerformed
+
+    private void btnRegistrarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarLibroActionPerformed
+        this.setVisible(false);
+        registro.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarLibroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +147,7 @@ public class JFMenu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -168,7 +162,6 @@ public class JFMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarLibro;
     private javax.swing.JButton btnRegistrarLibro;
     private javax.swing.JButton jButton4;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuSalir;
