@@ -3,11 +3,11 @@ import java.sql.*;
 import java.util.*;
 import proyectogrupo1.SqlCrud;
 
-final class SqlCrudCliente implements SqlCrud<Cliente,String>{
+final public class SqlCrudClienteByCI implements SqlCrud<Cliente,String>{
 
     Connection connection;
 
-    public SqlCrudCliente(Connection connection) {
+    public SqlCrudClienteByCI(Connection connection) {
         this.connection = connection;
     }
     
@@ -28,6 +28,8 @@ final class SqlCrudCliente implements SqlCrud<Cliente,String>{
         prepStat.setString(7, e.getCorreo());
         prepStat.setBoolean(8, e.isSuspendido());
         prepStat.execute();
+        prepStat.close();
+
     }
 
     @Override
@@ -48,9 +50,28 @@ final class SqlCrudCliente implements SqlCrud<Cliente,String>{
         while(rs.next()){
             clientes.add(readRow(rs));
         }
+        prepStat.close();
         return clientes;
     }
 
+    public List<Cliente> read() throws SQLException{
+        // TODO: Implementar
+        PreparedStatement prepStat = connection.prepareStatement(
+                "SELECT IDCLIENTE,CICLIENTE,NOMBRECLIENTE,APELLIDOCLIENTE,DIRECCION,TELEFONO,CORREO,SUSPENDIDO "+ 
+                      //1        ,2        ,3            ,4              ,5        ,6       ,7     ,8
+                "FROM CLIENTES;"
+        );
+        prepStat.execute();
+        ResultSet rs = prepStat.getResultSet();
+        
+        LinkedList<Cliente> clientes = new LinkedList<>();
+        while(rs.next()){
+            clientes.add(readRow(rs));
+        }
+        prepStat.close();
+        return clientes;
+    }
+    
     private Cliente readRow(ResultSet rs) throws SQLException{
         int idCliente = Integer.parseInt(rs.getString(1).trim());
         String cedula = rs.getString(2).trim();
@@ -87,6 +108,8 @@ final class SqlCrudCliente implements SqlCrud<Cliente,String>{
         prepStat.setString(7, String.valueOf(e.getCedula()));
         
         prepStat.execute();
+        prepStat.close();
+
     }
 
     @Override
@@ -99,6 +122,8 @@ final class SqlCrudCliente implements SqlCrud<Cliente,String>{
         prepStat.setString(1, String.valueOf(e.getCedula()));
         
         prepStat.execute();
+        prepStat.close();
+
     }
     
     public void close() throws SQLException{

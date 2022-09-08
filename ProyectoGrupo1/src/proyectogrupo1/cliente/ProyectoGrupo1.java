@@ -6,10 +6,12 @@ package proyectogrupo1.cliente;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import proyectogrupo1.ConexionSQL;
+import proyectogrupo1.prestamo.Prestamo;
 
 /**
  *
@@ -23,8 +25,8 @@ public class ProyectoGrupo1 {
     public static void main(String[] args) {
         try {
             // LuisM45
-            
-            SqlCrudCliente sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
+            Connection c = ConexionSQL.getConexion();
+            SqlCrudClienteByCI sqlCrudCliente = new SqlCrudClienteByCI(c);
 //            for(Cliente c: sqlCrudCliente.read("0", "999999999"))
 //                sqlCrudCliente.delete(c);
             
@@ -57,7 +59,9 @@ public class ProyectoGrupo1 {
             sqlCrudCliente.read("4", "4"); // Lee los clientes con CI ci = 4
 
             //Creación del GUIGestorCliente
-            GUIGestorCliente gUIGestorCliente = new GUIGestorCliente(new SqlCrudCliente(ConexionSQL.getConexion()));
+            Cliente.sQLIndexIdCliente = new Cliente.SQLIndexIdCliente(c);
+            Prestamo.sQLIndexIdPrestamo = new Prestamo.SQLIndexIdPrestamo(c);
+            GUIGestorCliente gUIGestorCliente = new GUIGestorCliente(new SqlCrudClienteByCI(c));
             gUIGestorCliente.setVisible(true);
 
         } catch (SQLException ex) {

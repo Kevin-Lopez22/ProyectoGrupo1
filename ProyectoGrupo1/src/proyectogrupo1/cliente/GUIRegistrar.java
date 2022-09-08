@@ -25,9 +25,9 @@ public class GUIRegistrar extends javax.swing.JFrame {
      */
     //Instancia de cliente
     Cliente cliente ;
-    SqlCrudCliente sqlCrudCliente; // Handler para el crud
+    SqlCrudClienteByCI sqlCrudCliente; // Handler para el crud
     List<Validator<javax.swing.JTextField>> validators;
-    public GUIRegistrar(SqlCrudCliente sqlCrudCliente) {
+    public GUIRegistrar(SqlCrudClienteByCI sqlCrudCliente) {
         initComponents();
         this.sqlCrudCliente = sqlCrudCliente;
         this.validators = new ArrayList<>(7);
@@ -251,10 +251,10 @@ public class GUIRegistrar extends javax.swing.JFrame {
             telefono = txtTelefono.getText();
             direccion = txtDireccion.getText();
             correo = txtCorreo.getText();
-        }catch(Exception ex){
+            cliente = new Cliente(Cliente.sQLIndexIdCliente.pop(), cedula, nombre, apellido, telefono, direccion, correo);
+        }catch(SQLException ex){
             Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        cliente = new Cliente(1, cedula, nombre, apellido, telefono, direccion, correo);
     
         
         // La documentación da mas detalles de como opera el SqlCrudCliente

@@ -21,11 +21,12 @@ public class GUIGestorCliente extends javax.swing.JFrame {
     /**
      * Creates new form GUIGestorCliente
      */
-    SqlCrudCliente sqlCrudCliente;
-    public GUIGestorCliente(SqlCrudCliente sqlCrudCliente) {
+    SqlCrudClienteByCI sqlCrudCliente;
+    public GUIGestorCliente(SqlCrudClienteByCI sqlCrudCliente) {
         initComponents();
         //setIconImage(new ImageIcon(getClass().getResource("/imagen/book.png")).getImage());
         this.sqlCrudCliente = sqlCrudCliente;
+        
     }
 
     /**

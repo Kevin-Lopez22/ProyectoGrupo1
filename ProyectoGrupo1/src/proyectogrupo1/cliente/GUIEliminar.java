@@ -19,10 +19,10 @@ public class GUIEliminar extends javax.swing.JFrame {
 
     /* Variables para la actualizacion del cliente */
     Cliente clientePorEliminar;     // Variable auxiliar para modificar y enviar al CRUD
-    SqlCrudCliente sqlCrudCliente;  // Handler para el crud
+    SqlCrudClienteByCI sqlCrudCliente;  // Handler para el crud
     
     
-    public GUIEliminar(SqlCrudCliente sqlCrudCliente) {
+    public GUIEliminar(SqlCrudClienteByCI sqlCrudCliente) {
         initComponents();
         this.sqlCrudCliente =sqlCrudCliente;
     }

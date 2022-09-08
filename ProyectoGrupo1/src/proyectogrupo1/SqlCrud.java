@@ -14,7 +14,7 @@ import java.util.List;
  * tipo {@code F} que pueda ser ocupado como PK
  * @param <F> Clase de la primary key
  */
-public interface SqlCrud<E,F extends Comparable<F>> {
+public interface SqlCrud<E,F> {
     
     /**
      * Funcion create del CRUD
@@ -23,6 +23,14 @@ public interface SqlCrud<E,F extends Comparable<F>> {
      * @throws SQLException 
      */
     void create(E e) throws SQLException;
+    
+    /**
+     * Funcion read del CRUD(3)
+     * Lee todo y lo devuelve
+     * @return
+     * @throws SQLException 
+     */
+    List<E> read() throws SQLException;
     
     /**
      * Funcion read del CRUD(1)

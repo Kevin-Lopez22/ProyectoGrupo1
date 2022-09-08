@@ -4,10 +4,24 @@
  */
 package proyectogrupo1;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author luism
  */
-public interface SQLIndex {
+public interface SQLIndex<E> {
+    final static String TABLE_NAME = "indices";
     
+    E peek() throws SQLException ;
+    
+    default E pop() throws SQLException {
+        E ret = peek();
+        increment();
+        return ret;
+    }
+    
+    void increment() throws SQLException ;
+    void decrement() throws SQLException ;
+    void close() throws SQLException;
 }
