@@ -17,10 +17,8 @@ public class JFRegistroLibro extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         libro = new Libro();
-        
         gestorLibro = new GestorLibros();
-    //    jCBPais.setModel(reservaCliente.llenarComboboxCli("SELECT PAIS FROM PAIS"));
-        
+        //jCBPais.setModel(reservaCliente.llenarComboboxCli("SELECT PAIS FROM PAIS"));        
     }
 
     @SuppressWarnings("unchecked")
@@ -35,14 +33,14 @@ public class JFRegistroLibro extends javax.swing.JFrame {
         jTFIDLIbro = new javax.swing.JTextField();
         jTFPaginas = new javax.swing.JTextField();
         jBIngresarClienteRes = new javax.swing.JButton();
-        jBSalirJFRegCli = new javax.swing.JButton();
+        jBRegresar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTFTituloLibro1 = new javax.swing.JTextField();
+        jTFTituloLibro = new javax.swing.JTextField();
         jTFAutorLibro = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTFIsbnLibro = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTFStock1 = new javax.swing.JTextField();
+        jTFStock = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("REGISTRO DE CLIENTES");
@@ -92,20 +90,20 @@ public class JFRegistroLibro extends javax.swing.JFrame {
         });
         getContentPane().add(jBIngresarClienteRes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 200, -1));
 
-        jBSalirJFRegCli.setBackground(new java.awt.Color(153, 153, 153));
-        jBSalirJFRegCli.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jBSalirJFRegCli.setForeground(new java.awt.Color(102, 102, 102));
-        jBSalirJFRegCli.setText("Regresar");
-        jBSalirJFRegCli.addActionListener(new java.awt.event.ActionListener() {
+        jBRegresar.setBackground(new java.awt.Color(153, 153, 153));
+        jBRegresar.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jBRegresar.setForeground(new java.awt.Color(102, 102, 102));
+        jBRegresar.setText("Regresar");
+        jBRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalirJFRegCliActionPerformed(evt);
+                jBRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBSalirJFRegCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, 210, -1));
+        getContentPane().add(jBRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, 210, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo2REGISTRO.jpg"))); // NOI18N
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 470));
-        getContentPane().add(jTFTituloLibro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 220, -1));
+        getContentPane().add(jTFTituloLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 220, -1));
         getContentPane().add(jTFAutorLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 220, -1));
 
         jLabel7.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
@@ -119,44 +117,45 @@ public class JFRegistroLibro extends javax.swing.JFrame {
         jLabel8.setText("Stock");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 350, -1));
 
-        jTFStock1.addActionListener(new java.awt.event.ActionListener() {
+        jTFStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFStock1ActionPerformed(evt);
+                jTFStockActionPerformed(evt);
             }
         });
-        getContentPane().add(jTFStock1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 220, -1));
+        getContentPane().add(jTFStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 220, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBIngresarClienteResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIngresarClienteResActionPerformed
-        String id_cliente = jTFIDLIbro.getText();
-        String nombres = jTFPaginas.getText();
-        String pais = jCBPais.getSelectedItem().toString();
-        
-        String clave = new String(jPFClave.getPassword());
-        boolean respuesta = cliente.insertarCliente(id_cliente, nombres, pais, clave);
+        int idLibro = Integer.parseInt(jTFIDLIbro.getText());
+        String titulo = jTFTituloLibro.getText();
+        String autor = jTFAutorLibro.getText();
+        String isbn = jTFIsbnLibro.getText();
+        int stock = Integer.parseInt(jTFStock.getText());
+        int paginas = Integer.parseInt(jTFPaginas.getText());
+       
+        libro = new Libro(idLibro, titulo, autor, isbn, paginas, stock);
+        boolean respuesta = gestorLibro.agregarLibro(libro);
         if(respuesta == false){
-            JOptionPane.showMessageDialog(null, "¡Cliente agregado exitosamente!");
-            this.jFMenuCliente.setVisible(true);
-            this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "¡Libro agregado exitosamente!");
+            this.setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(null, "** Error ** ¡Cliente no agregado!");
+            JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser agregado!");
         }
     }//GEN-LAST:event_jBIngresarClienteResActionPerformed
 
-    private void jBSalirJFRegCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirJFRegCliActionPerformed
-        this.jFMenuCliente.setVisible(true);
+    private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_jBSalirJFRegCliActionPerformed
+    }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jTFPaginasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFPaginasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFPaginasActionPerformed
 
-    private void jTFStock1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFStock1ActionPerformed
+    private void jTFStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFStockActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFStock1ActionPerformed
+    }//GEN-LAST:event_jTFStockActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,7 +201,7 @@ public class JFRegistroLibro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBIngresarClienteRes;
-    private javax.swing.JButton jBSalirJFRegCli;
+    private javax.swing.JButton jBRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -215,7 +214,7 @@ public class JFRegistroLibro extends javax.swing.JFrame {
     private javax.swing.JTextField jTFIDLIbro;
     private javax.swing.JTextField jTFIsbnLibro;
     private javax.swing.JTextField jTFPaginas;
-    private javax.swing.JTextField jTFStock1;
-    private javax.swing.JTextField jTFTituloLibro1;
+    private javax.swing.JTextField jTFStock;
+    private javax.swing.JTextField jTFTituloLibro;
     // End of variables declaration//GEN-END:variables
 }
