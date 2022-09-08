@@ -143,7 +143,7 @@ public class GUIGestorCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        GUIRegistrar registrar = new GUIRegistrar();
+        GUIRegistrar registrar = new GUIRegistrar(sqlCrudCliente);
         registrar.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegistrarActionPerformed
