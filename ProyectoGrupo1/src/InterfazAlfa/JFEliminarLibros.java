@@ -4,7 +4,6 @@
  */
 package InterfazAlfa;
 
-import java.awt.PopupMenu;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -99,7 +98,7 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         jLabel1.setText("ELIMINACIÓN DE LIBROS");
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel3.setText("Título:");
+        jLabel3.setText("Filtrar por título:");
 
         jTFTituloLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,15 +182,14 @@ public class JFEliminarLibros extends javax.swing.JFrame {
                         .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(137, 137, 137))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -201,10 +199,10 @@ public class JFEliminarLibros extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                    .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEliminarLibro)
@@ -230,18 +228,26 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFTituloLibroActionPerformed
 
     private void jBEliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarLibroActionPerformed
-
         String IDLibro = (String)jtblLibros.getValueAt(jtblLibros.getSelectedRow(), 0);
-         System.out.println(IDLibro);
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el libro seleccionado?", 
+                    "** ADVERTENCIA **",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        System.out.println(IDLibro);
+        
         boolean respuesta = gestorLibro.eliminarLibro(IDLibro);
-        if (respuesta == false) {
-            JOptionPane.showMessageDialog(null, "¡Libro eliminado exitosamente!");
-            this.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser eliminado debido a que no existe!");
+        
+        if(opcion == JOptionPane.YES_OPTION){
+            if (respuesta == false) {
+                JOptionPane.showMessageDialog(null, "¡Libro eliminado exitosamente!");
+                this.setVisible(true);
+                try {
+                    gestorLibro.buscarLibro(this.jtblLibros, "SELECT * FROM LIBRO");
+                } catch (SQLException ex) {
+                    Logger.getLogger(JFEliminarLibros.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser eliminado debido a que no existe!");
+            }
         }
-        // System.out.println(idLibro+" "+titulo+" "+autor+" "+ " "+isbn+stock+paginas);
-
     }//GEN-LAST:event_jBEliminarLibroActionPerformed
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
@@ -261,14 +267,25 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     }//GEN-LAST:event_jtblLibrosMouseReleased
 
     private void optEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optEliminarActionPerformed
-         String IDLibro = (String)jtblLibros.getValueAt(jtblLibros.getSelectedRow(), 0);
-         System.out.println(IDLibro);
+        String IDLibro = (String)jtblLibros.getValueAt(jtblLibros.getSelectedRow(), 0);
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el libro seleccionado?", 
+                    "** ADVERTENCIA **",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        System.out.println(IDLibro);
+        
         boolean respuesta = gestorLibro.eliminarLibro(IDLibro);
-        if (respuesta == false) {
-            JOptionPane.showMessageDialog(null, "¡Libro eliminado exitosamente!");
-            this.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser eliminado debido a que no existe!");
+        
+        if(opcion == JOptionPane.YES_OPTION){
+            if (respuesta == false) {
+                JOptionPane.showMessageDialog(null, "¡Libro eliminado exitosamente!");
+                this.setVisible(true);
+                try {
+                    gestorLibro.buscarLibro(this.jtblLibros, "SELECT * FROM LIBRO");
+                } catch (SQLException ex) {
+                    Logger.getLogger(JFEliminarLibros.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser eliminado debido a que no existe!");
+            }
         }
     }//GEN-LAST:event_optEliminarActionPerformed
     TableRowSorter trs=null;
