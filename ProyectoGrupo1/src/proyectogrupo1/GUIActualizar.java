@@ -5,8 +5,10 @@
 package proyectogrupo1;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -165,8 +167,25 @@ public class GUIActualizar extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cedula = "";
-        
+
         cedula = txtCedula.getText();
+            try {
+            List<Cliente> clientes = sqlCrudCliente.read(cedula);
+            
+            if(clientes.isEmpty()){
+                JOptionPane.showMessageDialog(null, "No se ha encontrado el cliente especificado"); // Ahi le cambian
+                clientePorModificar = null;
+                return;
+                }
+            if(clientes.size()==1){
+                JOptionPane.showMessageDialog(null, "Cliente encontrado!"); // Ahi le cambian
+                clientePorModificar = clientes.get(0);
+                }
+            }
+            catch (SQLException ex) {
+            // TODO: Control de excepciones
+            Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         /*Aplicar logica para ingresar a la base de datos e imprimir en el textArea*/
         txaInformacion.setVisible(true);
@@ -198,13 +217,14 @@ public class GUIActualizar extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         String variableString = "";
         
-        variableString = txtEditar.getText(); //Esto tambien que se actualice en la base de datos y se cambie el textArea pilas mateo
         
-        // Antes de este comentario actualizen el objeto clientePorModificar\
-        // como sea pertinente
-        // La documentación da mas detalles de como opera el SqlCrudCliente
+        variableString = txtEditar.getText(); //Esto tambien que se actualice en la base de datos y se cambie el textArea pilas mateo
+
         try {
+
             sqlCrudCliente.update(clientePorModificar);
+            JOptionPane.showMessageDialog(null, "Información actualizada"); // Ahi le cambian
+
         } catch (SQLException ex) {
             // TODO: Control de excepciones
             Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
