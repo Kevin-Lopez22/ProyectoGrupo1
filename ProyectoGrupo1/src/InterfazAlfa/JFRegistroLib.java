@@ -126,6 +126,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         jMenuItem1.setText("Salir");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

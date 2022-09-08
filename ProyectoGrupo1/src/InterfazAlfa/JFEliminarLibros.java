@@ -68,6 +68,7 @@ public class JFEliminarLibros extends javax.swing.JFrame {
 
         jpopmMenuEliminar = new javax.swing.JPopupMenu();
         optEliminar = new javax.swing.JMenuItem();
+        optAniadirEjemplar = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTFTituloLibro = new javax.swing.JTextField();
@@ -75,6 +76,7 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         jBRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblLibros = new javax.swing.JTable();
+        jBAniadirLibro = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -87,6 +89,14 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         });
         jpopmMenuEliminar.add(optEliminar);
 
+        optAniadirEjemplar.setText("Añadir Ejemplar");
+        optAniadirEjemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optAniadirEjemplarActionPerformed(evt);
+            }
+        });
+        jpopmMenuEliminar.add(optAniadirEjemplar);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -95,7 +105,7 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        jLabel1.setText("ELIMINACIÓN DE LIBROS");
+        jLabel1.setText("Buscar Libro");
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel3.setText("Filtrar por título:");
@@ -152,8 +162,19 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtblLibros);
 
+        jBAniadirLibro.setBackground(new java.awt.Color(153, 153, 153));
+        jBAniadirLibro.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jBAniadirLibro.setForeground(new java.awt.Color(102, 102, 102));
+        jBAniadirLibro.setText("AñadirEjemplar");
+        jBAniadirLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAniadirLibroActionPerformed(evt);
+            }
+        });
+
         jMenu2.setText("Edit");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         jMenuItem1.setText("Salir");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,51 +191,53 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(170, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jBEliminarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(137, 137, 137))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(34, 34, 34)))
+                .addGap(0, 71, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(274, 274, 274))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jBAniadirLibro)
+                .addGap(43, 43, 43)
+                .addComponent(jBEliminarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEliminarLibro)
-                    .addComponent(jBRegresar))
-                .addGap(18, 18, 18))
+                    .addComponent(jBRegresar)
+                    .addComponent(jBAniadirLibro))
+                .addGap(48, 48, 48))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
@@ -302,6 +325,22 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         jtblLibros.setRowSorter(trs);
     }//GEN-LAST:event_jTFTituloLibroKeyTyped
 
+    private void optAniadirEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optAniadirEjemplarActionPerformed
+        int stock = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese la cantidad de ajemplares a añadir","Añadir Libros"));
+        String IDLibro = (String)jtblLibros.getValueAt(jtblLibros.getSelectedRow(), 0);
+        for (int i = 0; i < stock; i++) {
+             gestorLibro.agregarEjemplar(IDLibro, "Disponible");
+        }
+    }//GEN-LAST:event_optAniadirEjemplarActionPerformed
+
+    private void jBAniadirLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAniadirLibroActionPerformed
+        int stock = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese la cantidad de ajemplares a añadir","Añadir Libros"));
+        String IDLibro = (String)jtblLibros.getValueAt(jtblLibros.getSelectedRow(), 0);
+        for (int i = 0; i < stock; i++) {
+             gestorLibro.agregarEjemplar(IDLibro, "Disponible");
+        }
+    }//GEN-LAST:event_jBAniadirLibroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -343,6 +382,7 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAniadirLibro;
     private javax.swing.JButton jBEliminarLibro;
     private javax.swing.JButton jBRegresar;
     private javax.swing.JLabel jLabel1;
@@ -354,6 +394,7 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     private javax.swing.JTextField jTFTituloLibro;
     private javax.swing.JPopupMenu jpopmMenuEliminar;
     private javax.swing.JTable jtblLibros;
+    private javax.swing.JMenuItem optAniadirEjemplar;
     private javax.swing.JMenuItem optEliminar;
     // End of variables declaration//GEN-END:variables
 }
