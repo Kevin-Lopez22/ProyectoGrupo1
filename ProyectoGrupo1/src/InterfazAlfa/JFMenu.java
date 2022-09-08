@@ -26,17 +26,48 @@ public class JFMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnRegistrarLibro = new javax.swing.JButton();
+        btnEliminarLibro = new javax.swing.JButton();
+        btnBuscarLibro = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnRegistrarLibro.setText("Registrar libro");
+
+        btnEliminarLibro.setText("Eliminar Libro");
+
+        btnBuscarLibro.setText("Buscar Libro");
+
+        jButton4.setText("Agregar Ejemplar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegistrarLibro)
+                    .addComponent(btnEliminarLibro))
+                .addGap(87, 87, 87)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4)
+                    .addComponent(btnBuscarLibro))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrarLibro)
+                    .addComponent(btnBuscarLibro))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminarLibro)
+                    .addComponent(jButton4))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pack();
@@ -78,5 +109,9 @@ public class JFMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarLibro;
+    private javax.swing.JButton btnEliminarLibro;
+    private javax.swing.JButton btnRegistrarLibro;
+    private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
 }
