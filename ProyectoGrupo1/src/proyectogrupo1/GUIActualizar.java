@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -167,7 +168,7 @@ public class GUIActualizar extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cedula = "";
-
+        JTextArea textArea = new JTextArea(cedula);
         cedula = txtCedula.getText();
             try {
             List<Cliente> clientes = sqlCrudCliente.read(cedula);
