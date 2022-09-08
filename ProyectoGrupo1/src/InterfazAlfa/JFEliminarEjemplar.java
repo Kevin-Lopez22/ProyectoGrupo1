@@ -45,7 +45,7 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
         gestorLibro = new GestorLibros();
         dtmModelo = cargarTitulosTabla(dtmModelo);
         this.jtblEjemplaresPorLibro.setModel(dtmModelo);
-        gestorLibro.buscarLibro(this.jtblEjemplaresPorLibro, "select a.TITULO, b.IDEJEMPLAR, b.ESTADO from\n"
+        gestorLibro.buscarEjemplar(this.jtblEjemplaresPorLibro, "select a.TITULO, b.IDEJEMPLAR, b.ESTADO from\n"
                 + "LIBRO a, EJEMPLARES b \n"
                 + "where a.IDLIBRO = b.IDLIBRO");
     }
@@ -223,14 +223,14 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
     TableRowSorter trs = null;
     private void jTFTituloLibroEjemplarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTituloLibroEjemplarKeyTyped
 
-        JTEjemplarPorLibros.addKeyListener(new KeyAdapter() {
+        jTFTituloLibroEjemplar.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke) {
-                trs.setRowFilter(RowFilter.regexFilter("(?i)" + jTFTituloLibroEjemplar.getText(), 1));
+                trs.setRowFilter(RowFilter.regexFilter("(?i)" + jTFTituloLibroEjemplar.getText(), 0));
             }
         });
         trs = new TableRowSorter(this.dtmModelo);
-        JTEjemplarPorLibros.setRowSorter(trs);
+      jtblEjemplaresPorLibro.setRowSorter(trs);
 
     }//GEN-LAST:event_jTFTituloLibroEjemplarKeyTyped
 
