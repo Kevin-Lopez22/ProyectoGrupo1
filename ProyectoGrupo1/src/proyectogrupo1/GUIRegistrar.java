@@ -6,6 +6,8 @@
 package proyectogrupo1;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,9 +25,12 @@ public class GUIRegistrar extends javax.swing.JFrame {
     //Instancia de cliente
     Cliente cliente ;
     SqlCrudCliente sqlCrudCliente; // Handler para el crud
+    List<Validator<javax.swing.JTextField>> validators;
     public GUIRegistrar(SqlCrudCliente sqlCrudCliente) {
         initComponents();
         this.sqlCrudCliente = sqlCrudCliente;
+        this.validators = new ArrayList<>(7);
+        this.validators.add(new Validator<>(txtCedula, t->Persona.valida(t.getText())));
     }
 
     /**
@@ -228,6 +233,10 @@ public class GUIRegistrar extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         //Variables para almacenar datos de ingreso
+        for(Validator v: validators)
+            if(!v.test())
+                return;
+        
         String cedula = "";
         String nombre = "";
         String apellido = "";
@@ -295,7 +304,7 @@ public class GUIRegistrar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoKeyTyped
 
     private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
-        if(!Persona.valida(txtCedula.getText())){
+        if(!validators.get(0).test()){
             JOptionPane.showMessageDialog(null, "La cedula ingresada no es válida");
         }
 
