@@ -30,6 +30,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     Boolean clienteValido = false;
     Boolean libroExistente = false;
     String auxiliarCodigoCliente, auxiliarCodigoLibro;
+    
 
     public InterfazPrestamos() {
         initComponents();
@@ -587,8 +588,8 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     }//GEN-LAST:event_paguinasLibroActionPerformed
 
     private void verificaLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificaLibroActionPerformed
-        DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
 
+        DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
         if (tituloLibro.getText().isEmpty()) {
             JOptionPane.showInternalMessageDialog(null, "Asegurese de ingresar el titulo del libro");
         } else {
@@ -627,9 +628,9 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                         Object[] fila = new Object[tabla.getColumnCount()];
                         consulta = "Select * from baseBiblioteca.dbo.EJEMPLARES where idlibro = '" + codigoLibro.getText() + "' and estado = 'disponible'";
                         resultado = sql.executeQuery(consulta);
-                        while(resultado.next()){
-                            for(int i =0; i < tabla.getColumnCount(); i++){
-                                fila[i] = resultado.getString(i+1);
+                        while (resultado.next()) {
+                            for (int i = 0; i < tabla.getColumnCount(); i++) {
+                                fila[i] = resultado.getString(i + 1);
                                 fila[0] = tituloLibro.getText();
                             }
                             modeloTabla.addRow(fila);
@@ -793,9 +794,30 @@ public class InterfazPrestamos extends javax.swing.JFrame {
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // pasar la info del ejemplar a la interfaz de prestamo para generar
-        int fila = tabla.getSelectedRow();
-        PrestamoGUI d = new PrestamoGUI(auxiliarCodigoCliente, (String) tabla.getValueAt(fila, 1).toString(),auxiliarCodigoLibro);
-        d.show();
+
+        if (clienteValido) {
+            int fila = tabla.getSelectedRow();
+            PrestamoGUI d = new PrestamoGUI(auxiliarCodigoCliente, (String) tabla.getValueAt(fila, 1).toString(), auxiliarCodigoLibro);
+            d.show();
+            txtCedula.setText("");
+            nombreCliente.setText("");
+            apellidoCliente.setText("");
+            correoCliente.setText("");
+            idCliente.setText("");
+            telefonoCliente.setText("");
+            direccionCliente.setText("");
+            tituloLibro.setText("");
+            codigoLibro.setText("");
+            isbnLibro.setText("");
+            stockLibro.setText("");
+            paguinasLibro.setText("");
+            autor.setText("");
+            DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
+            modeloTabla.setRowCount(0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Asegurese de ingresar un usuario");
+
+        }
     }//GEN-LAST:event_tablaMouseClicked
 
     /**

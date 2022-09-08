@@ -28,15 +28,15 @@ public class PrestamoGUI extends javax.swing.JFrame {
         initComponents();
     }
 
-    public PrestamoGUI(String cliente, String ejemplar, String libro) {
-        this.codigoCliente = cliente;
-        this.codigoEjemplar = ejemplar;
-        this.codigoLibro = libro;
-        
-        this.cliente.setText(cliente);
-        this.libro.setText(libro);
-        this.ejemplar.setText(ejemplar);
+    public PrestamoGUI(String cliente1, String ejemplar1, String libro1) {
+        this.codigoCliente = cliente1;
+        this.codigoEjemplar = ejemplar1;
+        this.codigoLibro = libro1;
+       
         initComponents();
+        cliente.setText(cliente1);
+        libro.setText(libro1);
+        ejemplar.setText(ejemplar1);
     }
 
     /**
@@ -59,6 +59,7 @@ public class PrestamoGUI extends javax.swing.JFrame {
         cliente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         fechaPrestamo = new com.toedter.calendar.JDateChooser();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +92,13 @@ public class PrestamoGUI extends javax.swing.JFrame {
 
         jLabel5.setText("Fecha de Prestamo");
 
+        jButton2.setText("cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,24 +111,29 @@ public class PrestamoGUI extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(libro, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fechaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ejemplar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(91, 91, 91)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(fechaPrestamo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(11, 11, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(293, 293, 293))
+                        .addComponent(fechaPrestamo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(libro, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jButton1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fechaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(jButton2)))))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,9 +156,11 @@ public class PrestamoGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(ejemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
-                .addComponent(jButton1)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -153,6 +168,7 @@ public class PrestamoGUI extends javax.swing.JFrame {
 
     private void fechaDevolucionPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaDevolucionPropertyChange
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_fechaDevolucionPropertyChange
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -167,13 +183,24 @@ public class PrestamoGUI extends javax.swing.JFrame {
             String consulta = "Insert into baseBiblioteca.dbo.PRESTAMO values('" + cliente.getText() + "',"
                     + "'"+libro.getText()+"','"+ejemplar.getText()+"','"+fPrestamo+"','"+fFinal+"')";
             sql.executeUpdate(consulta);
+            
+            //cambio de estado del libro
+            consulta = "update baseBiblioteca.dbo.ejemplares set estado = 'prestado' where IDEjemplar = '"+this.codigoEjemplar+"'";
+            sql.executeUpdate(consulta);
+            
             JOptionPane.showMessageDialog(null, "Regsitro Exitoso");
+            this.show(false);
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.show(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,6 +243,7 @@ public class PrestamoGUI extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser fechaDevolucion;
     private com.toedter.calendar.JDateChooser fechaPrestamo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
