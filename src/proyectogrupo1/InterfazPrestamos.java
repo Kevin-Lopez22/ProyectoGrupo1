@@ -1059,7 +1059,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
             try {
                 //Verificación de la existencia del prestamo 
                 Statement sql = ConexionSQL.getConexion().createStatement();
-                SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat ff = new SimpleDateFormat("yyyy-MM-dd");
                 fFinalModificada = ff.format(dateFechaModificada.getCalendar().getTime());
 
                 String consulta = "UPDATE baseBiblioteca.dbo.PRESTAMO SET "
