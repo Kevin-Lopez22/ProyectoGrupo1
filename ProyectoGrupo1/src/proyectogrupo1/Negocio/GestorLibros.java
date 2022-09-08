@@ -61,6 +61,25 @@ public class GestorLibros {
                 JOptionPane.showMessageDialog(null, ex.toString());
         }
     }
+    
+    public void buscarEjemplar(JTable jTabla, String consulta) throws SQLException{
+        //Carga la informacion de buscar libro y lo pone en el jtable 
+        DefaultTableModel modelo = (DefaultTableModel) jTabla.getModel();
+        modelo.setRowCount(0);
+        res = proyectogrupo1.Negocio.ConexionSQL.consulta(consulta);
+        try{
+            while(res.next()){
+                Vector v = new Vector();
+                v.add(res.getString(1));
+                v.add(res.getInt(2));
+                v.add(res.getString(3));
+                modelo.addRow(v);
+                jTabla.setModel(modelo);
+            }
+        }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }
 
    
     public boolean agregarLibro(Libro libro){

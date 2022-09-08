@@ -5,7 +5,17 @@
  */
 package InterfazAlfa;
 
+import static InterfazAlfa.JFEliminarLibros.cargarTitulosTabla;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import proyectogrupo1.Negocio.GestorLibros;
 
 /**
  *
@@ -13,11 +23,30 @@ import java.awt.event.MouseEvent;
  */
 public class JFEliminarEjemplar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFEliminarEjemplar
-     */
-    public JFEliminarEjemplar() {
+    DefaultTableModel dtmModelo;
+    GestorLibros gestorLibro;
+
+    public static DefaultTableModel cargarTitulosTabla(DefaultTableModel dtmModelo) {
+        dtmModelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int fila, int columna) {
+                return false; //Con esto conseguimos que la tabla no se pueda editar
+            }
+        };
+
+        dtmModelo.addColumn("Titulo Libro");
+        dtmModelo.addColumn("Id Ejemplar");
+        dtmModelo.addColumn("Descripcion");
+        return dtmModelo;
+    }
+
+    public JFEliminarEjemplar() throws SQLException {
         initComponents();
+        dtmModelo = cargarTitulosTabla(dtmModelo);
+        this.jtblEjemplaresPorLibro.setModel(dtmModelo);
+        gestorLibro.buscarLibro(this.jtblEjemplaresPorLibro, "select a.TITULO,b.IDLIBRO, b.IDEJEMPLAR, b.ESTADO from\n"
+                + "LIBRO a, EJEMPLARES b \n"
+                + "where a.IDLIBRO = b.IDLIBRO");
     }
 
     /**
@@ -142,13 +171,13 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTFTituloLibroEjemplar, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addContainerGap()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBEliminarEjemplar)
@@ -190,14 +219,22 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
     private void jTFTituloLibroEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFTituloLibroEjemplarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFTituloLibroEjemplarActionPerformed
-
+    TableRowSorter trs = null;
     private void jTFTituloLibroEjemplarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTituloLibroEjemplarKeyTyped
 
-       
+        JTEjemplarPorLibros.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                trs.setRowFilter(RowFilter.regexFilter("(?i)" + jTFTituloLibroEjemplar.getText(), 1));
+            }
+        });
+        trs = new TableRowSorter(this.dtmModelo);
+        JTEjemplarPorLibros.setRowSorter(trs);
+
     }//GEN-LAST:event_jTFTituloLibroEjemplarKeyTyped
 
     private void jBEliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarLibroActionPerformed
-       
+
     }//GEN-LAST:event_jBEliminarLibroActionPerformed
 
     private void jBEliminarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarEjemplarActionPerformed
@@ -215,7 +252,7 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
     private void jtblEjemplaresPorLibroMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblEjemplaresPorLibroMouseReleased
         if (evt.getButton() == MouseEvent.BUTTON3) {
             if (evt.isPopupTrigger()) {
-             //   jpopmMenuEliminar.show(evt.getComponent(), evt.getX(), evt.getY());
+                //   jpopmMenuEliminar.show(evt.getComponent(), evt.getX(), evt.getY());
             }
         }
     }//GEN-LAST:event_jtblEjemplaresPorLibroMouseReleased
@@ -250,7 +287,11 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFEliminarEjemplar().setVisible(true);
+                try {
+                    new JFEliminarEjemplar().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(JFEliminarEjemplar.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
