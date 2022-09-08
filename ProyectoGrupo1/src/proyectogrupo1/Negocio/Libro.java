@@ -24,7 +24,12 @@ public class Libro {
     }
 
     public Libro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.idLibro = 0;
+        this.titulo = "";
+        this.autor = "";
+        this.ISBN = "";
+        this.stock = 0;
+        this.paginas = 0;
     }
 
     public String getTitulo() {
