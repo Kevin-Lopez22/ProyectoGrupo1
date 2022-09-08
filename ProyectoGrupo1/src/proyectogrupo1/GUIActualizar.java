@@ -168,12 +168,14 @@ public class GUIActualizar extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cedula = "";
+     
+        
         cedula = txtCedula.getText();
             try {
             List<Cliente> clientes = sqlCrudCliente.read(cedula);
             
             if(clientes.isEmpty()){
-                JOptionPane.showMessageDialog(null, "No se ha encontrado el cliente especificado"); // Ahi le cambian
+                JOptionPane.showMessageDialog(null, "No se ha encontrado el cliente especificado" ); // Ahi le cambian
                 clientePorModificar = null;
                 return;
                 }
@@ -189,7 +191,7 @@ public class GUIActualizar extends javax.swing.JFrame {
         }
         
         /*Aplicar logica para ingresar a la base de datos e imprimir en el textArea*/
-        txaInformacion.setVisible(true);
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cmbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEditarActionPerformed
