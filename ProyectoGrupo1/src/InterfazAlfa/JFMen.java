@@ -4,6 +4,10 @@
  */
 package InterfazAlfa;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Det-Pc
@@ -114,8 +118,14 @@ public class JFMen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-         JFEliminarLibros eliminar = new JFEliminarLibros();
-        eliminar.setVisible(true);
+         JFEliminarLibros eliminar;
+        try {
+            eliminar = new JFEliminarLibros();
+            eliminar.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFMen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
