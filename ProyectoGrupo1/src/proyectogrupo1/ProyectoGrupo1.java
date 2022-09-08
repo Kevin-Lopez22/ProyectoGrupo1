@@ -29,8 +29,8 @@ public class ProyectoGrupo1 {
             
             // Preparacion de los Objetos cliente
             Cliente a, b;
-            a = new Cliente(1, "2", "3-nombre", "4-apellido", "5", "6-direcc", "7-correo");
-            b = new Cliente(2, "3", "3-nombre", "4-apellido", "5", "6-direcc", "7-correo");
+            a = new Cliente(1, "2", "3-nombre", "4-apellido", "5", "6-direccion", "7-correo");
+            b = new Cliente(2, "3", "3-nombre", "4-apellido", "5", "6-direccion", "7-correo");
             System.out.println(sqlCrudCliente.read("0", "999999999"));                      // Lectura en la DB (Ejemplo de READ)
 
             // Ejemplo Create/Insercion
