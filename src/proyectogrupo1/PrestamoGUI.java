@@ -165,7 +165,7 @@ public class PrestamoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_fechaDevolucionPropertyChange
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Boton de Registro de préstamos :c
         LocalDate fPrestamo;
         LocalDate fFinal;
         try {
