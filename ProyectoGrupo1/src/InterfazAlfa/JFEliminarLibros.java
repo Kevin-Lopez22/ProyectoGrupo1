@@ -262,7 +262,15 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     }//GEN-LAST:event_jtblLibrosMouseReleased
 
     private void optEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optEliminarActionPerformed
-        //-------------------------logica para eliminar---------------------
+         String IDLibro = (String)jtblLibros.getValueAt(jtblLibros.getSelectedRow(), 0);
+         System.out.println(IDLibro);
+        boolean respuesta = gestorLibro.eliminarLibro(IDLibro);
+        if (respuesta == false) {
+            JOptionPane.showMessageDialog(null, "¡Libro eliminado exitosamente!");
+            this.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser eliminado debido a que no existe!");
+        }
     }//GEN-LAST:event_optEliminarActionPerformed
     TableRowSorter trs=null;
     private void jTFTituloLibroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTituloLibroKeyTyped

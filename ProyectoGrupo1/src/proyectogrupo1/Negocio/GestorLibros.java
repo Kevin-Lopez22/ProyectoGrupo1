@@ -23,14 +23,14 @@ public class GestorLibros {
     static ResultSet res;
      
    
-    public boolean eliminarLibro(String titulo) {
+    public boolean eliminarLibro(String IdLibro) {
         CallableStatement con = null; 
         boolean respuesta = true;
         
         try{              
             con = ConexionSQL.getConexion().prepareCall("{call eliminarLibro(?)}");
 
-            con.setString(1, titulo);
+            con.setString(1, IdLibro);
             respuesta = con.execute();
         }catch(Exception e){
             e.printStackTrace();
