@@ -32,6 +32,10 @@ public class PrestamoGUI extends javax.swing.JFrame {
         this.codigoCliente = cliente;
         this.codigoEjemplar = ejemplar;
         this.codigoLibro = libro;
+        
+        this.cliente.setText(cliente);
+        this.libro.setText(libro);
+        this.ejemplar.setText(ejemplar);
         initComponents();
     }
 
@@ -78,6 +82,12 @@ public class PrestamoGUI extends javax.swing.JFrame {
         jLabel3.setText("Codigo del libro");
 
         jLabel4.setText("Fecha de Devolucion");
+
+        ejemplar.setEnabled(false);
+
+        libro.setEnabled(false);
+
+        cliente.setEnabled(false);
 
         jLabel5.setText("Fecha de Prestamo");
 
@@ -148,14 +158,16 @@ public class PrestamoGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String fPrestamo = "";
+        String fFinal = "";
         try {
             Statement sql = ConexionSQL.getConexion().createStatement();
             SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
             fPrestamo = ff.format(fechaPrestamo.getCalendar().getTime());
-            
-            //String consulta = "Insert into baseBiblioteca.dbo.PRESTAMO where cicliente = '" + cliente.getText() + "',"
-              //      + "'"+libro.getText()+"','"+ejemplar.getText()+"',"+fechaPrestamo.getCalendar().getTime();
-           // ResultSet resultado = sql.executeQuery(consulta);
+            fFinal = ff.format(fechaDevolucion.getCalendar().getTime());
+            String consulta = "Insert into baseBiblioteca.dbo.PRESTAMO values('" + cliente.getText() + "',"
+                    + "'"+libro.getText()+"','"+ejemplar.getText()+"','"+fPrestamo+"','"+fFinal+"')";
+            sql.executeUpdate(consulta);
+            JOptionPane.showMessageDialog(null, "Regsitro Exitoso");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString());
