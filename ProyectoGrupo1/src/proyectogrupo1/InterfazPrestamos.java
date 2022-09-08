@@ -7,6 +7,10 @@ package proyectogrupo1;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +28,17 @@ public class InterfazPrestamos extends javax.swing.JFrame {
 
     public InterfazPrestamos() {
         initComponents();
+    }
+
+    //FUNCION PARA CALCULAR MULTAS POR RETRASO DE ENTREGA
+    public String calcularMulta(String dayBefore) {
+        dayBefore = String.format("%." + 10 + "s", dayBefore);
+
+        LocalDate Before = LocalDate.parse(dayBefore, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate After = LocalDate.now();
+
+        long diff = ChronoUnit.DAYS.between(Before, After);
+        return "" + diff * 1.5 + "$ ("+diff +" días de retraso)";
     }
 
     /**
@@ -437,6 +452,10 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(txtInfoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,27 +464,21 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                         .addGap(234, 234, 234))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addComponent(btnCancelar)
-                        .addGap(203, 203, 203))))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addGap(203, 203, 203))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addComponent(lblCodigoCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(txtInfoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(116, 116, 116))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigoCancelar)
-                    .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCodigoCancelar))
+                .addGap(34, 34, 34)
                 .addComponent(btnValidarCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtInfoCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
@@ -490,11 +503,11 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap(121, Short.MAX_VALUE)
                 .addComponent(lblCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGap(118, 118, 118))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -514,15 +527,16 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addComponent(lblTituloCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(15, 15, 15)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTituloCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(203, 203, 203))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -688,13 +702,18 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                 ResultSet resultado = sql.executeQuery(consulta);
                 resultado.next();
 
+                //Calculo de multa por retaso
+                String dayBefore = resultado.getString("FECHADEVOLUCION");
+
                 //Impresion de los datos del prestamo
                 txtCancelar.setText("\tDATOS DEL PRÉSTAMO A CANCELAR\n"
                         + "Cédula del Cliente: " + resultado.getString("CODIGOCLIENTE")
                         + "\nCódigo del libro: " + resultado.getString("CODIGOLIBRO")
                         + "\nCódigo del ejemplar: " + resultado.getString("CODEJEMPLAR")
                         + "\nFecha de incio del préstamo: " + resultado.getString("FECHAPRESTAMO")
-                        + "\nFecha de fin del préstamo: " + resultado.getString("FECHADEVOLUCION"));
+                        + "\nFecha establecida para la devolución: " + resultado.getString("FECHADEVOLUCION")
+                        + "\nFecha actual: " + LocalDateTime.now() 
+                        + "\nMulta por retraso: " + calcularMulta(dayBefore));
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "¡No se encontraron préstamos con los datos ingresados!",
