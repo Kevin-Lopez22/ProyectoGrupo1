@@ -31,7 +31,7 @@ public class Cliente extends Persona{
                    
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente +","+super.toString()+'}';
+        return "Cliente{" + "idCliente=" + idCliente +",isSuspendido="+ String.valueOf(isSuspendido) + ", "+super.toString()+'}';
     }
 
 
