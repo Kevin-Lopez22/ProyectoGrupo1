@@ -6,6 +6,7 @@ package InterfazAlfa;
 
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import proyectogrupo1.Negocio.Ejemplar;
 import proyectogrupo1.Negocio.GestorLibros;
 import proyectogrupo1.Negocio.Libro;
 
@@ -236,6 +237,10 @@ public class JFRegistroLib extends javax.swing.JFrame {
 
         libro = new Libro(idLibro, titulo, isbn, autor, stock, paginas);
         //boolean respuesta = gestorLibro.agregarLibro(idLibro, titulo, autor, isbn, paginas, stock);
+        for (int i = 0; i < stock; i++) {
+            gestorLibro.agregarEjemplar(idLibro, "Disponible");
+        }
+        
         boolean respuesta = gestorLibro.agregarLibro(libro);
         if (respuesta == false) {
             JOptionPane.showMessageDialog(null, "¡Libro agregado exitosamente!");

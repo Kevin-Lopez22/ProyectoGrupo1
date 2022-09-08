@@ -84,14 +84,14 @@ public class GestorLibros {
         return respuesta;
     }
    
-    public boolean agregarEjemplar(String descripcion){
+    public boolean agregarEjemplar(String idLibro,String descripcion){
         CallableStatement con = null; 
         boolean respuesta = true;
         
         try{
-            con = ConexionSQL.getConexion().prepareCall("{call insertarEjemplar(?)}");
-            
-            con.setString(1, descripcion);
+            con = ConexionSQL.getConexion().prepareCall("{call insertarEjemplar(?,?)}");
+            con.setString(1, idLibro);
+            con.setString(2, descripcion);
             respuesta = con.execute();
         }catch(Exception e){
             e.printStackTrace();
