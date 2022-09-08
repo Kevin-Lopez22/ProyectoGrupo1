@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Thomas Tapia
+ * 
  */
 public class GUIEliminar extends javax.swing.JFrame {
 
