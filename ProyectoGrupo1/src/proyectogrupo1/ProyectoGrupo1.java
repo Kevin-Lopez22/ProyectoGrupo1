@@ -14,7 +14,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class ProyectoGrupo1 {
 
@@ -25,6 +29,15 @@ public class ProyectoGrupo1 {
         // dennis chamba
         // 10 de agosto....
         
+        //PrestamoGUI d = new PrestamoGUI("1725661183","1","2");
+        //d.show();
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        System.out.println(dtf.format(LocalDateTime.now()));
+        
+        Date fecha = new Date(dtf.format(LocalDateTime.now()));
+        
+        System.out.println(fecha);
         try{
             Statement sql = ConexionSQL.getConexion().createStatement();
             
