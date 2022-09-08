@@ -104,7 +104,19 @@ public class SqlCrudPrestamoByFields implements SqlCrud<Prestamo, Triplet<String
 
     @Override
     public void delete(Prestamo e) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement prepStat = connection.prepareStatement(
+                "DELETE FROM PRESTAMO "
+              + "WHERE CODIGOCLIENTE=? "
+                        + "AND CODIGOLIBRO=? "
+                        + "AND CODEJEMPLAR=? ;"
+        );
+        
+        prepStat.setString(1, String.valueOf(e.getCliente().getIdCliente()));
+        prepStat.setString(2, e.getLibro().getIdLibro());
+        prepStat.setInt(3, e.getEjemplar().getIdEjemplar());
+        
+        prepStat.execute();
+        prepStat.close();
     }
 
 

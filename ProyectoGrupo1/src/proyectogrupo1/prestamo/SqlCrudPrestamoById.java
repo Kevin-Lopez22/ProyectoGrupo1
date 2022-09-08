@@ -92,7 +92,15 @@ public class SqlCrudPrestamoById implements SqlCrud<Prestamo, Integer>{
 
     @Override
     public void delete(Prestamo e) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement prepStat = connection.prepareStatement(
+                "DELETE FROM PRESTAMO "
+              + "WHERE IDPRESTAMO=?;" // 2
+        );
+        
+        prepStat.setString(1, String.valueOf(e.getIdPrestamo()));
+        
+        prepStat.execute();
+        prepStat.close();
     }
     
     
@@ -108,11 +116,16 @@ public class SqlCrudPrestamoById implements SqlCrud<Prestamo, Integer>{
         prepStat.setString(2,  String.valueOf(e.getCliente().getIdCliente()));
         prepStat.setString(3, e.getLibro().toString()); // TODO: Codigo libro
         prepStat.setInt(4, e.getEjemplar().hashCode()); // TODO: Codigo ejemplar
-        prepStat.setDate(5, java.sql.Date.valueOf(toLocalDate(e.getFechaGeneracion())));
-        prepStat.setDate(6, java.sql.Date.valueOf(toLocalDate(e.getFechaVencimiento())));
-        prepStat.setDate(7, java.sql.Date.valueOf(toLocalDate(e.getFechaDevolucion())));
+        prepStat.setDate(5, toSqlDate(e.getFechaGeneracion()));
+        prepStat.setDate(6, toSqlDate(e.getFechaVencimiento()));
+        prepStat.setDate(7, toSqlDate(e.getFechaDevolucion()));
         prepStat.execute();
         prepStat.close();
+    }
+    
+    static java.sql.Date toSqlDate(java.util.Date date){
+        if(date==null) return null;
+        return java.sql.Date.valueOf(toLocalDate(date));
     }
     
     static LocalDate toLocalDate(java.util.Date date){
