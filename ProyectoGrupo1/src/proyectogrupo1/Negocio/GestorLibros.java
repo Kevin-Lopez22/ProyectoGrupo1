@@ -44,7 +44,7 @@ public class GestorLibros {
 
     
     
-     public void buscarLibro(JTable jTabla, String consulta) throws SQLException{
+    public void buscarLibro(JTable jTabla, String consulta) throws SQLException{
          //Carga la informacion de buscar libro y lo pone en el jtable 
         DefaultTableModel modelo = (DefaultTableModel) jTabla.getModel();
         modelo.setRowCount(0);
@@ -63,7 +63,7 @@ public class GestorLibros {
     }
 
    
-     public boolean agregarLibro(String descripcion){
+    public boolean agregarLibro(Libro libro){
         Connection con = null; 
         boolean respuesta = true;
         
@@ -71,17 +71,20 @@ public class GestorLibros {
             con = ConexionSQL.getConexion();
             con.setAutoCommit(false);
             CallableStatement entrada = ConexionSQL.getConexion().prepareCall("{call insertarLibro(?)}");
-            //entrada.setString(1, "");
-            entrada.setString(1, descripcion);
+            entrada.setInt(1, libro.getIdLibro());
+            entrada.setString(1, libro.getTitulo());
+            entrada.setString(1, libro.getAutor());
+            entrada.setString(1, libro.getISBN());
+            entrada.setInt(1, libro.getPaginas());
+            entrada.setInt(1, libro.getStock());
             respuesta = entrada.execute();
         }catch(Exception e){
             e.printStackTrace();
         }
         return respuesta;
     }
-
    
-      public boolean agregarEjemplar(String descripcion){
+    public boolean agregarEjemplar(String descripcion){
         Connection con = null; 
         boolean respuesta = true;
         
@@ -97,7 +100,8 @@ public class GestorLibros {
         }
         return respuesta;
     }
-     public boolean modificarDisponibilidad (String id_libro, String descripcion){
+      
+    public boolean modificarDisponibilidad (String id_libro, String descripcion){
         Connection con = null;
         CallableStatement entrada = null;
         boolean respuesta = true;
@@ -115,9 +119,6 @@ public class GestorLibros {
             e.printStackTrace();
         }
         return respuesta;
-    }
-     
-    
-    
+    }   
     
 }
