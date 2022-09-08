@@ -7,6 +7,7 @@ package proyectogrupo1;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,6 +65,12 @@ public class GUIEliminar extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Cédula");
+
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaActionPerformed(evt);
+            }
+        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -140,10 +147,21 @@ public class GUIEliminar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        GUIGestorCliente regresar = new GUIGestorCliente(sqlCrudCliente);
-        regresar.setVisible(true);
-        this.setVisible(false);
+        try {
+
+            sqlCrudCliente.delete(clientePorEliminar);
+            JOptionPane.showMessageDialog(null, "Cliente eliminado!");
+
+        } catch (SQLException ex) {
+            // TODO: Control de excepciones
+            JOptionPane.showMessageDialog(null, "El cliente no pudo ser eliminado!");
+            Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
 
     /**
      * @param args the command line arguments
