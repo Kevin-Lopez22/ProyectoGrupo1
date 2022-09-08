@@ -4,6 +4,13 @@
  */
 package proyectogrupo1;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author denni
@@ -16,13 +23,12 @@ public class PrestamoGUI extends javax.swing.JFrame {
     private String codigoCliente;
     private String codigoEjemplar;
     private String codigoLibro;
-    
-    
+
     public PrestamoGUI() {
         initComponents();
     }
-    
-    public PrestamoGUI(String cliente, String ejemplar, String libro){
+
+    public PrestamoGUI(String cliente, String ejemplar, String libro) {
         this.codigoCliente = cliente;
         this.codigoEjemplar = ejemplar;
         this.codigoLibro = libro;
@@ -44,9 +50,9 @@ public class PrestamoGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        texto1 = new javax.swing.JTextField();
-        texto2 = new javax.swing.JTextField();
-        texto3 = new javax.swing.JTextField();
+        ejemplar = new javax.swing.JTextField();
+        libro = new javax.swing.JTextField();
+        cliente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         fechaPrestamo = new com.toedter.calendar.JDateChooser();
 
@@ -88,14 +94,14 @@ public class PrestamoGUI extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(texto2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(libro, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(89, 89, 89)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(fechaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(texto1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ejemplar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(texto3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(91, 91, 91)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
@@ -113,20 +119,20 @@ public class PrestamoGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(texto3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(fechaPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(texto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(libro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(fechaDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(texto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ejemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addComponent(jButton1)
                 .addContainerGap(36, Short.MAX_VALUE))
@@ -141,7 +147,20 @@ public class PrestamoGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        String fPrestamo = "";
+        try {
+            Statement sql = ConexionSQL.getConexion().createStatement();
+            SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
+            fPrestamo = ff.format(fechaPrestamo.getCalendar().getTime());
+            
+            //String consulta = "Insert into baseBiblioteca.dbo.PRESTAMO where cicliente = '" + cliente.getText() + "',"
+              //      + "'"+libro.getText()+"','"+ejemplar.getText()+"',"+fechaPrestamo.getCalendar().getTime();
+           // ResultSet resultado = sql.executeQuery(consulta);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -180,6 +199,8 @@ public class PrestamoGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cliente;
+    private javax.swing.JTextField ejemplar;
     private com.toedter.calendar.JDateChooser fechaDevolucion;
     private com.toedter.calendar.JDateChooser fechaPrestamo;
     private javax.swing.JButton jButton1;
@@ -188,8 +209,6 @@ public class PrestamoGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField texto1;
-    private javax.swing.JTextField texto2;
-    private javax.swing.JTextField texto3;
+    private javax.swing.JTextField libro;
     // End of variables declaration//GEN-END:variables
 }

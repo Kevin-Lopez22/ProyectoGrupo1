@@ -29,15 +29,15 @@ public class ProyectoGrupo1 {
         // dennis chamba
         // 10 de agosto....
         
-        //PrestamoGUI d = new PrestamoGUI("1725661183","1","2");
-        //d.show();
+        PrestamoGUI d = new PrestamoGUI("1725661183","1","2");
+        d.show();
         
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        System.out.println(dtf.format(LocalDateTime.now()));
+        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        //System.out.println(dtf.format(LocalDateTime.now()));
         
-        Date fecha = new Date(dtf.format(LocalDateTime.now()));
+        //Date fecha = new Date(dtf.format(LocalDateTime.now()));
         
-        System.out.println(fecha);
+        //System.out.println(fecha);
         try{
             Statement sql = ConexionSQL.getConexion().createStatement();
             
