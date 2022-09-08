@@ -6,6 +6,8 @@ package proyectogrupo1;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,10 +22,13 @@ public class GUIActualizar extends javax.swing.JFrame {
     /* Variables para la actualizacion del cliente */
     Cliente clientePorModificar;    // Variable auxiliar para modificar y enviar al CRUD
     SqlCrudCliente sqlCrudCliente;  // Handler para el crud
+    Consumer<String> consumerUpdateCliente = (t)->{};
     
     public GUIActualizar(SqlCrudCliente sqlCrudCliente) {
         initComponents();
         this.sqlCrudCliente = sqlCrudCliente;
+        consumerUpdateCliente = t->clientePorModificar.setNombre(t);
+
     }
 
     GUIActualizar() {
@@ -197,23 +202,23 @@ public class GUIActualizar extends javax.swing.JFrame {
     private void cmbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEditarActionPerformed
         if (cmbEditar.getSelectedItem() == "Nombre"){
             lblEditar.setText("Nombre");
-            txtEditar.setVisible(true);
+            consumerUpdateCliente = t->clientePorModificar.setNombre(t);
         }
         if (cmbEditar.getSelectedItem() == "Apellido"){
             lblEditar.setText("Apellido");
-            txtEditar.setVisible(true);
+            consumerUpdateCliente = t->clientePorModificar.setApellido(t);
         }
         if (cmbEditar.getSelectedItem() == "Telefono"){
             lblEditar.setText("Telefono");
-            txtEditar.setVisible(true);
+            consumerUpdateCliente = t->clientePorModificar.setTelefono(t);
         }
         if (cmbEditar.getSelectedItem() == "Dirección"){
+            consumerUpdateCliente = t->clientePorModificar.setDireccion(t);
             lblEditar.setText("Dirección");
-            txtEditar.setVisible(true);
         }
         if (cmbEditar.getSelectedItem() == "Correo"){
+            consumerUpdateCliente = t->clientePorModificar.setCorreo(t);
             lblEditar.setText("Correo");
-            txtEditar.setVisible(true);
         }
     }//GEN-LAST:event_cmbEditarActionPerformed
 
@@ -222,7 +227,7 @@ public class GUIActualizar extends javax.swing.JFrame {
         
         
         variableString = txtEditar.getText(); //Esto tambien que se actualice en la base de datos y se cambie el textArea pilas mateo
-
+        consumerUpdateCliente.accept(variableString);
         try {
 
             sqlCrudCliente.update(clientePorModificar);
