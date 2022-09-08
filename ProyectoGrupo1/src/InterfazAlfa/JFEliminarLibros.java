@@ -4,8 +4,14 @@
  */
 package InterfazAlfa;
 
+import java.awt.PopupMenu;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import proyectogrupo1.Negocio.GestorLibros;
 import proyectogrupo1.Negocio.Libro;
 
@@ -17,13 +23,37 @@ public class JFEliminarLibros extends javax.swing.JFrame {
 
     Libro libro;
     GestorLibros gestorLibro;
+    DefaultTableModel dtmModelo;
+
+    public static DefaultTableModel cargarTitulosTabla(DefaultTableModel dtmModelo) {
+        dtmModelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int fila, int columna) {
+                return false; //Con esto conseguimos que la tabla no se pueda editar
+            }
+        };
+        
+        dtmModelo.addColumn("ID");
+        dtmModelo.addColumn("Titulo");
+        dtmModelo.addColumn("ISBN");
+        dtmModelo.addColumn("Autor");
+        dtmModelo.addColumn("Stock");
+        dtmModelo.addColumn("Página");
+        return dtmModelo;
+    }
     
-    public JFEliminarLibros() {
+    
+    
+
+    public JFEliminarLibros() throws SQLException {
         initComponents();
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();
-     }
+        dtmModelo=cargarTitulosTabla(dtmModelo);
+        this.jtblLibros.setModel(dtmModelo);
+        gestorLibro.buscarLibro(this.jtblLibros, "SELECT * FROM LIBRO");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,14 +64,26 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jpopmMenuEliminar = new javax.swing.JPopupMenu();
+        optEliminar = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTFTituloLibro = new javax.swing.JTextField();
         jBEliminarLibro = new javax.swing.JButton();
         jBRegresar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtblLibros = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+
+        optEliminar.setText("Eliminar");
+        optEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optEliminarActionPerformed(evt);
+            }
+        });
+        jpopmMenuEliminar.add(optEliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -82,6 +124,27 @@ public class JFEliminarLibros extends javax.swing.JFrame {
             }
         });
 
+        jtblLibros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtblLibros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblLibrosMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtblLibrosMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtblLibros);
+
         jMenu2.setText("Edit");
 
         jMenuItem1.setText("Salir");
@@ -101,39 +164,42 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(170, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jBEliminarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(137, 137, 137))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBEliminarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEliminarLibro)
                     .addComponent(jBRegresar))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -144,7 +210,7 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        if (evt.getKeyCode()==KeyEvent.VK_ESCAPE) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             System.exit(0);
         }
     }//GEN-LAST:event_formKeyPressed
@@ -154,10 +220,9 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFTituloLibroActionPerformed
 
     private void jBEliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarLibroActionPerformed
-      
+
         String titulo = jTFTituloLibro.getText();
-              
-       
+
         boolean respuesta = gestorLibro.eliminarLibro(titulo);
         if (respuesta == false) {
             JOptionPane.showMessageDialog(null, "¡Libro eliminado exitosamente!");
@@ -173,6 +238,22 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
         this.dispose();
     }//GEN-LAST:event_jBRegresarActionPerformed
+
+    private void jtblLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblLibrosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtblLibrosMouseClicked
+
+    private void jtblLibrosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblLibrosMouseReleased
+        if (evt.getButton() == MouseEvent.BUTTON3) {
+            if (evt.isPopupTrigger()) {
+                jpopmMenuEliminar.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_jtblLibrosMouseReleased
+
+    private void optEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optEliminarActionPerformed
+        //-------------------------logica para eliminar---------------------
+    }//GEN-LAST:event_optEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,7 +286,11 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFEliminarLibros().setVisible(true);
+                try {
+                    new JFEliminarLibros().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(JFEliminarLibros.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -218,6 +303,10 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFTituloLibro;
+    private javax.swing.JPopupMenu jpopmMenuEliminar;
+    private javax.swing.JTable jtblLibros;
+    private javax.swing.JMenuItem optEliminar;
     // End of variables declaration//GEN-END:variables
 }

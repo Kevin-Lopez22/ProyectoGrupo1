@@ -50,6 +50,10 @@ public class GestorLibros {
                 Vector v = new Vector();
                 v.add(res.getString(1));
                 v.add(res.getString(2));
+                v.add(res.getString(3));
+                v.add(res.getString(4));
+                v.add(res.getInt(5));
+                v.add(res.getInt(6));
                 modelo.addRow(v);
                 jTabla.setModel(modelo);
             }
