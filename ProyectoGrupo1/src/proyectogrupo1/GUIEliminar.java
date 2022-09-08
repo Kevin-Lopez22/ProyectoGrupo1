@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Thomas Tapia
+ * 
  */
 public class GUIEliminar extends javax.swing.JFrame {
 
