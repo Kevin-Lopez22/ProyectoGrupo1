@@ -19,18 +19,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GestorLibros {
     
-     ConexionSQL conecxion = new ConexionSQL();
-     static ResultSet res;
+    ConexionSQL conexion = new ConexionSQL();
+    static ResultSet res;
      
    
     public boolean eliminarLibro(String titulo) {
-            CallableStatement con = null; 
-             boolean respuesta = true;
+        CallableStatement con = null; 
+        boolean respuesta = true;
         
-        try{
-                      
+        try{              
             con = ConexionSQL.getConexion().prepareCall("{call eliminarLibro(?)}");
-            
+
             con.setString(1, titulo);
             respuesta = con.execute();
         }catch(Exception e){
@@ -42,7 +41,7 @@ public class GestorLibros {
     
     
     public void buscarLibro(JTable jTabla, String consulta) throws SQLException{
-         //Carga la informacion de buscar libro y lo pone en el jtable 
+        //Carga la informacion de buscar libro y lo pone en el jtable 
         DefaultTableModel modelo = (DefaultTableModel) jTabla.getModel();
         modelo.setRowCount(0);
         res = proyectogrupo1.Negocio.ConexionSQL.consulta(consulta);
@@ -66,8 +65,7 @@ public class GestorLibros {
         
         try{
             con = ConexionSQL.getConexion().prepareCall("{call insertarLibro(?,?,?,?,?,?)}");
-                     
-                
+                                 
             con.setString(1, libro.getIdLibro());
             con.setString(2, libro.getTitulo());
             con.setString(3, libro.getISBN());
@@ -83,22 +81,35 @@ public class GestorLibros {
     }
    
     public boolean agregarEjemplar(String descripcion){
-        Connection con = null; 
+        CallableStatement con = null; 
         boolean respuesta = true;
         
         try{
-            con = ConexionSQL.getConexion();
-            con.setAutoCommit(false);
-            CallableStatement entrada = ConexionSQL.getConexion().prepareCall("{call insertarEjemplar(?)}");
-            //entrada.setString(1, "");
-            entrada.setString(1, descripcion);
-            respuesta = entrada.execute();
+            con = ConexionSQL.getConexion().prepareCall("{call insertarEjemplar(?)}");
+            
+            con.setString(1, descripcion);
+            respuesta = con.execute();
         }catch(Exception e){
             e.printStackTrace();
         }
         return respuesta;
     }
       
+    public boolean eliminarEjemplar(String descripcion){
+        CallableStatement con = null; 
+        boolean respuesta = true;
+        
+        try{
+            con = ConexionSQL.getConexion().prepareCall("{call eliminarEjemplar(?)}");
+            
+            con.setString(1, descripcion);
+            respuesta = con.execute();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return respuesta;
+    }
+    
     public boolean modificarDisponibilidad (String id_libro, String descripcion){
         Connection con = null;
         CallableStatement entrada = null;
