@@ -12,11 +12,11 @@ import proyectogrupo1.Negocio.Libro;
  *
  * @author marcelinne
  */
-public class JFLibros extends javax.swing.JFrame {
+public class JFAgregarEjemplar extends javax.swing.JFrame {
 
     Libro libro;
     GestorLibros gestorLibro;
-    public JFLibros() {
+    public JFAgregarEjemplar() {
         initComponents();
     }
 
@@ -95,20 +95,21 @@ public class JFLibros extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFLibros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAgregarEjemplar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFLibros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAgregarEjemplar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFLibros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAgregarEjemplar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFLibros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFAgregarEjemplar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFLibros().setVisible(true);
+                new JFAgregarEjemplar().setVisible(true);
             }
         });
     }
