@@ -167,8 +167,9 @@ public class GUIActualizar extends javax.swing.JFrame {
         String cedula = "";
         
         cedula = txtCedula.getText();
-        txaInformacion.setVisible(true);
+        
         /*Aplicar logica para ingresar a la base de datos e imprimir en el textArea*/
+        txaInformacion.setVisible(true);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cmbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEditarActionPerformed
