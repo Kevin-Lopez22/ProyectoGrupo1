@@ -5,6 +5,7 @@
 package InterfazAlfa;
 
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import proyectogrupo1.Negocio.GestorLibros;
 import proyectogrupo1.Negocio.Libro;
 
@@ -16,16 +17,13 @@ public class JFEliminarLibros extends javax.swing.JFrame {
 
     Libro libro;
     GestorLibros gestorLibro;
-    JFRegistroLib registro;
-    JFMen menu;
+    
     public JFEliminarLibros() {
         initComponents();
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();
-        menu= new JFMen();
-        registro= new JFRegistroLib();
-    }
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,6 +34,11 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jTFTituloLibro = new javax.swing.JTextField();
+        jBEliminarLibro = new javax.swing.JButton();
+        jBRegresar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -44,6 +47,38 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        jLabel1.setText("ELIMINACIÓN DE LIBROS");
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel3.setText("Título:");
+
+        jTFTituloLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFTituloLibroActionPerformed(evt);
+            }
+        });
+
+        jBEliminarLibro.setBackground(new java.awt.Color(153, 153, 153));
+        jBEliminarLibro.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jBEliminarLibro.setForeground(new java.awt.Color(102, 102, 102));
+        jBEliminarLibro.setText("Eliminar");
+        jBEliminarLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarLibroActionPerformed(evt);
+            }
+        });
+
+        jBRegresar.setBackground(new java.awt.Color(153, 153, 153));
+        jBRegresar.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jBRegresar.setForeground(new java.awt.Color(102, 102, 102));
+        jBRegresar.setText("Regresar");
+        jBRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRegresarActionPerformed(evt);
             }
         });
 
@@ -65,11 +100,40 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 585, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBEliminarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 392, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBEliminarLibro)
+                    .addComponent(jBRegresar))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         pack();
@@ -84,6 +148,31 @@ public class JFEliminarLibros extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_formKeyPressed
+
+    private void jTFTituloLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFTituloLibroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFTituloLibroActionPerformed
+
+    private void jBEliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarLibroActionPerformed
+      
+        String titulo = jTFTituloLibro.getText();
+              
+       
+        boolean respuesta = gestorLibro.eliminarLibro(titulo);
+        if (respuesta == false) {
+            JOptionPane.showMessageDialog(null, "¡Libro eliminado exitosamente!");
+            this.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser eliminado debido a que no existe!");
+        }
+
+        // System.out.println(idLibro+" "+titulo+" "+autor+" "+ " "+isbn+stock+paginas);
+
+    }//GEN-LAST:event_jBEliminarLibroActionPerformed
+
+    private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,8 +211,13 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBEliminarLibro;
+    private javax.swing.JButton jBRegresar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JTextField jTFTituloLibro;
     // End of variables declaration//GEN-END:variables
 }

@@ -89,7 +89,7 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
-                          <Component id="jBIngresarClienteRes" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="jBIngresarLibroRes" min="-2" pref="200" max="-2" attributes="0"/>
                           <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
                           <Component id="jBRegresar" min="-2" pref="210" max="-2" attributes="0"/>
                       </Group>
@@ -138,7 +138,7 @@
                   </Group>
                   <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jBIngresarClienteRes" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBIngresarLibroRes" min="-2" max="-2" attributes="0"/>
                       <Component id="jBRegresar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
@@ -198,7 +198,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFPaginasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jBIngresarClienteRes">
+    <Component class="javax.swing.JButton" name="jBIngresarLibroRes">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="99" red="99" type="rgb"/>
@@ -212,7 +212,7 @@
         <Property name="text" type="java.lang.String" value="Ingresar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBIngresarClienteResActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBIngresarLibroResActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBRegresar">
@@ -233,6 +233,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFTituloLibro">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFTituloLibroActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFAutorLibro">
     </Component>

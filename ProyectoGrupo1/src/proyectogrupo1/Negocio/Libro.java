@@ -7,27 +7,27 @@ import java.sql.Connection;
 
 public class Libro { 
    
-    private String titulo, autor, ISBN;
-    private int idLibro, paginas, stock;
+    private String idLibro,titulo, autor, isbn;
+    private int  paginas, stock;
 
     ConexionSQL conecxion = new ConexionSQL();
     
     static ResultSet res;
 
-    public Libro(int idLibro, String titulo, String autor, String isbn, int paginas, int stock) {
+    public Libro(String idLibro, String titulo, String isbn, String autor, int stock, int paginas) {
         this.idLibro = idLibro;
         this.titulo = titulo;
+        this.isbn = isbn;
         this.autor = autor;
-        this.ISBN = isbn;
         this.stock = stock;
         this.paginas = paginas;   
     }
 
     public Libro() {
-        this.idLibro = 0;
+        this.idLibro = "";
         this.titulo = "";
         this.autor = "";
-        this.ISBN = "";
+        this.isbn = "";
         this.stock = 0;
         this.paginas = 0;
     }
@@ -49,18 +49,18 @@ public class Libro {
     }
 
     public String getISBN() {
-        return ISBN;
+        return isbn;
     }
 
     public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+        this.isbn = ISBN;
     }
 
-    public int getIdLibro() {
+    public String getIdLibro() {
         return idLibro;
     }
 
-    public void setIdLibro(int idLibro) {
+    public void setIdLibro(String idLibro) {
         this.idLibro = idLibro;
     }
 

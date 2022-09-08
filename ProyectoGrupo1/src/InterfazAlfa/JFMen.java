@@ -46,6 +46,11 @@ public class JFMen extends javax.swing.JFrame {
         jButton2.setText("jButton2");
 
         btnEliminar.setText("Eliminar libros");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("jButton4");
 
@@ -107,6 +112,11 @@ public class JFMen extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+         JFEliminarLibros eliminar = new JFEliminarLibros();
+        eliminar.setVisible(true);
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments

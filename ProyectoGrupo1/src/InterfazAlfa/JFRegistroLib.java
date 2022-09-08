@@ -39,7 +39,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTFIDLIbro = new javax.swing.JTextField();
         jTFPaginas = new javax.swing.JTextField();
-        jBIngresarClienteRes = new javax.swing.JButton();
+        jBIngresarLibroRes = new javax.swing.JButton();
         jBRegresar = new javax.swing.JButton();
         jTFTituloLibro = new javax.swing.JTextField();
         jTFAutorLibro = new javax.swing.JTextField();
@@ -85,13 +85,13 @@ public class JFRegistroLib extends javax.swing.JFrame {
             }
         });
 
-        jBIngresarClienteRes.setBackground(new java.awt.Color(153, 153, 153));
-        jBIngresarClienteRes.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jBIngresarClienteRes.setForeground(new java.awt.Color(102, 102, 102));
-        jBIngresarClienteRes.setText("Ingresar");
-        jBIngresarClienteRes.addActionListener(new java.awt.event.ActionListener() {
+        jBIngresarLibroRes.setBackground(new java.awt.Color(153, 153, 153));
+        jBIngresarLibroRes.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jBIngresarLibroRes.setForeground(new java.awt.Color(102, 102, 102));
+        jBIngresarLibroRes.setText("Ingresar");
+        jBIngresarLibroRes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBIngresarClienteResActionPerformed(evt);
+                jBIngresarLibroResActionPerformed(evt);
             }
         });
 
@@ -102,6 +102,12 @@ public class JFRegistroLib extends javax.swing.JFrame {
         jBRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBRegresarActionPerformed(evt);
+            }
+        });
+
+        jTFTituloLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFTituloLibroActionPerformed(evt);
             }
         });
 
@@ -169,7 +175,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
                             .addComponent(jTFPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(50, 50, 50)
-                            .addComponent(jBIngresarClienteRes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBIngresarLibroRes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(50, 50, 50)
                             .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(0, 28, Short.MAX_VALUE)))
@@ -207,7 +213,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
                         .addComponent(jTFPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(40, 40, 40)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jBIngresarClienteRes)
+                        .addComponent(jBIngresarLibroRes)
                         .addComponent(jBRegresar))
                     .addGap(0, 9, Short.MAX_VALUE)))
         );
@@ -219,15 +225,17 @@ public class JFRegistroLib extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFPaginasActionPerformed
 
-    private void jBIngresarClienteResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIngresarClienteResActionPerformed
-        int idLibro = Integer.parseInt(jTFIDLIbro.getText());
+    private void jBIngresarLibroResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIngresarLibroResActionPerformed
+        String idLibro = jTFIDLIbro.getText();
         String titulo = jTFTituloLibro.getText();
-        String autor = jTFAutorLibro.getText();
         String isbn = jTFIsbnLibro.getText();
+        String autor = jTFAutorLibro.getText();
+        
         int stock = Integer.parseInt(jTFStock.getText());
         int paginas = Integer.parseInt(jTFPaginas.getText());
 
-        libro = new Libro(idLibro, titulo, autor, isbn, paginas, stock);
+        libro = new Libro(idLibro, titulo, isbn, autor, stock, paginas);
+        //boolean respuesta = gestorLibro.agregarLibro(idLibro, titulo, autor, isbn, paginas, stock);
         boolean respuesta = gestorLibro.agregarLibro(libro);
         if (respuesta == false) {
             JOptionPane.showMessageDialog(null, "¡Libro agregado exitosamente!");
@@ -235,7 +243,10 @@ public class JFRegistroLib extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser agregado!");
         }
-    }//GEN-LAST:event_jBIngresarClienteResActionPerformed
+        
+      // System.out.println(idLibro+" "+titulo+" "+autor+" "+ " "+isbn+stock+paginas);
+            
+    }//GEN-LAST:event_jBIngresarLibroResActionPerformed
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
         this.dispose();
@@ -258,6 +269,10 @@ public class JFRegistroLib extends javax.swing.JFrame {
     private void jTFIDLIbroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIDLIbroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFIDLIbroActionPerformed
+
+    private void jTFTituloLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFTituloLibroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFTituloLibroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,7 +310,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBIngresarClienteRes;
+    private javax.swing.JButton jBIngresarLibroRes;
     private javax.swing.JButton jBRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

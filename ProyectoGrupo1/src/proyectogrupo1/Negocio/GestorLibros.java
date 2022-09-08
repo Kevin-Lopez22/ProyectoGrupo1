@@ -23,19 +23,16 @@ public class GestorLibros {
      static ResultSet res;
      
    
-    public boolean eliminarLibro( String idLibro) {
-        Connection con = null;
-        CallableStatement entrada = null;
-        boolean respuesta = true;
+    public boolean eliminarLibro(String titulo) {
+            CallableStatement con = null; 
+             boolean respuesta = true;
         
         try{
-            con = ConexionSQL.getConexion();
-            con.setAutoCommit(false);
+                      
+            con = ConexionSQL.getConexion().prepareCall("{call eliminarLibro(?)}");
             
-            entrada = ConexionSQL.getConexion().prepareCall("{call eliminarLibro(?)}");
-            
-            entrada.setString(1, idLibro);
-            respuesta = entrada.execute();
+            con.setString(1, titulo);
+            respuesta = con.execute();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -64,20 +61,21 @@ public class GestorLibros {
 
    
     public boolean agregarLibro(Libro libro){
-        Connection con = null; 
+        CallableStatement con = null; 
         boolean respuesta = true;
         
         try{
-            con = ConexionSQL.getConexion();
-            con.setAutoCommit(false);
-            CallableStatement entrada = ConexionSQL.getConexion().prepareCall("{call insertarLibro(?)}");
-            entrada.setInt(1, libro.getIdLibro());
-            entrada.setString(1, libro.getTitulo());
-            entrada.setString(1, libro.getAutor());
-            entrada.setString(1, libro.getISBN());
-            entrada.setInt(1, libro.getPaginas());
-            entrada.setInt(1, libro.getStock());
-            respuesta = entrada.execute();
+            con = ConexionSQL.getConexion().prepareCall("{call insertarLibro(?,?,?,?,?,?)}");
+                     
+                
+            con.setString(1, libro.getIdLibro());
+            con.setString(2, libro.getTitulo());
+            con.setString(3, libro.getISBN());
+            con.setString(4, libro.getAutor());
+            con.setInt(5, libro.getStock());
+            con.setInt(6, libro.getPaginas());
+            
+            respuesta = con.execute();
         }catch(Exception e){
             e.printStackTrace();
         }

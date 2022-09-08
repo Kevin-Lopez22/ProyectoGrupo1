@@ -4,6 +4,7 @@
  */
 package proyectogrupo1;
 
+import InterfazAlfa.JFMen;
 import proyectogrupo1.Negocio.ConexionSQL;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -25,10 +26,14 @@ public class ProyectoGrupo1 {
         // 10 de agosto
         try{
             Statement sql = ConexionSQL.getConexion().createStatement();
+            JFMen menu = new JFMen();
             
-            String consulta = "Select * from baseBiblioteca.dbo.BIBLIOTECARIOS";
+            menu.setVisible(true);
+            String consulta = "Select * from baseBiblioteca.dbo.LIBRO";
+          
             
             ResultSet resultado = sql.executeQuery(consulta);
+            
             
             while(resultado.next()){
                 System.out.println(resultado.getString(1));
