@@ -48,11 +48,11 @@ public class GUIBiblioteca extends javax.swing.JFrame {
         btnGestionClientes.setBackground(new java.awt.Color(204, 204, 204));
         btnGestionClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user.png"))); // NOI18N
         btnGestionClientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(btnGestionClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+        getContentPane().add(btnGestionClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
 
         btnGestionLibros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/books.png"))); // NOI18N
         btnGestionLibros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(btnGestionLibros, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
+        getContentPane().add(btnGestionLibros, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
 
         btnGestionPrestamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/loan.png"))); // NOI18N
         btnGestionPrestamos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -61,23 +61,23 @@ public class GUIBiblioteca extends javax.swing.JFrame {
                 btnGestionPrestamosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGestionPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, 64));
+        getContentPane().add(btnGestionPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, 64));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 16)); // NOI18N
         jLabel4.setText("Gestión de préstamos");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 121, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 16)); // NOI18N
         jLabel3.setText("Gestión de libros");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 121, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 16)); // NOI18N
         jLabel2.setText("Gestión de clientes");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 121, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Sistema de Gestión de Biblioteca");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 192, -1));
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 24)); // NOI18N
+        jLabel1.setText("SISTEMA DE GESTIÓN DE BIBLIOTECA");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 340, -1));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/b2.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 320));
@@ -88,7 +88,7 @@ public class GUIBiblioteca extends javax.swing.JFrame {
     private void btnGestionPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionPrestamosActionPerformed
         //Mostrar el gestor de préstamos
         gestorPrestamos.setVisible(true);
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_btnGestionPrestamosActionPerformed
 
     /**
