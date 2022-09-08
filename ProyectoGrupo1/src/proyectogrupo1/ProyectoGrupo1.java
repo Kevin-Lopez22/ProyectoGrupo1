@@ -23,8 +23,8 @@ public class ProyectoGrupo1 {
             // LuisM45
             
             SqlCrudCliente sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
-            for(Cliente c: sqlCrudCliente.read("0", "999999999"))
-                sqlCrudCliente.delete(c);
+//            for(Cliente c: sqlCrudCliente.read("0", "999999999"))
+//                sqlCrudCliente.delete(c);
             
             // Preparacion de los Objetos cliente
             Cliente a,b;
