@@ -18,6 +18,10 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     /**
      * Creates new form InterfazPrestamos
      */
+    //Variables para la cancelación de préstamos 
+    String cedulaCancelar;
+    String codigoCancelar;
+
     public InterfazPrestamos() {
         initComponents();
     }
@@ -68,6 +72,17 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         paguinasLibro = new javax.swing.JTextField();
         autor = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        lblCodigoCancelar = new javax.swing.JLabel();
+        txtCodigoCancelar = new javax.swing.JTextField();
+        btnValidarCancelar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        txtInfoCancelar = new javax.swing.JScrollPane();
+        txtCancelar = new javax.swing.JTextArea();
+        jPanel5 = new javax.swing.JPanel();
+        lblCedulaCancelar = new javax.swing.JLabel();
+        txtCedulaCancelar = new javax.swing.JTextField();
+        lblTituloCancelar = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -372,11 +387,11 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,20 +400,140 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrar Prestamo", jPanel1);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Libro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12))); // NOI18N
+
+        lblCodigoCancelar.setText("Código del ejemplar:");
+
+        txtCodigoCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoCancelarActionPerformed(evt);
+            }
+        });
+
+        btnValidarCancelar.setText("Validar");
+        btnValidarCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarCancelarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar préstamo");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        txtCancelar.setColumns(20);
+        txtCancelar.setRows(5);
+        txtInfoCancelar.setViewportView(txtCancelar);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(btnValidarCancelar)
+                        .addGap(234, 234, 234))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(btnCancelar)
+                        .addGap(203, 203, 203))))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(lblCodigoCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(txtInfoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodigoCancelar)
+                    .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(btnValidarCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtInfoCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar)
+                .addGap(20, 20, 20))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12))); // NOI18N
+        jPanel5.setToolTipText("");
+
+        lblCedulaCancelar.setText("Cédula del cliente:");
+
+        txtCedulaCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(lblCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCedulaCancelar)
+                    .addComponent(txtCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        lblTituloCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTituloCancelar.setText("CANCELACIÓN DE PRÉSTAMOS");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(203, 203, 203)
+                .addComponent(lblTituloCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(lblTituloCancelar)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cancelar Prestamo", jPanel2);
@@ -432,21 +567,20 @@ public class InterfazPrestamos extends javax.swing.JFrame {
             try {
                 Statement sql = ConexionSQL.getConexion().createStatement();
 
-                String consulta = "Select count(*) from baseBiblioteca.dbo.LIBRO where titulo = '"+tituloLibro.getText()+"'";
+                String consulta = "Select count(*) from baseBiblioteca.dbo.LIBRO where titulo = '" + tituloLibro.getText() + "'";
 
                 ResultSet resultado = sql.executeQuery(consulta);
                 resultado.next();
 
                 //verificar que exista el cliente cuya cedula se ingreso
-
-                if(Integer.parseInt(resultado.getString(1)) == 0){
+                if (Integer.parseInt(resultado.getString(1)) == 0) {
                     JOptionPane.showMessageDialog(null, "no se han encontrado el libro especificado");
-                }else{
+                } else {
                     //llenar los campos con la info del LIBRO
-                    consulta = "Select * from baseBiblioteca.dbo.LIBRO where titulo = '"+tituloLibro.getText()+"'";
+                    consulta = "Select * from baseBiblioteca.dbo.LIBRO where titulo = '" + tituloLibro.getText() + "'";
                     resultado = sql.executeQuery(consulta);
                     resultado.next();
-                    
+
                     autor.setText(resultado.getString("autor"));
                     codigoLibro.setText(resultado.getString("idlibro"));
                     isbnLibro.setText(resultado.getString("isbn"));
@@ -494,17 +628,16 @@ public class InterfazPrestamos extends javax.swing.JFrame {
             try {
                 Statement sql = ConexionSQL.getConexion().createStatement();
 
-                String consulta = "Select count(*) from baseBiblioteca.dbo.CLIENTES where cicliente = '"+txtCedula.getText()+"'";
+                String consulta = "Select count(*) from baseBiblioteca.dbo.CLIENTES where cicliente = '" + txtCedula.getText() + "'";
 
                 ResultSet resultado = sql.executeQuery(consulta);
                 resultado.next();
 
                 //verificar que exista el cliente cuya cedula se ingreso
-
-                if(Integer.parseInt(resultado.getString(1)) == 0){
+                if (Integer.parseInt(resultado.getString(1)) == 0) {
                     JOptionPane.showMessageDialog(null, "no se han encontrado cleintes con el numero de decula especificado");
-                }else{
-                    consulta = "Select * from baseBiblioteca.dbo.CLIENTES where cicliente = '"+txtCedula.getText()+"'";
+                } else {
+                    consulta = "Select * from baseBiblioteca.dbo.CLIENTES where cicliente = '" + txtCedula.getText() + "'";
                     resultado = sql.executeQuery(consulta);
                     resultado.next();
 
@@ -529,6 +662,78 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     private void autorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_autorActionPerformed
+
+    private void txtCodigoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoCancelarActionPerformed
+
+    private void txtCedulaCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaCancelarActionPerformed
+
+    private void btnValidarCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarCancelarActionPerformed
+        //Verificacion de datos de entrada
+        cedulaCancelar = txtCedulaCancelar.getText();
+        codigoCancelar = txtCodigoCancelar.getText();
+        if (cedulaCancelar.isEmpty() || codigoCancelar.isEmpty()) {
+            JOptionPane.showInternalMessageDialog(null, "Asegurese de ingresar los datos requeridos");
+        } else {
+            try {
+                // Verificación de la existencia del prestamo a cancelar 
+                Statement sql = ConexionSQL.getConexion().createStatement();
+                //Sentencia para consulta en la tabla PRESTAMO
+                String consulta = "Select * from baseBiblioteca.dbo.PRESTAMO where "
+                        + "CODIGOCLIENTE = '" + cedulaCancelar + "' and CODEJEMPLAR = "
+                        + Integer.parseInt(codigoCancelar);
+                ResultSet resultado = sql.executeQuery(consulta);
+                resultado.next();
+
+                //Impresion de los datos del prestamo
+                txtCancelar.setText("\tDATOS DEL PRÉSTAMO A CANCELAR\n"
+                        + "Cédula del Cliente: " + resultado.getString("CODIGOCLIENTE")
+                        + "\nCódigo del libro: " + resultado.getString("CODIGOLIBRO")
+                        + "\nCódigo del ejemplar: " + resultado.getString("CODEJEMPLAR")
+                        + "\nFecha de incio del préstamo: " + resultado.getString("FECHAPRESTAMO")
+                        + "\nFecha de fin del préstamo: " + resultado.getString("FECHADEVOLUCION"));
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "¡No se encontraron préstamos con los datos ingresados!",
+                        "Error: Cancelar préstamo", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+
+    }//GEN-LAST:event_btnValidarCancelarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // CANCELACION DEL PRESTAMO (DELETE ON dbo.PRESTAMO)
+        JOptionPane.showConfirmDialog(null, "Está apunto de cancelar el préstamo", "Alerta: Cancelar préstamo",
+                JOptionPane.WARNING_MESSAGE);
+        try {
+            // Cancelación de un préstamo
+            Statement sql = ConexionSQL.getConexion().createStatement();
+            //Sentencia para eliminar en la tabla PRESTAMO
+            String consulta = "Delete from baseBiblioteca.dbo.PRESTAMO where "
+                    + "CODIGOCLIENTE = '" + cedulaCancelar + "' and CODEJEMPLAR = "
+                    + Integer.parseInt(codigoCancelar);
+            sql.executeUpdate(consulta);
+
+            //Impresion de mensaje de confirmación 
+            txtCancelar.setText("\t¡PRÉSTAMO CANCELADO!\n"
+                    + "El préstamo con datos: \n"
+                    + "     Cédula del Cliente: " + cedulaCancelar
+                    + "\n     Código del libro: " + codigoCancelar
+                    + "\n se canceló de manera exitosa.");
+
+            //Borrado de datos de entrada
+            txtCedulaCancelar.setText("");
+            txtCodigoCancelar.setText("");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "¡No se pudo cancelar el préstamo!",
+                    "Error: Cancelar préstamo", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -568,7 +773,9 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoCliente;
     private javax.swing.JTextField autor;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnValidar;
+    private javax.swing.JButton btnValidarCancelar;
     private javax.swing.JTextField codigoLibro;
     private javax.swing.JTextField correoCliente;
     private javax.swing.JTextField direccionCliente;
@@ -591,17 +798,26 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblCedulaCancelar;
+    private javax.swing.JLabel lblCodigoCancelar;
+    private javax.swing.JLabel lblTituloCancelar;
     private javax.swing.JTextField nombreCliente;
     private javax.swing.JTextField paguinasLibro;
     private javax.swing.JTextField stockLibro;
     private javax.swing.JTextField telefonoCliente;
     private javax.swing.JTextField tituloLibro;
+    private javax.swing.JTextArea txtCancelar;
     private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtCedulaCancelar;
+    private javax.swing.JTextField txtCodigoCancelar;
+    private javax.swing.JScrollPane txtInfoCancelar;
     private javax.swing.JButton verificaLibro;
     // End of variables declaration//GEN-END:variables
 }
