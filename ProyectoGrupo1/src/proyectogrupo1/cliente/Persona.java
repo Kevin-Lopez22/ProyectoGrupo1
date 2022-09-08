@@ -1,4 +1,4 @@
-package proyectogrupo1;
+package proyectogrupo1.cliente;
 
 public class Persona {
     

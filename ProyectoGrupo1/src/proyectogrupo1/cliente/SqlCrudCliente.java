@@ -1,6 +1,7 @@
-package proyectogrupo1;
+package proyectogrupo1.cliente;
 import java.sql.*;
 import java.util.*;
+import proyectogrupo1.SqlCrud;
 
 final class SqlCrudCliente implements SqlCrud<Cliente,String>{
 

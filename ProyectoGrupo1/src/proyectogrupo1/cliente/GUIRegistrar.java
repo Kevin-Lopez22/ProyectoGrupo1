@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectogrupo1;
+package proyectogrupo1.cliente;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import proyectogrupo1.Persona;
+import proyectogrupo1.cliente.Persona;
+import proyectogrupo1.Validator;
 
 /**
  *
