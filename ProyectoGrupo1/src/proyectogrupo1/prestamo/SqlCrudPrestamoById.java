@@ -14,6 +14,10 @@ import java.util.List;
 import proyectogrupo1.SqlCrud;
 import proyectogrupo1.cliente.Cliente;
 import proyectogrupo1.cliente.SqlCrudClienteByID;
+import proyectogrupo1.libro.Ejemplar;
+import proyectogrupo1.libro.Libro;
+import proyectogrupo1.libro.SqlCrudEjemplar;
+import proyectogrupo1.libro.SqlCrudLibro;
 
 /**
  *
@@ -55,12 +59,35 @@ public class SqlCrudPrestamoById implements SqlCrud<Prestamo, Integer>{
 
         @Override
     public List<Prestamo> read() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                PreparedStatement prepStat = connection.prepareStatement(
+                "SELECT IDPRESTAMO,CODIGOCLIENTE,CODIGOLIBRO,CODEJEMPLAR,FECHAPRESTAMO,FECHAVENCIMIENTO,FECHADEVOLUCION "+ 
+                      //1         ,2            ,3          ,4          ,5            ,6               ,7
+                "FROM PRESTAMO;"
+        );
+        prepStat.execute();
+        ResultSet rs = prepStat.getResultSet();
+        
+        LinkedList<Prestamo> prestamos = new LinkedList<>();
+        while(rs.next()){
+            prestamos.add(readRow(rs));
+        }
+        prepStat.close();
+        return prestamos;
     }
     
     @Override
     public void update(Prestamo e) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement prepStat = connection.prepareStatement(
+                "UPDATE PRESTAMO " +
+                "SET " +
+                "FECHADEVOLUCION=? " +  // 1
+                "WHERE IDPRESTAMO=?;" // 2
+        );
+        prepStat.setDate(1, java.sql.Date.valueOf(toLocalDate(e.getFechaDevolucion())));
+        prepStat.setString(2, String.valueOf(e.getIdPrestamo()));
+        
+        prepStat.execute();
+        prepStat.close();
     }
 
     @Override
@@ -88,20 +115,21 @@ public class SqlCrudPrestamoById implements SqlCrud<Prestamo, Integer>{
         prepStat.close();
     }
     
-    private static LocalDate toLocalDate(java.util.Date date){
+    static LocalDate toLocalDate(java.util.Date date){
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
-    private Prestamo readRow(ResultSet rs) throws SQLException{
+    Prestamo readRow(ResultSet rs) throws SQLException{
+        //IDPRESTAMO,CODIGOCLIENTE,CODIGOLIBRO,CODEJEMPLAR,FECHAPRESTAMO,FECHAVENCIMIENTO,FECHADEVOLUCION
         //IDPRESTAMO,CODIGOCLIENTE,CODIGOLIBRO,CODEJEMPLAR,FECHAPRESTAMO,FECHAVENCIMIENTO,FECHADEVOLUCION
         int idPrestamo = Integer.parseInt(rs.getString(1));
         Cliente cliente = new SqlCrudClienteByID(connection).read(rs.getString(2)).get(0);
-        Object libro = null; // TODO: Implementar libro
-        Object ejemplar = null; // TODO: Implementar ejemplar
+        Libro libro = new SqlCrudLibro(connection).read(rs.getString(3)).get(0); // TODO: Implementar libro
+        Ejemplar ejemplar = new SqlCrudEjemplar(connection).read(rs.getInt(4)).get(0); // TODO: Implementar ejemplar
         java.util.Date fechaGeneracion = rs.getDate(5);
         java.util.Date fechaVencimiento = rs.getDate(6);
         java.util.Date fechaDevolucion = rs.getDate(7);
-        return new Prestamo(0, cliente, rs, rs, fechaGeneracion, fechaVencimiento, fechaDevolucion);
+        return new Prestamo(idPrestamo, cliente, libro, ejemplar, fechaGeneracion, fechaVencimiento, fechaDevolucion);
     }
 
 

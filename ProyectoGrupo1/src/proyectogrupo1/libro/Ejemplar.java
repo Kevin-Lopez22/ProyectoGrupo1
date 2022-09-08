@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import proyectogrupo1.SQLIndex;
 import static proyectogrupo1.SQLIndex.TABLE_NAME;
+import proyectogrupo1.cliente.Cliente;
 
 public class Ejemplar {
     private final int idEjemplar;
@@ -38,7 +39,26 @@ public class Ejemplar {
         this.estadoEjemplar = estadoEjemplar;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Ejemplar{" + "idEjemplar=" + idEjemplar + ", libro=" + libro + ", estadoEjemplar=" + estadoEjemplar + '}';
+    }
+
+       @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ejemplar other = (Ejemplar) obj;
+        if(this.idEjemplar == other.idEjemplar) return true;
+        return false;
+    }
     
     
     public static class SQLIndexIdEjemplar implements SQLIndex<Integer>{

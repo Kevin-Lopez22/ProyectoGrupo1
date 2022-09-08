@@ -12,6 +12,8 @@ import java.util.Date;
 import proyectogrupo1.SQLIndex;
 import static proyectogrupo1.SQLIndex.TABLE_NAME;
 import proyectogrupo1.cliente.Cliente;
+import proyectogrupo1.libro.Ejemplar;
+import proyectogrupo1.libro.Libro;
 /**
  *
  * @author denni
@@ -20,14 +22,14 @@ public class Prestamo {
     public static SQLIndexIdPrestamo sQLIndexIdPrestamo;
     private final int idPrestamo;
     private final Cliente cliente;
-    private final Object libro;
-    private final Object ejemplar;
+    private final Libro libro;
+    private final Ejemplar ejemplar;
     private final Date fechaGeneracion;
     private final Date fechaVencimiento;
     private Date fechaDevolucion;
     
 
-    public Prestamo(int idPrestamo, Cliente cliente, Object libro, Object ejemplar, Date fechaGeneracion, Date fechaVencimiento, Date fechaDevolucion) {
+    public Prestamo(int idPrestamo, Cliente cliente, Libro libro, Ejemplar ejemplar, Date fechaGeneracion, Date fechaVencimiento, Date fechaDevolucion) {
         this.idPrestamo = idPrestamo;
         this.cliente = cliente;
         this.libro = libro;
@@ -37,7 +39,7 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
     
-    public Prestamo(int idPrestamo, Cliente cliente, Object libro, Object ejemplar, Date fechaGeneracion, Date fechaVencimiento) {
+    public Prestamo(int idPrestamo, Cliente cliente, Libro libro, Ejemplar ejemplar, Date fechaGeneracion, Date fechaVencimiento) {
         this(idPrestamo,cliente,libro,ejemplar,fechaGeneracion,fechaVencimiento,null);
     }
 
@@ -49,11 +51,11 @@ public class Prestamo {
         return cliente;
     }
 
-    public Object getLibro() {
+    public Libro getLibro() {
         return libro;
     }
 
-    public Object getEjemplar() {
+    public Ejemplar getEjemplar() {
         return ejemplar;
     }
 
@@ -73,6 +75,24 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
     
+        @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Prestamo other = (Prestamo) obj;
+        if(this.idPrestamo == other.idPrestamo) return true;
+        if(this.cliente.equals(other.cliente)&&
+                this.ejemplar.equals(other.ejemplar)&&
+                this.libro.equals(other.libro)) return true;
+        return false;
+    }
     
     
     public static class SQLIndexIdPrestamo implements SQLIndex<Integer>{
@@ -115,4 +135,6 @@ public class Prestamo {
             connection.close();
         }
     }
+    
+    
 }

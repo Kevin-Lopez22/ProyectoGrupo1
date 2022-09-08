@@ -43,6 +43,31 @@ public class Cliente extends Persona{
         return "Cliente{" + "idCliente=" + idCliente +",isSuspendido="+ String.valueOf(isSuspendido) + ", "+super.toString()+'}';
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if(this.idCliente == other.idCliente) return true;
+        if(this.getCedula().equals(other.getCedula())) return true;
+        return false;
+    }
+    
+    
+
     public static class SQLIndexIdCliente implements SQLIndex<Integer>{
         final static String INDEX_NAME = "idCliente";
         Connection connection;

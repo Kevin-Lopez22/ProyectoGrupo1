@@ -1,5 +1,7 @@
 package proyectogrupo1.cliente;
 
+import java.util.Objects;
+
 public class Persona {
     
     private String cedula;
@@ -104,7 +106,12 @@ public class Persona {
         }
     
     }
+    
+    
+    
     }
+
+    
     @Override
     public String toString() {
         return "Persona{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", direccion=" + direccion + ", correo=" + correo + '}';

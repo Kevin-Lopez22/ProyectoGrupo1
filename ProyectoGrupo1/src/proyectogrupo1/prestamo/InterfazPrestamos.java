@@ -8,21 +8,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.javatuples.Triplet;
 import proyectogrupo1.ConexionSQL;
 import proyectogrupo1.cliente.SqlCrudClienteByCI;
 import proyectogrupo1.cliente.Cliente;
 import proyectogrupo1.cliente.GUIActualizar;
 import proyectogrupo1.libro.Ejemplar;
 import proyectogrupo1.libro.Libro;
+import proyectogrupo1.libro.SqlCrudEjemplar;
+import proyectogrupo1.libro.SqlCrudEjemplarByLibroId;
 import proyectogrupo1.libro.SqlCrudLibroByTitulo;
 
 /**
@@ -37,10 +42,15 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     //Variables para la cancelación de préstamos 
     private Cliente clientePrestamo;
     private Libro libroPrestamo;
+    private List<Ejemplar> ejemplaresEncontrados;
     private Ejemplar ejemplarPrestamo;
+    
+    private Cliente clienteCancelar;
+    private Ejemplar ejemplarCancelar;
     
     String cedulaCancelar;
     String codigoCancelar;
+    List<Prestamo> prestamosCancelar;
     
     //Variables para la modificación 
     String buscarCedula;
@@ -83,18 +93,6 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        lblCodigoCancelar = new javax.swing.JLabel();
-        txtCodigoCancelar = new javax.swing.JTextField();
-        btnValidarCancelar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        txtInfoCancelar = new javax.swing.JScrollPane();
-        txtCancelar = new javax.swing.JTextArea();
-        jPanel5 = new javax.swing.JPanel();
-        lblCedulaCancelar = new javax.swing.JLabel();
-        txtCedulaCancelar = new javax.swing.JTextField();
-        lblTituloCancelar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -144,144 +142,24 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         jTFCodigoP = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         fechaLimite = new com.toedter.calendar.JDateChooser();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        lblCodigoCancelar = new javax.swing.JLabel();
+        txtCodigoCancelar = new javax.swing.JTextField();
+        btnValidarCancelar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        txtInfoCancelar = new javax.swing.JScrollPane();
+        txtCancelar = new javax.swing.JTextArea();
+        jPanel5 = new javax.swing.JPanel();
+        lblCedulaCancelar = new javax.swing.JLabel();
+        txtCedulaCancelar = new javax.swing.JTextField();
+        lblTituloCancelar = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
         jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Libro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12))); // NOI18N
-
-        lblCodigoCancelar.setText("Código del ejemplar:");
-
-        txtCodigoCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoCancelarActionPerformed(evt);
-            }
-        });
-
-        btnValidarCancelar.setText("Validar");
-        btnValidarCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnValidarCancelarActionPerformed(evt);
-            }
-        });
-
-        btnCancelar.setText("Cancelar préstamo");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
-        txtCancelar.setColumns(20);
-        txtCancelar.setRows(5);
-        txtInfoCancelar.setViewportView(txtCancelar);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(txtInfoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(btnValidarCancelar)
-                        .addGap(234, 234, 234))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(btnCancelar)
-                        .addGap(203, 203, 203))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(lblCodigoCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116))))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCodigoCancelar))
-                .addGap(34, 34, 34)
-                .addComponent(btnValidarCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtInfoCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar)
-                .addGap(20, 20, 20))
-        );
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12))); // NOI18N
-        jPanel5.setToolTipText("");
-
-        lblCedulaCancelar.setText("Cédula del cliente:");
-
-        txtCedulaCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCedulaCancelarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
-                .addComponent(lblCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCedulaCancelar)
-                    .addComponent(txtCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        lblTituloCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblTituloCancelar.setText("CANCELACIÓN DE PRÉSTAMOS");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(822, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblTituloCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(203, 203, 203))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(lblTituloCancelar)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Cancelar Prestamo", jPanel2);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12))); // NOI18N
         jPanel4.setToolTipText("");
@@ -724,23 +602,158 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrar Prestamo", jPanel1);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Libro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12))); // NOI18N
+
+        lblCodigoCancelar.setText("Código del ejemplar:");
+
+        txtCodigoCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoCancelarActionPerformed(evt);
+            }
+        });
+
+        btnValidarCancelar.setText("Validar");
+        btnValidarCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarCancelarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar préstamo");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        txtCancelar.setColumns(20);
+        txtCancelar.setRows(5);
+        txtInfoCancelar.setViewportView(txtCancelar);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(txtInfoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(btnValidarCancelar)
+                        .addGap(234, 234, 234))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(btnCancelar)
+                        .addGap(203, 203, 203))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(lblCodigoCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(116, 116, 116))))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodigoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCodigoCancelar))
+                .addGap(34, 34, 34)
+                .addComponent(btnValidarCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtInfoCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar)
+                .addGap(20, 20, 20))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 12))); // NOI18N
+        jPanel5.setToolTipText("");
+
+        lblCedulaCancelar.setText("Cédula del cliente:");
+
+        txtCedulaCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addComponent(lblCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCedulaCancelar)
+                    .addComponent(txtCedulaCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        lblTituloCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTituloCancelar.setText("CANCELACIÓN DE PRÉSTAMOS");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(822, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTituloCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(203, 203, 203))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(lblTituloCancelar)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Cancelar Prestamo", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addComponent(jTabbedPane1)
-                .addGap(39, 39, 39))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -779,26 +792,20 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                     auxiliarCodigoLibro = String.valueOf(libroPrestamo.getPaginas());
                     jTFLibroId.setText(libroPrestamo.getIdLibro());
                     
-                    
-                    //verificar que existan ejemplares disponibles
-//                    consulta = "Select count(*) from baseBiblioteca.dbo.EJEMPLARES where idlibro = '" + codigoLibro.getText() + "' and estado = 'disponible'";
-//                    resultado = sql.executeQuery(consulta);
-//                    resultado.next();
-//                    if (Integer.parseInt(resultado.getString(1)) == 0) {
-//                        JOptionPane.showMessageDialog(null, "Actualmente no existen ejemplares disponibles del libro: " + tituloLibro.getText());
-//                    } else {
-//                        modeloTabla.setRowCount(0);
-//                        Object[] fila = new Object[tabla.getColumnCount()];
-//                        consulta = "Select * from baseBiblioteca.dbo.EJEMPLARES where idlibro = '" + codigoLibro.getText() + "' and estado = 'disponible'";
-//                        resultado = sql.executeQuery(consulta);
-//                        while(resultado.next()){
-//                            for(int i =0; i < tabla.getColumnCount(); i++){
-//                                fila[i] = resultado.getString(i+1);
-//                                fila[0] = tituloLibro.getText();
-//                            }
-//                            modeloTabla.addRow(fila);
-//                        }
-//                    }
+                    ejemplaresEncontrados = new SqlCrudEjemplarByLibroId(ConexionSQL.getConexion()).read(libroPrestamo.getIdLibro());
+//                    verificar que existan ejemplares disponibles
+                    modeloTabla.setRowCount(0);
+                    if (ejemplaresEncontrados.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Actualmente no existen ejemplares disponibles del libro: " + tituloLibro.getText());
+                    } else {
+                        Object[] fila = new Object[tabla.getColumnCount()];
+                        for(Ejemplar ej: ejemplaresEncontrados){
+                            fila[0] = ej.getLibro().getTitulo();
+                            fila[1] = ej.getIdEjemplar();
+                            fila[2] = ej.getEstadoEjemplar();
+                            modeloTabla.addRow(fila);
+                        }
+                    }
 
                 }
             } catch (SQLException ex) {
@@ -894,35 +901,36 @@ public class InterfazPrestamos extends javax.swing.JFrame {
 
     private void btnValidarCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarCancelarActionPerformed
         //Verificacion de datos de entrada
+        java.sql.Connection connection = ConexionSQL.getConexion();
         cedulaCancelar = txtCedulaCancelar.getText();
         codigoCancelar = txtCodigoCancelar.getText();
         if (cedulaCancelar.isEmpty() || codigoCancelar.isEmpty()) {
             JOptionPane.showInternalMessageDialog(null, "Asegurese de ingresar los datos requeridos");
         } else {
             try {
-                // Verificación de la existencia del prestamo a cancelar 
-                Statement sql = ConexionSQL.getConexion().createStatement();
-                //Sentencia para consulta en la tabla PRESTAMO
-                String consulta = "Select * from baseBiblioteca.dbo.PRESTAMO where "
-                        + "CODIGOCLIENTE = '" + cedulaCancelar + "' and CODEJEMPLAR = "
-                        + Integer.parseInt(codigoCancelar);
-                ResultSet resultado = sql.executeQuery(consulta);
-                resultado.next();
-
-                //Calculo de multa por retaso
-                String dayBefore = resultado.getString("FECHADEVOLUCION");
-
+                clienteCancelar = new SqlCrudClienteByCI(connection).read(txtCedulaCancelar.getText()).get(0);
+                ejemplarCancelar = new SqlCrudEjemplar(connection).read(Integer.parseInt(txtCodigoCancelar.getText())).get(0);
+                Triplet<String,String,Integer> key = new Triplet<>(String.valueOf(clienteCancelar.getIdCliente()),ejemplarCancelar.getLibro().getIdLibro(),ejemplarCancelar.getIdEjemplar());
+                List<Prestamo> todosPrestamos = new SqlCrudPrestamoByFields(connection).read(key);
+                for(Prestamo p: todosPrestamos)
+                    if(p.getFechaDevolucion()==null)
+                        prestamosCancelar.add(p);
                 //Impresion de los datos del prestamo
-                txtCancelar.setText("\tDATOS DEL PRÉSTAMO A CANCELAR\n"
-                        + "Cédula del Cliente: " + resultado.getString("CODIGOCLIENTE")
-                        + "\nCódigo del libro: " + resultado.getString("CODIGOLIBRO")
-                        + "\nCódigo del ejemplar: " + resultado.getString("CODEJEMPLAR")
-                        + "\nFecha de incio del préstamo: " + resultado.getString("FECHAPRESTAMO")
-                        + "\nFecha establecida para la devolución: " + resultado.getString("FECHADEVOLUCION")
+                
+                for(Prestamo p: prestamosCancelar){
+                        String dayBefore = p.getFechaVencimiento().toString();
+                        txtCancelar.setText("\tDATOS DEL PRÉSTAMO A CANCELAR\n"
+                        + "Cédula del Cliente: " + String.valueOf(p.getCliente().getCedula())
+                        + "\nCódigo del libro: " + p.getLibro().getIdLibro()
+                        + "\nCódigo del ejemplar: " + String.valueOf(p.getEjemplar().getIdEjemplar())
+                        + "\nFecha de incio del préstamo: " + p.getFechaGeneracion().toString()
+                        + "\nFecha establecida para la devolución: " + p.getFechaVencimiento().toString()
                         + "\nFecha actual: " + LocalDateTime.now()
                         + "\nMulta por retraso: " + calcularMulta(dayBefore));
+                }
+                
 
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "¡No se encontraron préstamos con los datos ingresados!",
                         "Error: Cancelar préstamo", JOptionPane.ERROR_MESSAGE);
             }
@@ -937,13 +945,12 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                 JOptionPane.WARNING_MESSAGE);
         try {
             // Cancelación de un préstamo
-            Statement sql = ConexionSQL.getConexion().createStatement();
-            //Sentencia para eliminar en la tabla PRESTAMO
-            String consulta = "Delete from baseBiblioteca.dbo.PRESTAMO where "
-                    + "CODIGOCLIENTE = '" + cedulaCancelar + "' and CODEJEMPLAR = "
-                    + Integer.parseInt(codigoCancelar);
-            sql.executeUpdate(consulta);
-
+            java.sql.Connection connection = ConexionSQL.getConexion();
+            SqlCrudPrestamoById sqlCrudPrestamoById = new SqlCrudPrestamoById(connection);
+            for(Prestamo p: prestamosCancelar){
+                p.setFechaDevolucion(Date.from(Instant.now()));
+                sqlCrudPrestamoById.update(p);
+            }
             //Impresion de mensaje de confirmación 
             txtCancelar.setText("\t¡PRÉSTAMO CANCELADO!\n"
                     + "El préstamo con datos: \n"
@@ -964,8 +971,8 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // pasar la info del ejemplar a la interfaz de prestamo para generar
         int fila = tabla.getSelectedRow();
-        PrestamoGUI d = new PrestamoGUI(auxiliarCodigoCliente, (String) tabla.getValueAt(fila, 1).toString(),auxiliarCodigoLibro);
-        d.show();
+        ejemplarPrestamo = ejemplaresEncontrados.get(fila);
+        jTFEjemplarId.setText(String.valueOf(ejemplarPrestamo.getIdEjemplar()));
     }//GEN-LAST:event_tablaMouseClicked
 
     // private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
@@ -1052,22 +1059,18 @@ public class InterfazPrestamos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String fPrestamo = "";
-        String fFinal = "";
-        String codigoEjemplar = "";
+        java.sql.Connection connection = ConexionSQL.getConexion();
+        if(libroPrestamo==null) return;
+        if(clientePrestamo==null) return;
+        if(ejemplarPrestamo==null) return;
+        if(fechaPrestamo.getDate()==null) return;
+        if(fechaLimite.getDate()==null) return;
         try {
-            Statement sql = ConexionSQL.getConexion().createStatement();
-            SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
-            fPrestamo = ff.format(fechaPrestamo.getCalendar().getTime());
-            fFinal = ff.format(fechaDevolucion.getCalendar().getTime());
-            String consulta = "Insert into baseBiblioteca.dbo.PRESTAMO values('" + jTFcliente.getText() + "',"
-            + "'"+jTFLibroId.getText()+"','"+jTFEjemplarId.getText()+"','"+fPrestamo+"','"+fFinal+"')";
-            sql.executeUpdate(consulta);
-
-            //cambio de estado del libro
-            consulta = "update baseBiblioteca.dbo.ejemplares set estado = 'prestado' where IDEjemplar = '"+codigoEjemplar+"'";
-            sql.executeUpdate(consulta);
-
+            Prestamo prestamo = new Prestamo(Prestamo.sQLIndexIdPrestamo.pop(), clientePrestamo, libroPrestamo, ejemplarPrestamo, fechaPrestamo.getDate(), fechaLimite.getDate());
+            SqlCrudPrestamoById sqlCrudPrestamoById = new SqlCrudPrestamoById(connection);
+            ejemplarPrestamo.setEstadoEjemplar("Prestado");
+            new SqlCrudEjemplarByLibroId(connection).update(ejemplarPrestamo);
+            sqlCrudPrestamoById.create(prestamo);
             JOptionPane.showMessageDialog(null, "Regsitro Exitoso");
             this.show(false);
 

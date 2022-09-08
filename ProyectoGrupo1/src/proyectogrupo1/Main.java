@@ -9,7 +9,9 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import proyectogrupo1.cliente.Cliente;
+import proyectogrupo1.libro.Ejemplar;
 import proyectogrupo1.libro.Libro;
+import proyectogrupo1.libro.SqlCrudEjemplar;
 import proyectogrupo1.libro.SqlCrudLibro;
 import proyectogrupo1.prestamo.*;
 
@@ -41,12 +43,12 @@ public class Main {
         
         if(true){
             try {
-                SqlCrudLibro sqlCrudLibro = new SqlCrudLibro(c);
-                for(Libro l: sqlCrudLibro.read())sqlCrudLibro.delete(l);
-                sqlCrudLibro.create(l1);
-                sqlCrudLibro.create(new Libro("102", "El segundo", "XXXXX", "Marcelo", 1000, 200));
-                sqlCrudLibro.create(new Libro("103", "El tercero", "XXXXX", "Marcelo", 1000, 200));
-                System.out.println(sqlCrudLibro.read());
+                SqlCrudEjemplar sqlCrudEjemplar = new SqlCrudEjemplar(c);
+                for(Ejemplar l: sqlCrudEjemplar.read())sqlCrudEjemplar.delete(l);
+                sqlCrudEjemplar.create(new Ejemplar(0, l1));
+                sqlCrudEjemplar.create(new Ejemplar(1, l1));
+                sqlCrudEjemplar.create(new Ejemplar(2, l1));
+                System.out.println(sqlCrudEjemplar.read());
             } catch (SQLException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }

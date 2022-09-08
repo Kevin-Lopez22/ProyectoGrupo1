@@ -17,10 +17,10 @@ import proyectogrupo1.cliente.Cliente;
  *
  * @author luism
  */
-public class SqlCrudEjemplar implements SqlCrud<Ejemplar, Integer>{
+public class SqlCrudEjemplarByLibroId implements SqlCrud<Ejemplar, String>{
     Connection connection;
 
-    public SqlCrudEjemplar(Connection connection) {
+    public SqlCrudEjemplarByLibroId(Connection connection) {
         this.connection = connection;
     }
 
@@ -38,16 +38,16 @@ public class SqlCrudEjemplar implements SqlCrud<Ejemplar, Integer>{
     }
 
     @Override
-    public List<Ejemplar> read(Integer lowerLimit, Integer upperLimit) throws SQLException {
+    public List<Ejemplar> read(String lowerLimit, String upperLimit) throws SQLException {
         // TODO: Implementar
         PreparedStatement prepStat = connection.prepareStatement(
                 "SELECT IDEJEMPLAR,IDLIBRO,ESTADO "+ 
                       //1        ,2        ,3
                 "FROM EJEMPLARES "+
-                "WHERE ? <= IDEJEMPLAR AND IDEJEMPLAR <= ?;"
+                "WHERE ? <= IDLIBRO AND IDLIBRO <= ?;"
         );
-        prepStat.setInt(1, lowerLimit);
-        prepStat.setInt(2, upperLimit);
+        prepStat.setString(1, lowerLimit);
+        prepStat.setString(2, upperLimit);
         prepStat.execute();
         ResultSet rs = prepStat.getResultSet();
         

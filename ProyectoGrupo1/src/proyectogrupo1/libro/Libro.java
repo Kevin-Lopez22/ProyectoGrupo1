@@ -127,6 +127,22 @@ public class Libro {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Libro other = (Libro) obj;
+        if(this.idLibro.equals(other.idLibro)) return true;
+        return false;
+    }
+    
+    @Override
     public String toString() {
         return "Libro{" + "idLibro=" + idLibro + ", titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", paginas=" + paginas + ", stock=" + stock + '}';
     }
