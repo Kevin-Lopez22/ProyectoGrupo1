@@ -168,7 +168,6 @@ public class GUIActualizar extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cedula = "";
-        JTextArea textArea = new JTextArea(cedula);
         cedula = txtCedula.getText();
             try {
             List<Cliente> clientes = sqlCrudCliente.read(cedula);
@@ -181,6 +180,7 @@ public class GUIActualizar extends javax.swing.JFrame {
             if(clientes.size()==1){
                 JOptionPane.showMessageDialog(null, "Cliente encontrado!"); // Ahi le cambian
                 clientePorModificar = clientes.get(0);
+                txaInformacion.setText(clientePorModificar.toString());
                 }
             }
             catch (SQLException ex) {
