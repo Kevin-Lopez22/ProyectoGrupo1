@@ -81,7 +81,22 @@ public class GestorLibros {
     }
 
    
-
+      public boolean agregarEjemplar(String descripcion){
+        Connection con = null; 
+        boolean respuesta = true;
+        
+        try{
+            con = ConexionSQL.getConexion();
+            con.setAutoCommit(false);
+            CallableStatement entrada = ConexionSQL.getConexion().prepareCall("{call insertarEjemplar(?)}");
+            //entrada.setString(1, "");
+            entrada.setString(1, descripcion);
+            respuesta = entrada.execute();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return respuesta;
+    }
      public boolean modificarDisponibilidad (String id_libro, String descripcion){
         Connection con = null;
         CallableStatement entrada = null;
