@@ -237,9 +237,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
 
         libro = new Libro(idLibro, titulo, isbn, autor, stock, paginas);
         //boolean respuesta = gestorLibro.agregarLibro(idLibro, titulo, autor, isbn, paginas, stock);
-        for (int i = 0; i < stock; i++) {
-             gestorLibro.agregarEjemplar(idLibro, "Disponible");
-        }
+        
         
         boolean respuesta = gestorLibro.agregarLibro(libro);
         if (respuesta == false) {
@@ -249,6 +247,9 @@ public class JFRegistroLib extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser agregado!");
         }
         
+        for (int i = 0; i < stock; i++) {
+             gestorLibro.agregarEjemplar(idLibro, "Disponible");
+        }
       // System.out.println(idLibro+" "+titulo+" "+autor+" "+ " "+isbn+stock+paginas);
             
     }//GEN-LAST:event_jBIngresarLibroResActionPerformed
