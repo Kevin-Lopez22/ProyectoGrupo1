@@ -50,7 +50,7 @@ public class JFRegistroLibro extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("REGISTRO DE CLIENTES");
+        jLabel1.setText("REGISTRO DE LIBROS");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 510, 40));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
