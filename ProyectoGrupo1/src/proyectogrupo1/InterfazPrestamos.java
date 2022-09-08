@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,6 +27,10 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     String cedulaCancelar;
     String codigoCancelar;
 
+    Boolean clienteValido = false;
+    Boolean libroExistente = false;
+    String auxiliarCodigoCliente, auxiliarCodigoLibro;
+
     public InterfazPrestamos() {
         initComponents();
     }
@@ -38,7 +43,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         LocalDate After = LocalDate.now();
 
         long diff = ChronoUnit.DAYS.between(Before, After);
-        return "" + diff * 1.5 + "$ ("+diff +" días de retraso)";
+        return "" + diff * 1.5 + "$ (" + diff + " días de retraso)";
     }
 
     /**
@@ -82,7 +87,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         verificaLibro = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         paguinasLibro = new javax.swing.JTextField();
         autor = new javax.swing.JTextField();
@@ -293,12 +298,9 @@ public class InterfazPrestamos extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Nombre", "ID", "Estado"
@@ -307,12 +309,24 @@ public class InterfazPrestamos extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
 
         jLabel13.setText("Autor");
 
@@ -529,11 +543,11 @@ public class InterfazPrestamos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(15, 15, 15)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(lblTituloCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(203, 203, 203))))
@@ -573,6 +587,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     }//GEN-LAST:event_paguinasLibroActionPerformed
 
     private void verificaLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificaLibroActionPerformed
+        DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
 
         if (tituloLibro.getText().isEmpty()) {
             JOptionPane.showInternalMessageDialog(null, "Asegurese de ingresar el titulo del libro");
@@ -586,7 +601,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                 ResultSet resultado = sql.executeQuery(consulta);
                 resultado.next();
 
-                //verificar que exista el cliente cuya cedula se ingreso
+                //verificar que exista el libro solicitado
                 if (Integer.parseInt(resultado.getString(1)) == 0) {
                     JOptionPane.showMessageDialog(null, "no se han encontrado el libro especificado");
                 } else {
@@ -594,12 +609,32 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                     consulta = "Select * from baseBiblioteca.dbo.LIBRO where titulo = '" + tituloLibro.getText() + "'";
                     resultado = sql.executeQuery(consulta);
                     resultado.next();
-
                     autor.setText(resultado.getString("autor"));
                     codigoLibro.setText(resultado.getString("idlibro"));
                     isbnLibro.setText(resultado.getString("isbn"));
                     paguinasLibro.setText(resultado.getString("paginas"));
                     stockLibro.setText(resultado.getString("stock"));
+                    auxiliarCodigoLibro = resultado.getString("idlibro");
+
+                    //verificar que existan ejemplares disponibles
+                    consulta = "Select count(*) from baseBiblioteca.dbo.EJEMPLARES where idlibro = '" + codigoLibro.getText() + "' and estado = 'disponible'";
+                    resultado = sql.executeQuery(consulta);
+                    resultado.next();
+                    if (Integer.parseInt(resultado.getString(1)) == 0) {
+                        JOptionPane.showMessageDialog(null, "Actualmente no existen ejemplares disponibles del libro: " + tituloLibro.getText());
+                    } else {
+                        modeloTabla.setRowCount(0);
+                        Object[] fila = new Object[tabla.getColumnCount()];
+                        consulta = "Select * from baseBiblioteca.dbo.EJEMPLARES where idlibro = '" + codigoLibro.getText() + "' and estado = 'disponible'";
+                        resultado = sql.executeQuery(consulta);
+                        while(resultado.next()){
+                            for(int i =0; i < tabla.getColumnCount(); i++){
+                                fila[i] = resultado.getString(i+1);
+                                fila[0] = tituloLibro.getText();
+                            }
+                            modeloTabla.addRow(fila);
+                        }
+                    }
 
                 }
             } catch (SQLException ex) {
@@ -651,6 +686,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                 if (Integer.parseInt(resultado.getString(1)) == 0) {
                     JOptionPane.showMessageDialog(null, "no se han encontrado cleintes con el numero de decula especificado");
                 } else {
+                    clienteValido = true;
                     consulta = "Select * from baseBiblioteca.dbo.CLIENTES where cicliente = '" + txtCedula.getText() + "'";
                     resultado = sql.executeQuery(consulta);
                     resultado.next();
@@ -661,6 +697,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                     telefonoCliente.setText(resultado.getString("telefono"));
                     idCliente.setText(resultado.getString("idcliente"));
                     correoCliente.setText(resultado.getString("correo"));
+                    auxiliarCodigoCliente = resultado.getString("idcliente");
 
                 }
             } catch (SQLException ex) {
@@ -712,7 +749,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
                         + "\nCódigo del ejemplar: " + resultado.getString("CODEJEMPLAR")
                         + "\nFecha de incio del préstamo: " + resultado.getString("FECHAPRESTAMO")
                         + "\nFecha establecida para la devolución: " + resultado.getString("FECHADEVOLUCION")
-                        + "\nFecha actual: " + LocalDateTime.now() 
+                        + "\nFecha actual: " + LocalDateTime.now()
                         + "\nMulta por retraso: " + calcularMulta(dayBefore));
 
             } catch (SQLException ex) {
@@ -753,6 +790,13 @@ public class InterfazPrestamos extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // pasar la info del ejemplar a la interfaz de prestamo para generar
+        int fila = tabla.getSelectedRow();
+        PrestamoGUI d = new PrestamoGUI(auxiliarCodigoCliente, (String) tabla.getValueAt(fila, 1).toString(),auxiliarCodigoLibro);
+        d.show();
+    }//GEN-LAST:event_tablaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -821,7 +865,6 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblCedulaCancelar;
@@ -830,6 +873,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     private javax.swing.JTextField nombreCliente;
     private javax.swing.JTextField paguinasLibro;
     private javax.swing.JTextField stockLibro;
+    private javax.swing.JTable tabla;
     private javax.swing.JTextField telefonoCliente;
     private javax.swing.JTextField tituloLibro;
     private javax.swing.JTextArea txtCancelar;
