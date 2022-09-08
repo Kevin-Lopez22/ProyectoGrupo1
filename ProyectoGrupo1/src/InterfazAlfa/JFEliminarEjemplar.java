@@ -42,6 +42,7 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
 
     public JFEliminarEjemplar() throws SQLException {
         initComponents();
+        gestorLibro = new GestorLibros();
         dtmModelo = cargarTitulosTabla(dtmModelo);
         this.jtblEjemplaresPorLibro.setModel(dtmModelo);
         gestorLibro.buscarLibro(this.jtblEjemplaresPorLibro, "select a.TITULO,b.IDLIBRO, b.IDEJEMPLAR, b.ESTADO from\n"
