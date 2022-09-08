@@ -167,24 +167,30 @@ public class GUIActualizar extends javax.swing.JFrame {
         String cedula = "";
         
         cedula = txtCedula.getText();
+        txaInformacion.setVisible(true);
         /*Aplicar logica para ingresar a la base de datos e imprimir en el textArea*/
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cmbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEditarActionPerformed
         if (cmbEditar.getSelectedItem() == "Nombre"){
             lblEditar.setText("Nombre");
+            txtEditar.setVisible(true);
         }
         if (cmbEditar.getSelectedItem() == "Apellido"){
             lblEditar.setText("Apellido");
+            txtEditar.setVisible(true);
         }
         if (cmbEditar.getSelectedItem() == "Telefono"){
             lblEditar.setText("Telefono");
+            txtEditar.setVisible(true);
         }
         if (cmbEditar.getSelectedItem() == "Dirección"){
             lblEditar.setText("Dirección");
+            txtEditar.setVisible(true);
         }
         if (cmbEditar.getSelectedItem() == "Correo"){
             lblEditar.setText("Correo");
+            txtEditar.setVisible(true);
         }
     }//GEN-LAST:event_cmbEditarActionPerformed
 
