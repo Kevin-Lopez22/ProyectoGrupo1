@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import proyectogrupo1.Persona;
 
 /**
  *
@@ -88,6 +89,11 @@ public class GUIRegistrar extends javax.swing.JFrame {
 
         jLabel7.setText("Correo:");
 
+        txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCedulaFocusLost(evt);
+            }
+        });
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyTyped(evt);
@@ -239,6 +245,7 @@ public class GUIRegistrar extends javax.swing.JFrame {
             Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
         }
         cliente = new Cliente(1, cedula, nombre, apellido, telefono, direccion, correo);
+    
         
         // La documentación da mas detalles de como opera el SqlCrudCliente
         // Parte de la insercion
@@ -254,8 +261,10 @@ public class GUIRegistrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
-        // TODO add your handling code here:
-        
+        char entrada = evt.getKeyChar();
+        if (entrada<'0' || entrada>'9'){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCedulaKeyTyped
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
@@ -284,6 +293,13 @@ public class GUIRegistrar extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
+        if(!Persona.valida(txtCedula.getText())){
+            JOptionPane.showMessageDialog(null, "La cedula ingresada no es válida");
+        }
+
+    }//GEN-LAST:event_txtCedulaFocusLost
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
