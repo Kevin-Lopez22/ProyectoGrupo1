@@ -211,7 +211,8 @@ public class GUIRegistrar extends javax.swing.JFrame {
             telefono = txtTelefono.getText();
             direccion = txtDireccion.getText();
             correo = txtCorreo.getText();
-        }catch(Exception e){
+        }catch(Exception ex){
+            Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
         }
         cliente = new Cliente(1, cedula, nombre, apellido, telefono, direccion, correo);
         
@@ -222,6 +223,8 @@ public class GUIRegistrar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Añadido exitosamente"); // Ahi le cambian
         } catch (SQLException ex) {
             // TODO: Control de excepciones
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al intentar añadir este cliente"); // Ahi le cambian
+
             Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
