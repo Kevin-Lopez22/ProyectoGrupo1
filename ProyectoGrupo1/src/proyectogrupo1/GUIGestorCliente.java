@@ -159,7 +159,7 @@ public class GUIGestorCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        GUIEliminar eliminar = new GUIEliminar();
+        GUIEliminar eliminar = new GUIEliminar(sqlCrudCliente);
         eliminar.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEliminarActionPerformed
