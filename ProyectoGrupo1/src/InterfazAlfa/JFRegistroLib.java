@@ -14,7 +14,7 @@ import proyectogrupo1.Negocio.Libro;
  * @author Det-Pc
  */
 public class JFRegistroLib extends javax.swing.JFrame {
-
+    JFMenu menu;
     Libro libro;
     GestorLibros gestorLibro;
     public JFRegistroLib() {
@@ -22,6 +22,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();
+        //menu= new JFMenu();
     }
 
     
@@ -56,23 +57,18 @@ public class JFRegistroLib extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("REGISTRO DE LIBROS");
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Id_Libro:");
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Titulo:");
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Autor:");
 
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("N Páginas ");
 
         jTFIDLIbro.addActionListener(new java.awt.event.ActionListener() {
@@ -108,11 +104,9 @@ public class JFRegistroLib extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("ISBN");
 
         jLabel8.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Stock");
 
         jTFStock.addActionListener(new java.awt.event.ActionListener() {
@@ -243,6 +237,8 @@ public class JFRegistroLib extends javax.swing.JFrame {
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
         this.setVisible(false);
+        //menu.setVisible(true);
+        System.exit(0);
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jTFStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFStockActionPerformed

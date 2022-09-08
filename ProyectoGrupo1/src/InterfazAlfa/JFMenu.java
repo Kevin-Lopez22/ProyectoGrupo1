@@ -10,15 +10,17 @@ package InterfazAlfa;
  */
 public class JFMenu extends javax.swing.JFrame {
 
-    JFEliminarLibros jfEliminarLibros;
-    JFRegistroLibro jfRegistroLibros;
+   
+    
+    JFRegistroLib registro;
+    JFEliminarLibros eliminar;
     
     
     public JFMenu() {
         initComponents();
         this.setLocationRelativeTo(this);
-        jfEliminarLibros = new JFEliminarLibros();
-        jfRegistroLibros = new JFRegistroLibro();
+        eliminar = new JFEliminarLibros();
+        registro = new JFRegistroLib();
     }
 
     /**
@@ -118,12 +120,12 @@ public class JFMenu extends javax.swing.JFrame {
 
     private void btnRegistrarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarLibroActionPerformed
         this.setVisible(false);
-        jfRegistroLibros.setVisible(true);
+        registro.setVisible(true);
     }//GEN-LAST:event_btnRegistrarLibroActionPerformed
 
     private void btnEliminarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLibroActionPerformed
         this.setVisible(false);
-        jfEliminarLibros.setVisible(true);
+        eliminar.setVisible(true);
     }//GEN-LAST:event_btnEliminarLibroActionPerformed
 
     /**
