@@ -35,6 +35,7 @@ public class PrestamoGUI extends javax.swing.JFrame {
 
     public PrestamoGUI(String cliente, String ejemplar, String libro) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.codigoCliente = cliente;
         this.codigoEjemplar = ejemplar;
         this.codigoLibro = libro;
