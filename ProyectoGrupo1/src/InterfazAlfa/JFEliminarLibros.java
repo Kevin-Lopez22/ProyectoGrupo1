@@ -5,13 +5,16 @@
 package InterfazAlfa;
 
 import java.awt.PopupMenu;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import proyectogrupo1.Negocio.GestorLibros;
 import proyectogrupo1.Negocio.Libro;
 
@@ -103,6 +106,11 @@ public class JFEliminarLibros extends javax.swing.JFrame {
                 jTFTituloLibroActionPerformed(evt);
             }
         });
+        jTFTituloLibro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFTituloLibroKeyTyped(evt);
+            }
+        });
 
         jBEliminarLibro.setBackground(new java.awt.Color(153, 153, 153));
         jBEliminarLibro.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
@@ -175,13 +183,15 @@ public class JFEliminarLibros extends javax.swing.JFrame {
                         .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(137, 137, 137))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(143, 143, 143)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -193,9 +203,9 @@ public class JFEliminarLibros extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTFTituloLibro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEliminarLibro)
                     .addComponent(jBRegresar))
@@ -254,6 +264,19 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     private void optEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optEliminarActionPerformed
         //-------------------------logica para eliminar---------------------
     }//GEN-LAST:event_optEliminarActionPerformed
+    TableRowSorter trs=null;
+    private void jTFTituloLibroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTituloLibroKeyTyped
+        
+        
+        jTFTituloLibro.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent ke){
+                trs.setRowFilter(RowFilter.regexFilter(jTFTituloLibro.getText(), 1));
+            }
+        });
+        trs= new TableRowSorter(this.dtmModelo);
+        jtblLibros.setRowSorter(trs);
+    }//GEN-LAST:event_jTFTituloLibroKeyTyped
 
     /**
      * @param args the command line arguments
