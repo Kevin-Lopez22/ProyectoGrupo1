@@ -45,7 +45,7 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
         gestorLibro = new GestorLibros();
         dtmModelo = cargarTitulosTabla(dtmModelo);
         this.jtblEjemplaresPorLibro.setModel(dtmModelo);
-        gestorLibro.buscarLibro(this.jtblEjemplaresPorLibro, "select a.TITULO,b.IDLIBRO, b.IDEJEMPLAR, b.ESTADO from\n"
+        gestorLibro.buscarLibro(this.jtblEjemplaresPorLibro, "select a.TITULO, b.IDEJEMPLAR, b.ESTADO from\n"
                 + "LIBRO a, EJEMPLARES b \n"
                 + "where a.IDLIBRO = b.IDLIBRO");
     }
