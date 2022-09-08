@@ -5,22 +5,26 @@
  */
 package proyectogrupo1;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Usuario
  */
 public class GUIGestorCliente extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form GUIGestorCliente
      */
     SqlCrudCliente sqlCrudCliente;
     public GUIGestorCliente(SqlCrudCliente sqlCrudCliente) {
         initComponents();
+        //setIconImage(new ImageIcon(getClass().getResource("/imagen/book.png")).getImage());
         this.sqlCrudCliente = sqlCrudCliente;
     }
 
