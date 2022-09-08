@@ -266,12 +266,7 @@ public class GUIRegistrar extends javax.swing.JFrame {
         }
         if ((entrada<'a' || entrada>'z') && ((entrada<'A' || entrada>'Z'))){
             evt.consume();
-        }
-        
-       
-        
-        
-            
+        }    
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
