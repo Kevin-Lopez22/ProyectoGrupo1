@@ -271,7 +271,7 @@ public class JFEliminarLibros extends javax.swing.JFrame {
         jTFTituloLibro.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke){
-                trs.setRowFilter(RowFilter.regexFilter(jTFTituloLibro.getText(), 1));
+                trs.setRowFilter(RowFilter.regexFilter("(?i)"+jTFTituloLibro.getText(), 1));
             }
         });
         trs= new TableRowSorter(this.dtmModelo);
