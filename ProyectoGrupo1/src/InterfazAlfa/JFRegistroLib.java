@@ -17,12 +17,13 @@ public class JFRegistroLib extends javax.swing.JFrame {
     //Menu menu;
     Libro libro;
     GestorLibros gestorLibro;
+    JFMen men;
     public JFRegistroLib() {
         initComponents();
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();
-        //menu= new Menu();
+        men= new JFMen();
     }
 
     
@@ -237,8 +238,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
         this.setVisible(false);
-        //menu.setVisible(true);
-        System.exit(0);
+        men.setVisible(true);
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jTFStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFStockActionPerformed

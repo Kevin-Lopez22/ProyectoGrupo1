@@ -17,13 +17,13 @@ public class JFEliminarLibros extends javax.swing.JFrame {
     Libro libro;
     GestorLibros gestorLibro;
     JFRegistroLib registro;
-   //Menu menu;
+    JFMen menu;
     public JFEliminarLibros() {
         initComponents();
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();
-        //menu= new Menu();
+        menu= new JFMen();
         registro= new JFRegistroLib();
     }
 
