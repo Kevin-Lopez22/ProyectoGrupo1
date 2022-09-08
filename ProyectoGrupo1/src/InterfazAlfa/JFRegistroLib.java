@@ -14,7 +14,7 @@ import proyectogrupo1.Negocio.Libro;
  * @author Det-Pc
  */
 public class JFRegistroLib extends javax.swing.JFrame {
-    JFMenu menu;
+    //Menu menu;
     Libro libro;
     GestorLibros gestorLibro;
     public JFRegistroLib() {
@@ -22,7 +22,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();
-        //menu= new JFMenu();
+        //menu= new Menu();
     }
 
     

@@ -16,11 +16,15 @@ public class JFEliminarLibros extends javax.swing.JFrame {
 
     Libro libro;
     GestorLibros gestorLibro;
+    JFRegistroLib registro;
+   //Menu menu;
     public JFEliminarLibros() {
         initComponents();
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();
+        //menu= new Menu();
+        registro= new JFRegistroLib();
     }
 
     /**
