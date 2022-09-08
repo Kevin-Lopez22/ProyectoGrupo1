@@ -15,8 +15,8 @@ final class SqlCrudCliente implements SqlCrud<Cliente,String>{
     public void create(Cliente e) throws SQLException{
         // TODO: Implementar
         PreparedStatement prepStat = connection.prepareStatement(
-                "INSERT INTO CLIENTES(IDCLIENTE,CICLIENTE,NOMBRECLIENTE,APELLIDOCLIENTE,DIRECCION,TELEFONO,CORREO) VALUES("
-                        + "?,?,?,?,?,?,?);"
+                "INSERT INTO CLIENTES(IDCLIENTE,CICLIENTE,NOMBRECLIENTE,APELLIDOCLIENTE,DIRECCION,TELEFONO,CORREO,SUSPENDIDO) VALUES("
+                        + "?,?,?,?,?,?,?,?);"
         );
         prepStat.setString(1, String.valueOf(e.getIdCliente()));
         prepStat.setString(2, e.getCedula());
@@ -25,6 +25,7 @@ final class SqlCrudCliente implements SqlCrud<Cliente,String>{
         prepStat.setString(5, e.getDireccion());
         prepStat.setString(6, e.getTelefono());
         prepStat.setString(7, e.getCorreo());
+        prepStat.setBoolean(8, e.isSuspendido());
         prepStat.execute();
     }
 
@@ -32,8 +33,8 @@ final class SqlCrudCliente implements SqlCrud<Cliente,String>{
     public List<Cliente> read(String lowerLimit, String upperLimit) throws SQLException{
         // TODO: Implementar
         PreparedStatement prepStat = connection.prepareStatement(
-                "SELECT IDCLIENTE,CICLIENTE,NOMBRECLIENTE,APELLIDOCLIENTE,DIRECCION,TELEFONO,CORREO "+ 
-                      //1        ,2        ,3            ,4              ,5        ,6       ,7
+                "SELECT IDCLIENTE,CICLIENTE,NOMBRECLIENTE,APELLIDOCLIENTE,DIRECCION,TELEFONO,CORREO,SUSPENDIDO "+ 
+                      //1        ,2        ,3            ,4              ,5        ,6       ,7     ,8
                 "FROM CLIENTES "+
                 "WHERE ? <= CICLIENTE AND CICLIENTE <= ?;"
         );
@@ -57,8 +58,9 @@ final class SqlCrudCliente implements SqlCrud<Cliente,String>{
         String direccion = rs.getString(5).trim();
         String telefono = rs.getString(6).trim();
         String correo = rs.getString(7).trim();
+        boolean isSuspendido = rs.getBoolean(8);
         
-        return new Cliente(idCliente,cedula,nombre,apellido,telefono,direccion,correo);
+        return new Cliente(idCliente,cedula,nombre,apellido,telefono,direccion,correo,isSuspendido);
     }
     
     @Override
@@ -71,15 +73,17 @@ final class SqlCrudCliente implements SqlCrud<Cliente,String>{
               + "APELLIDOCLIENTE=?,"  // 2
               + "DIRECCION=?,"        // 3
               + "TELEFONO=?,"         // 4
-              + "CORREO=? "           // 5
-              + "WHERE CICLIENTE=?;" // 6
+              + "CORREO=?, "           // 5
+              + "SUSPENDIDO=? "           // 6
+              + "WHERE CICLIENTE=?;" // 7
         );
         prepStat.setString(1, e.getNombre());
         prepStat.setString(2, e.getApellido());
         prepStat.setString(3, e.getDireccion());
         prepStat.setString(4, e.getTelefono());
         prepStat.setString(5, e.getCorreo());
-        prepStat.setString(6, String.valueOf(e.getCedula()));
+        prepStat.setBoolean(6, e.isSuspendido());
+        prepStat.setString(7, String.valueOf(e.getCedula()));
         
         prepStat.execute();
     }

@@ -21,7 +21,10 @@ public class ProyectoGrupo1 {
     public static void main(String[] args) {
         try {
             // LuisM45
+            
             SqlCrudCliente sqlCrudCliente = new SqlCrudCliente(ConexionSQL.getConexion());
+            for(Cliente c: sqlCrudCliente.read("0", "999999999"))
+                sqlCrudCliente.delete(c);
             
             // Preparacion de los Objetos cliente
             Cliente a,b;

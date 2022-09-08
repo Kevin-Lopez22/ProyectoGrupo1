@@ -25,7 +25,7 @@ public interface SqlCrud<E,F extends Comparable<F>> {
     void create(E e) throws SQLException;
     
     /**
-     * Funcion read del CRUD
+     * Funcion read del CRUD(1)
      * Recibe un límite inferior y un límite superior para el PK, se leeran
      * y devolverán todos los Objetos en la tabla cuya PK se encuentre dentro
      * de este rango. Este deberá ser inclusivo [a,b]
@@ -34,7 +34,18 @@ public interface SqlCrud<E,F extends Comparable<F>> {
      * @return Una List con todos los objetos leídos dentro del rango
      * @throws SQLException 
      */
-    List<E> read(F lowerLimit, F upperLimit) throws SQLException;;
+    List<E> read(F lowerLimit, F upperLimit) throws SQLException;
+    
+    /**
+     * Funcion read del CRUD(2)
+     * Recibe la PK del objetivo y devuelve una lista con las coincidencias
+     * @param key
+     * @return List con los elemenetos con PK=key
+     * @throws SQLException 
+     */
+    default List<E> read(F key) throws SQLException{
+        return read(key,key);
+    }
     
     /**
      * Funcion update del CRUD
