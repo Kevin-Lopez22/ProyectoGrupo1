@@ -5,12 +5,14 @@
 package proyectogrupo1;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Thomas Tapia
+ * 
  */
 public class GUIEliminar extends javax.swing.JFrame {
 
@@ -20,8 +22,9 @@ public class GUIEliminar extends javax.swing.JFrame {
     SqlCrudCliente sqlCrudCliente;  // Handler para el crud
     
     
-    public GUIEliminar() {
+    public GUIEliminar(SqlCrudCliente sqlCrudCliente) {
         initComponents();
+        this.sqlCrudCliente =sqlCrudCliente;
     }
 
     /**
@@ -64,6 +67,12 @@ public class GUIEliminar extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Cédula");
+
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaActionPerformed(evt);
+            }
+        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,60 +134,51 @@ public class GUIEliminar extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO: clientePorEliminar debe leerse cuando se le de a buscar
         try {
+
             sqlCrudCliente.delete(clientePorEliminar);
-            
+            JOptionPane.showMessageDialog(null, "Cliente eliminado!");
+
         } catch (SQLException ex) {
-            Logger.getLogger(GUIEliminar.class.getName()).log(Level.SEVERE, null, ex);
+            // TODO: Control de excepciones
+            JOptionPane.showMessageDialog(null, "El cliente no pudo ser eliminado!");
+            Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cedula = "";
-        cedula = txtCedula.getText();
-        /*Aplicar logica para ingresar a la base de datos e imprimir en el textArea*/
         txaInformacion.setVisible(true);
+        cedula = txtCedula.getText();
+            try {
+            List<Cliente> clientes = sqlCrudCliente.read(cedula);
+            
+            if(clientes.isEmpty()){
+                JOptionPane.showMessageDialog(null, "No se ha encontrado el cliente especificado"); // Ahi le cambian
+                clientePorEliminar = null;
+                return;
+                }
+            if(clientes.size()==1){
+                JOptionPane.showMessageDialog(null, "Cliente encontrado!"); // Ahi le cambian
+                clientePorEliminar = clientes.get(0);
+                txaInformacion.setText(clientePorEliminar.toString());
+                }
+            }
+            catch (SQLException ex) {
+            // TODO: Control de excepciones
+            Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        GUIGestorCliente regresar = new GUIGestorCliente(sqlCrudCliente);
-        regresar.setVisible(true);
+        GUIGestorCliente gestor = new GUIGestorCliente(sqlCrudCliente);
+        gestor.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIEliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIEliminar().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
