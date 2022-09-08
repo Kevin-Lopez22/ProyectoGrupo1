@@ -14,19 +14,20 @@ import proyectogrupo1.Negocio.Libro;
  * @author Det-Pc
  */
 public class JFRegistroLib extends javax.swing.JFrame {
+
     //Menu menu;
     Libro libro;
     GestorLibros gestorLibro;
-    JFMen men;
+
+    //JFMen men;
     public JFRegistroLib() {
         initComponents();
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();
-        men= new JFMen();
+        //men= new JFMen();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -228,17 +229,16 @@ public class JFRegistroLib extends javax.swing.JFrame {
 
         libro = new Libro(idLibro, titulo, autor, isbn, paginas, stock);
         boolean respuesta = gestorLibro.agregarLibro(libro);
-        if(respuesta == false){
+        if (respuesta == false) {
             JOptionPane.showMessageDialog(null, "¡Libro agregado exitosamente!");
             this.setVisible(true);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "** Error ** ¡Este libro no puede ser agregado!");
         }
     }//GEN-LAST:event_jBIngresarClienteResActionPerformed
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
-        this.setVisible(false);
-        men.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBRegresarActionPerformed
 
     private void jTFStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFStockActionPerformed
@@ -250,7 +250,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        if (evt.getKeyCode()==KeyEvent.VK_ESCAPE) {
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             System.exit(0);
         }
     }//GEN-LAST:event_formKeyPressed

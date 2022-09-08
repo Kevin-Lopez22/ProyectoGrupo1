@@ -99,8 +99,9 @@ public class JFMen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        JFRegistroLib registro= new JFRegistroLib();
+        JFRegistroLib registro = new JFRegistroLib();
         registro.setVisible(true);
+
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
