@@ -212,8 +212,8 @@ public class GUIRegistrar extends javax.swing.JFrame {
             direccion = txtDireccion.getText();
             correo = txtCorreo.getText();
         }catch(Exception e){
-            System.out.println("Puto el que lea"); //Temporal
-            JOptionPane.showMessageDialog(rootPane, "Puto el que lea"); // Ahi le cambian
+            System.out.println("Se agrego correctamente"); //Temporal
+            JOptionPane.showMessageDialog(null, "Añadido exitosamente"); // Ahi le cambian
         }
         cliente = new Cliente(1, cedula, nombre, apellido, telefono, direccion, correo);
         

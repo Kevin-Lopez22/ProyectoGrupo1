@@ -126,7 +126,7 @@ public class GUIEliminar extends javax.swing.JFrame {
         // TODO: clientePorEliminar debe leerse cuando se le de a buscar
         try {
             sqlCrudCliente.delete(clientePorEliminar);
-            setVisible(true);
+            
         } catch (SQLException ex) {
             Logger.getLogger(GUIEliminar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -136,6 +136,7 @@ public class GUIEliminar extends javax.swing.JFrame {
         String cedula = "";
         cedula = txtCedula.getText();
         /*Aplicar logica para ingresar a la base de datos e imprimir en el textArea*/
+        txaInformacion.setVisible(true);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
