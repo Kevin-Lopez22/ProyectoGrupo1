@@ -980,7 +980,7 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // pasar la info del ejemplar a la interfaz de prestamo para generar
         int fila = tabla.getSelectedRow();
-        PrestamoGUI d = new PrestamoGUI(auxiliarCodigoCliente, (String) tabla.getValueAt(fila, 1).toString(),auxiliarCodigoLibro);
+        PrestamoGUI d = new PrestamoGUI(txtCedula.getText(), (String) tabla.getValueAt(fila, 1).toString(),auxiliarCodigoLibro);
         d.show();
     }//GEN-LAST:event_tablaMouseClicked
 
