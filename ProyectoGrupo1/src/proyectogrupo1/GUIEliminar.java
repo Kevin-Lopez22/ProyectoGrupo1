@@ -126,6 +126,7 @@ public class GUIEliminar extends javax.swing.JFrame {
         // TODO: clientePorEliminar debe leerse cuando se le de a buscar
         try {
             sqlCrudCliente.delete(clientePorEliminar);
+            setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(GUIEliminar.class.getName()).log(Level.SEVERE, null, ex);
         }
