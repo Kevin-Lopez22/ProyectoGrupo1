@@ -30,6 +30,7 @@ public class PrestamoGUI extends javax.swing.JFrame {
     Prestamo prestamo = new Prestamo();
 
     public PrestamoGUI() {
+        this.setTitle("Sistema Bibliotecario - Gestión de préstamos");
         initComponents();
     }
 
