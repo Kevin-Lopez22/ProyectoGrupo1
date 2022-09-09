@@ -21,6 +21,7 @@ public class JFMen extends javax.swing.JFrame {
     public JFMen() {
         initComponents();
         this.setTitle("Menu Gestion de libros");
+        this.setLocationRelativeTo(null);
     }
 
     /**
