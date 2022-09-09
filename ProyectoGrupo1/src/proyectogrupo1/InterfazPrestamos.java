@@ -40,7 +40,9 @@ public class InterfazPrestamos extends javax.swing.JFrame {
     
     public InterfazPrestamos() {
         initComponents();
-      this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Sistema Bibliotecario - Gestion Préstamos");
+
     }
 
     //FUNCION PARA CALCULAR MULTAS POR RETRASO DE ENTREGA
