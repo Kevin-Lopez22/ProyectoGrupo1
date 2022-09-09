@@ -27,6 +27,7 @@ public class GUIEliminar extends javax.swing.JFrame {
         initComponents();
         this.sqlCrudCliente =sqlCrudCliente;
         this.setLocationRelativeTo(null);
+        this.setTitle("Sistema Bibliotecario - Eliminar Cliente");
     }
 
     /**
@@ -184,7 +185,12 @@ public class GUIEliminar extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO: clientePorEliminar debe leerse cuando se le de a buscar
         try {
-
+            boolean consentimiento = JOptionPane.showConfirmDialog(
+                    null,
+                    "Esta acción es irreversible.\n¿Continuar?",
+                    "Eliminar Cliente",JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION;
+            if(!consentimiento) return;
+                
             sqlCrudCliente.delete(clientePorEliminar);
             txtCedula.setText("");
             txtIdCliente.setText("");

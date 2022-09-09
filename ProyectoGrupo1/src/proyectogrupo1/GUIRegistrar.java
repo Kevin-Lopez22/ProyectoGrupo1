@@ -29,6 +29,7 @@ public class GUIRegistrar extends javax.swing.JFrame {
         initComponents();
         this.sqlCrudCliente = sqlCrudCliente;
         this.setLocationRelativeTo(null);
+        this.setTitle("Sistema Bibliotecario - Registrar Cliente");
     }
 
     /**

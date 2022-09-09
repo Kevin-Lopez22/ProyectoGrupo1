@@ -24,12 +24,11 @@ public class GUIActualizar extends javax.swing.JFrame {
     /* Variables para la actualizacion del cliente */
     Cliente clientePorModificar;    // Variable auxiliar para modificar y enviar al CRUD
     private SqlCrudCliente sqlCrudCliente;  // Handler para el crud
-    private Consumer<String> consumerUpdateCliente = (t)->{};
     
     public GUIActualizar(SqlCrudCliente sqlCrudCliente) {
         initComponents();
         this.sqlCrudCliente = sqlCrudCliente;
-        consumerUpdateCliente = t->clientePorModificar.setNombre(t);
+        this.setTitle("Sistema Bibliotecario - Actualizar Cliente");
         this.setLocationRelativeTo(null);
 
     }

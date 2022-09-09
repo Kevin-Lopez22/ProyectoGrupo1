@@ -28,6 +28,7 @@ public class GUIGestorCliente extends javax.swing.JFrame {
         //setIconImage(new ImageIcon(getClass().getResource("/imagen/book.png")).getImage());
         this.sqlCrudCliente = sqlCrudCliente;
         this.setLocationRelativeTo(null);
+        this.setTitle("Sistema Bibliotecario - Gestor Clientes");
     }
 
     /**
