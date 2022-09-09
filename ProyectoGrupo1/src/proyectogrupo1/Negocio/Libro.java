@@ -1,5 +1,6 @@
 package proyectogrupo1.Negocio;
 
+import proyectogrupo1.ConexionSQL;
 import java.sql.ResultSet;
 
 

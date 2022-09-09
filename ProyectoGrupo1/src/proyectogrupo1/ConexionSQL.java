@@ -7,6 +7,7 @@ package proyectogrupo1;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author denni
@@ -22,7 +23,7 @@ public class ConexionSQL {
                 + "loginTimeout = 40;"; //tiempo para la conexion 
         try{
             Connection con = DriverManager.getConnection(conexionUrl);
-            //JOptionPane.showMessageDialog(null, "Conexion Exitosa");
+            System.out.println("Conexion Exitosa");
             return con;
             
         }catch(SQLException ex){
@@ -30,5 +31,28 @@ public class ConexionSQL {
             return null;
         }
     }
+    
+    public boolean verificarConexion(){
+        try{
+            Statement sql = ConexionSQL.getConexion().createStatement();
+            return true;
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            return false;
+        }
+    }
+    
+    public static ResultSet consulta (String consulta) throws SQLException{
+       Connection con = getConexion();
+       Statement info;
+       try{
+           info=con.createStatement();
+           ResultSet respuesta = info.executeQuery(consulta);
+           return respuesta;
+       }catch(SQLException ex){
+           JOptionPane.showMessageDialog(null, ex.toString());
+       }
+       return null;
+    } 
     
 }

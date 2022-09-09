@@ -4,6 +4,7 @@
  */
 package proyectogrupo1.Negocio;
 
+import proyectogrupo1.ConexionSQL;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -44,7 +45,7 @@ public class GestorLibros {
         //Carga la informacion de buscar libro y lo pone en el jtable 
         DefaultTableModel modelo = (DefaultTableModel) jTabla.getModel();
         modelo.setRowCount(0);
-        res = proyectogrupo1.Negocio.ConexionSQL.consulta(consulta);
+        res = proyectogrupo1.ConexionSQL.consulta(consulta);
         try{
             while(res.next()){
                 Vector v = new Vector();
@@ -66,7 +67,7 @@ public class GestorLibros {
         //Carga la informacion de buscar libro y lo pone en el jtable 
         DefaultTableModel modelo = (DefaultTableModel) jTabla.getModel();
         modelo.setRowCount(0);
-        res = proyectogrupo1.Negocio.ConexionSQL.consulta(consulta);
+        res = proyectogrupo1.ConexionSQL.consulta(consulta);
         try{
             while(res.next()){
                 Vector v = new Vector();
