@@ -7,6 +7,7 @@ package proyectogrupo1;
 
 import proyectogrupo1.*;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -232,17 +233,15 @@ public class GUIRegistrar extends javax.swing.JFrame {
             telefono = txtTelefono.getText();
             direccion = txtDireccion.getText();
             correo = txtCorreo.getText();
-        }catch(Exception ex){
-            Logger.getLogger(GUIActualizar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        cliente = new Cliente(1, cedula, nombre, apellido, telefono, direccion, correo);
+            List<Cliente> cs = sqlCrudCliente.read("", "9999999999");
+            
+            // Este es un hotfix, en el otro tenia metodos más bellos;
+            int nextId = 0;
+            if(!cs.isEmpty())
+                nextId = cs.get(cs.size()-1).getIdCliente();
+            cliente = new Cliente(nextId, cedula, nombre, apellido, telefono, direccion, correo);
     
         
-        // La documentación da mas detalles de como opera el SqlCrudCliente
-        // Parte de la insercion
-        try {
-            sqlCrudCliente.create(cliente);
-            JOptionPane.showMessageDialog(null, "Añadido exitosamente"); // Ahi le cambian
         } catch (SQLException ex) {
             // TODO: Control de excepciones
             JOptionPane.showMessageDialog(this, "Ocurrió un error al intentar añadir este cliente"); // Ahi le cambian
