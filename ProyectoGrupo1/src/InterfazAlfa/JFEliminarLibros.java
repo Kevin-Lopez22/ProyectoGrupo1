@@ -49,6 +49,7 @@ public class JFEliminarLibros extends javax.swing.JFrame {
 
     public JFEliminarLibros() throws SQLException {
         initComponents();
+        this.setTitle("Manejo de Libros");
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();

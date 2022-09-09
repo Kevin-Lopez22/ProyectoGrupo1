@@ -26,6 +26,7 @@ public class JFRegistroLib extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         libro = new Libro();
         gestorLibro = new GestorLibros();
+        this.setTitle("Registro de Libro");
         //men= new JFMen();
     }
 
