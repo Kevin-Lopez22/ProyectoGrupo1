@@ -110,7 +110,7 @@ public class JFEliminarEjemplar extends javax.swing.JFrame {
         });
         popMenu.add(jpopItmEliminar);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         jLabel4.setText("Buscar Ejemplares");
