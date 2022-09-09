@@ -28,6 +28,7 @@ public class GUIBiblioteca extends javax.swing.JFrame {
     public GUIBiblioteca() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Sistema Bibliotecario - Menú Principal");
         gestorPrestamos = new InterfazPrestamos();
         gUIGestorCliente = new GUIGestorCliente(new SqlCrudCliente(proyectogrupo1.ConexionSQL.getConexion()));
         guiGestorLibros = new JFMen();
