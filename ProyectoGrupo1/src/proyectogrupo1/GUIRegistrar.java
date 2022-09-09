@@ -241,7 +241,9 @@ public class GUIRegistrar extends javax.swing.JFrame {
             if(!cs.isEmpty())
                 nextId = cs.get(cs.size()-1).getIdCliente();
             cliente = new Cliente(nextId, cedula, nombre, apellido, telefono, direccion, correo);
-    
+            sqlCrudCliente.create(cliente);
+            JOptionPane.showMessageDialog(this, "Cliente registrado exitosamente"); // Ahi le cambian
+
         
         } catch (SQLException ex) {
             // TODO: Control de excepciones
