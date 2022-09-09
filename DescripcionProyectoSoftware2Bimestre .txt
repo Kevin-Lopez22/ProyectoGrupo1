@@ -74,25 +74,34 @@ Procedimiento para buscar un ejemplar de un libro dentro del sistema:
 5.2 Ingresar el titulo del libro del que se quiere buscar el ejemplar 
 5.3 Visualizar los ejemplares según el libro 
 
-6. Gestion de cliente
-6.1 Procedimiento para registrar un cliente dentro del sistema: 
-6.1.1	Escoger la opción de registrar un cliente en el menú principal. 
-6.1.2	Ingresar los campos como cédula, nombre, apellido, teléfono, dirección y correo.
-6.1.3	Presionar en el botón de guardar para que los datos sean registrados como tal.
-6.1.4	Confirmar que se guardó exitosamente dependiendo del mensaje que se despliegue en una ventana.
-6.1.5	Una vez realizadas las operaciones necesarias se presiona el botón Regresar para realizar las acciones continuas al menú principal.
+---------------------------------------------------2. Gestión de Usuarios-------------------------------------------------------------------
+Responsables : Grupo 1 
+Fecha de Deploy: 9 de Septiembre del 2022 
 
-6.2 Procedimiento para eliminar un cliente dentro del sistema: 
-6.2.1	Se selecciona la opción Eliminar desde el Gestor de Clientes.
-6.2.2	Se despliega la ventana Eliminar Cliente en la cual se ingresará la cédula para eliminar.
-6.2.3	Se presiona Buscar. Si existe un cliente en el sistema con tal cédula se nos confirmará con una notificación y se desplegarán los datos.
-6.2.4	Se confirma la identidad del cliente a eliminar y se presiona Eliminar.
-6.2.5	Se mostrará una ventana de opciones para confirmar nuestra acción. Seleccionamos OK.
+Descripción General del Módulo: 
 
-6.3 Implementación “Actualizar cliente”
-6.3.1	Se selecciona la opción Actualizar desde el Gestor de Clientes.
-6.3.2	Se desplegará la ventana de Actualizar Cliente. En esta ventana se ingresará la cédula del cliente.
-6.3.3	A continuación, se pulsa Buscar. Si el Cliente existe en el sistema se desplegarán sus datos para modificación. Además, se mostrará una notificación sobre la existencia del Cliente en el sistema.
-6.3.4	Una vez se confirma la notificación, los datos se desplegarán y los campos se volverán editables. En estos campos se pueden realizar las modificaciones pertinentes.
-6.3.5	Una vez ingresados los cambios se pulsa Aceptar para confirmar los mismos. Si la actualización fue exitosa se mostrará una notificación que lo confirma.
-6.3.6	Una vez realizadas las operaciones necesarias, se puede regresar al menú previo con el botón Regresar.
+Este Módulo incluye el registro, actualizaión y eliminación del cliente.
+
+En este módulo se puede: 
+
+1. Procedimiento para registrar un cliente dentro del sistema: 
+ 1.1	Escoger la opción de registrar un cliente en el menú principal. 
+ 1.2	Ingresar los campos como cédula, nombre, apellido, teléfono, dirección y correo.
+ 1.3	Presionar en el botón de guardar para que los datos sean registrados como tal.
+ 1.4	Confirmar que se guardó exitosamente dependiendo del mensaje que se despliegue en una ventana.
+ 1.5	Una vez realizadas las operaciones necesarias se presiona el botón Regresar para realizar las acciones continuas al menú principal.
+
+2. Procedimiento para eliminar un cliente dentro del sistema: 
+ 2.1	Se selecciona la opción Eliminar desde el Gestor de Clientes.
+ 2.2	Se despliega la ventana Eliminar Cliente en la cual se ingresará la cédula para eliminar.
+ 2.3	Se presiona Buscar. Si existe un cliente en el sistema con tal cédula se nos confirmará con una notificación y se desplegarán los datos.
+ 2.4	Se confirma la identidad del cliente a eliminar y se presiona Eliminar.
+ 2.5	Se mostrará una ventana de opciones para confirmar nuestra acción. Seleccionamos OK.
+
+3 Implementación “Actualizar cliente”
+ 3.1	Se selecciona la opción Actualizar desde el Gestor de Clientes.
+ 3.2	Se desplegará la ventana de Actualizar Cliente. En esta ventana se ingresará la cédula del cliente.
+ 3.3	A continuación, se pulsa Buscar. Si el Cliente existe en el sistema se desplegarán sus datos para modificación. Además, se mostrará una notificación sobre la existencia del Cliente en el sistema.
+ 3.4	Una vez se confirma la notificación, los datos se desplegarán y los campos se volverán editables. En estos campos se pueden realizar las modificaciones pertinentes.
+ 3.5	Una vez ingresados los cambios se pulsa Aceptar para confirmar los mismos. Si la actualización fue exitosa se mostrará una notificación que lo confirma.
+ 3.6	Una vez realizadas las operaciones necesarias, se puede regresar al menú previo con el botón Regresar.
