@@ -110,6 +110,7 @@ public class GUIBiblioteca extends javax.swing.JFrame {
     private void btnGestionClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionClientesActionPerformed
         // TODO add your handling code here:
            gUIGestorCliente.setVisible(true);
+           this.dispose();
     }//GEN-LAST:event_btnGestionClientesActionPerformed
 
     private void btnGestionLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionLibrosActionPerformed

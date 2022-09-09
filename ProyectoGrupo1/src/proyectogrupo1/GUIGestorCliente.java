@@ -167,7 +167,9 @@ public class GUIGestorCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnSuspenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuspenderActionPerformed
-        this.setVisible(false);
+        GUIBiblioteca biblioteca = new GUIBiblioteca();
+        biblioteca.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnSuspenderActionPerformed
 
 
