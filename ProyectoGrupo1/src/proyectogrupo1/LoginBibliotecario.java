@@ -26,6 +26,7 @@ public class LoginBibliotecario extends javax.swing.JFrame {
         initComponents();
         biblioteca = new GUIBiblioteca();
         this.setLocationRelativeTo(null);
+        this.setTitle("Sistema Bibliotecario - Login");
     }
 
     /**
